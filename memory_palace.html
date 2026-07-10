@@ -384,13 +384,13 @@ button{ cursor:pointer; }
 }
 .detail-close-left:hover{ color:var(--brass-bright); }
 
-@media (display-mode: standalone) {
-  .detail-panel {
-    padding-top: calc(56px + max(47px, env(safe-area-inset-top, 0px)));
-  }
-  .detail-close, .detail-close-left, .learn-toggle {
-    top: calc(18px + max(47px, env(safe-area-inset-top, 0px)));
-  }
+html.pwa-standalone .detail-panel {
+  padding-top: 110px;
+}
+html.pwa-standalone .detail-close,
+html.pwa-standalone .detail-close-left,
+html.pwa-standalone .learn-toggle {
+  top: 72px;
 }
 .detail-type{
   font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--brass-dim); font-weight:700;
@@ -550,6 +550,7 @@ min-width:190px;
 <script src="database.js"></script>
 </head>
 <body>
+<script>if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches){document.documentElement.classList.add('pwa-standalone');}</script>
 <div id="app"></div>
 
 <script>
