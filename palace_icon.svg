@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Dark theme background -->
+  <rect width="100%" height="100%" rx="128" fill="#0e141f"/>
+  
+  <!-- Palace Icon in Brass Gold -->
+  <svg x="106" y="106" width="300" height="300" viewBox="0 0 24 24" fill="none" stroke="#c8a261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h1M4 21h1M9 10v11M15 10v11M20 10h1M20 21h1"/>
+  </svg>
+</svg>
