@@ -108,10 +108,10 @@ const coreDatabase = {
             },
             {
                 "word": "minute",
-                "type": "noun",
-                "def": "A period of time equal to sixty seconds",
-                "example": "The meeting was delayed by one minute.",
-                "long_example": "The nervous surgeon paused for a brief minute to compose his thoughts and steady his hands before beginning the highly complex cardiovascular procedure on the elderly patient."
+                "type": "adj.",
+                "def": "Detailed, including many small descriptive features ; lacking importance",
+                "example": "She provided a minute description of the suspect.",
+                "long_example": "While the final contract contained a few minute discrepancies in formatting and punctuation, the legal team agreed that these minor oversights would not affect the overall validity of the agreement."
             },
             {
                 "word": "occult",
@@ -25928,6 +25928,13 @@ const coreDatabase = {
                 "long_example": "During the bloody aftermath of the peasant rebellion, the local magistrate ordered his soldiers to decapitate the captured rebel leaders and display their heads on the city walls as a warning."
             },
             {
+                "word": "demote",
+                "type": "verb",
+                "def": "To bring to a lower grade or rank",
+                "example": "The manager decided to demote him after reviewing his poor performance over the past several months.",
+                "long_example": "fter discovering the numerous accounting errors and blatant violations of company policy during the annual audit, the board of directors had no choice but to immediately demote the chief financial officer to a junior advisory role."
+            },
+            {
                 "word": "discernment",
                 "type": "noun",
                 "def": "Judgment; perceptiveness",
@@ -26045,13 +26052,6 @@ const coreDatabase = {
                 "def": "A ban resulting from social custom or emotional aversion",
                 "example": "In many cultures, discussing salary in public is a taboo.",
                 "long_example": "In many traditional societies, discussing personal financial matters or inheritance disputes in public remains a strict taboo, as such topics are reserved exclusively for private family discussions."
-            },
-            {
-                "word": "undercutting",
-                "type": "verb",
-                "def": "Offering a lower price; undermining",
-                "example": "The new store is undercutting its competitors' prices.",
-                "long_example": "By undercutting the prices of its domestic competitors, the foreign manufacturing firm was able to quickly capture a massive share of the consumer electronics market within a single year."
             },
             {
                 "word": "viviparous",
