@@ -517,7 +517,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 <span class="hidden sm:inline">Exit</span>
             </button>
-            <div id="nav-branding" class="flex items-center gap-2">
+            <div id="nav-branding" onclick="goToMainFromNav()" class="flex items-center gap-2 cursor-pointer select-none" title="Main Menu">
                 <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 <h1 class="text-xl font-bold tracking-tight hidden sm:block">GRE Vocab</h1>
             </div>
@@ -1197,13 +1197,26 @@
             } else {
                 document.getElementById(id).classList.remove('hidden');
                 document.getElementById('end-session-btn').classList.add('hidden');
-                document.getElementById('nav-branding').classList.add('hidden');
+                document.getElementById('nav-branding').classList.remove('hidden');
             }
         }
 
         function showSetup() {
             _navStack = ['setup-screen'];
             _showScreen('setup-screen');
+        }
+
+        function goToMainFromNav() {
+            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and go to main menu? Progress will be saved.')) {
+                return;
+            }
+            _navStack = ['setup-screen'];
+            const setupScreen = document.getElementById('setup-screen');
+            setupScreen.classList.remove('fade-in');
+            _showScreen('setup-screen');
+            requestAnimationFrame(() => {
+                setupScreen.classList.add('fade-in');
+            });
         }
 
         function _goBack() {
@@ -2113,6 +2126,7 @@
         function _selectDashCategory(cat) {
             catSelect.value = cat;
             localStorage.setItem('greLastCategory', cat);
+            updateSetOptions(true);
             showSetup();
         }
 
@@ -2235,23 +2249,23 @@
             }).join('');
             
             if (isCategoryChange) {
-                // Auto-select the set with the latest progress (highest numeric value),
-                // defaulting to Set 1 (first set) if nothing has been touched.
-                let bestSet = sets[0];
-                let bestProgress = -1;
+                // Auto-select the latest touched set: the last non-completed set
+                // that has any progress (sequential or matched). Skip completed
+                // sets. If no set has progress, default to Set 1 (first set).
+                let targetSet = sets[0];
                 for (const s of sets) {
                     const progressKey = `${cat}|${s}`;
                     const progressVal = progressDB[progressKey];
-                    if (progressVal === 'COMPLETED') {
-                        bestSet = s;
-                        bestProgress = Infinity;
-                    } else if (typeof progressVal === 'number' && progressVal > bestProgress) {
-                        bestProgress = progressVal;
-                        bestSet = s;
+                    if (progressVal === 'COMPLETED') continue;
+                    const matchedList = progressDB[progressKey + '_matched'];
+                    const hasProgress = (typeof progressVal === 'number' && progressVal > 0) ||
+                                        (Array.isArray(matchedList) && matchedList.length > 0);
+                    if (hasProgress) {
+                        targetSet = s;
                     }
                 }
-                setSelect.value = bestSet;
-                localStorage.setItem('greLastSet', bestSet);
+                setSelect.value = targetSet;
+                localStorage.setItem('greLastSet', targetSet);
             } else {
                 const savedSet = localStorage.getItem('greLastSet');
                 if (savedSet && sets.includes(savedSet)) {
