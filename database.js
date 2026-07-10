@@ -1292,8 +1292,8 @@ const coreDatabase = {
             {
                 "word": "dissonance",
                 "type": "noun",
-                "def": "Lack of harmony among musical notes.",
-                "example": "The modern piece was criticized for its loud and musical dissonance.",
+                "def": "A lack of harmony or agreement.",
+                "example": "The school board’s meeting lasted for hours due to the length debate fueled by dissonance among opinions.",
                 "long_example": "The avant-garde composer deliberately introduced a harsh dissonance into the final movement of the symphony to reflect the chaotic and unsettling theme of the modern era."
             },
             {
@@ -17510,7 +17510,7 @@ const coreDatabase = {
             {
                 "word": "waver",
                 "type": "verb",
-                "def": "To become unsteady or unsure",
+                "def": "To become unsteady or unsure; to go back and forth between choices or opinions",
                 "example": "The candle flame began to waver in the sudden draft of wind.",
                 "long_example": "Despite facing intense scrutiny and criticism from his peers, the lead investigator did not waver in his commitment to uncovering the truth behind the corporate fraud."
             }
