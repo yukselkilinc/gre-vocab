@@ -386,18 +386,10 @@ button{ cursor:pointer; }
 
 @media (display-mode: standalone) {
   .detail-panel {
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: calc(56px + max(47px, env(safe-area-inset-top, 0px)));
   }
   .detail-close, .detail-close-left, .learn-toggle {
-    top: calc(18px + env(safe-area-inset-top, 0px));
-  }
-}
-@media (display-mode: standalone) and (max-width: 640px) {
-  .learn-toggle {
-    position: absolute;
-    top: calc(18px + env(safe-area-inset-top, 0px));
-    left: 50%;
-    transform: translateX(-50%);
+    top: calc(18px + max(47px, env(safe-area-inset-top, 0px)));
   }
 }
 .detail-type{
