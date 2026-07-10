@@ -388,8 +388,24 @@ button{ cursor:pointer; }
   .detail-panel {
     padding-top: calc(56px + env(safe-area-inset-top, 0px));
   }
-  .detail-close, .detail-close-left, .learn-toggle {
+  .detail-close, .detail-close-left {
     top: calc(18px + env(safe-area-inset-top, 0px));
+  }
+}
+@media (display-mode: standalone) and (max-width: 640px) {
+  .learn-toggle {
+    position: fixed;
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 101;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    background: var(--wall-2);
+    border: 1px solid var(--line);
+  }
+  .detail-panel {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
   }
 }
 .detail-type{
