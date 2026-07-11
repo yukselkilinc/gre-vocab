@@ -11,7 +11,7 @@
         }
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=overlays-content">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1782,42 +1782,6 @@
             } catch(e) {}
         }
 
-        (function initModalKeyboardGuard() {
-            if (!window.visualViewport) return;
-            const modal = document.getElementById('cloud-confirm-modal');
-            const keyInput = document.getElementById('cloud-confirm-key-input');
-            if (!keyInput || !modal) return;
-            const modalBox = modal.querySelector('.relative') || modal.firstElementChild;
-            function onResize() {
-                if (!keyInput.matches(':focus')) return;
-                const vh = window.visualViewport.height;
-                const keyboardHeight = window.innerHeight - vh;
-                modal.style.position = 'fixed';
-                modal.style.left = '0';
-                modal.style.right = '0';
-                modal.style.top = '';
-                modal.style.bottom = (keyboardHeight + vh * 0.05) + 'px';
-                modal.style.alignItems = 'center';
-                modal.style.paddingBottom = '0';
-            }
-            keyInput.addEventListener('focus', () => {
-                modal.style.transition = 'bottom 0.2s ease';
-                window.visualViewport.addEventListener('resize', onResize);
-                onResize();
-            });
-            keyInput.addEventListener('blur', () => {
-                modal.style.position = '';
-                modal.style.left = '';
-                modal.style.right = '';
-                modal.style.top = '';
-                modal.style.bottom = '';
-                modal.style.alignItems = '';
-                modal.style.paddingBottom = '';
-                modal.style.transition = '';
-                window.visualViewport.removeEventListener('resize', onResize);
-            });
-        })();
-
         async function toggleCloudSync(checked) {
             const container = document.getElementById('cloud-key-container');
             if (checked) {
@@ -1945,7 +1909,7 @@
                 acceptBtn.disabled = false;
                 cancelBtn.classList.remove('opacity-50', 'pointer-events-none');
                 acceptBtn.classList.remove('opacity-75', 'pointer-events-none');
-                acceptText.textContent = "Accept & Enable";
+                acceptText.textContent = "Enable";
                 spinner.classList.add('hidden');
             }
         }
