@@ -101,7 +101,7 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            touch-action: pan-x pan-y;
+            touch-action: manipulation;
         }
 
         .perspective-1000 { perspective: 1000px; }
@@ -226,7 +226,7 @@
         /* Disable pull-to-refresh bounce and zoom on mobile */
         body { 
             overscroll-behavior-y: none; 
-            touch-action: none;
+            touch-action: manipulation;
             overflow: hidden;
         }
 
@@ -4477,23 +4477,7 @@
         document.addEventListener('touchend', function(e) {
             const now = Date.now();
             if (now - lastTouchEnd <= 300) {
-                const target = e.target;
-                const isInteractive = target && (
-                    target.tagName === 'BUTTON' || 
-                    target.tagName === 'A' || 
-                    target.tagName === 'INPUT' || 
-                    target.tagName === 'SELECT' || 
-                    target.tagName === 'LABEL' ||
-                    target.closest('button') || 
-                    target.closest('a') ||
-                    target.closest('label') ||
-                    target.closest('.interactive') ||
-                    target.classList.contains('cursor-pointer') ||
-                    target.closest('.cursor-pointer')
-                );
-                if (!isInteractive) {
-                    e.preventDefault();
-                }
+                e.preventDefault();
             }
             lastTouchEnd = now;
         }, { passive: false });
