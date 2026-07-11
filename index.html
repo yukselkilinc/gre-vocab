@@ -862,7 +862,7 @@
                 <div id="cloud-key-container" class="hidden">
                     <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-2">Cloud Sync Key</label>
                     <div class="flex items-center gap-2">
-                        <input type="text" id="setting-cloud-key" readonly placeholder="No cloud key active" class="flex-1 min-w-0 bg-slate-100 dark:bg-neutral-800/50 border border-slate-300 dark:border-neutral-700 rounded-lg px-4 py-3 outline-none dark:text-white transition-colors font-mono text-sm select-none cursor-default" />
+                        <div id="setting-cloud-key" class="flex-1 min-w-0 bg-slate-100 dark:bg-neutral-800/50 border border-slate-300 dark:border-neutral-700 rounded-lg px-4 py-3 dark:text-white font-mono text-sm truncate">&nbsp;</div>
                         <button onclick="haptic(); copyCloudKey()" class="flex-shrink-0 p-3 rounded-lg border border-slate-300 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800/50 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-neutral-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" title="Copy Key">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                         </button>
@@ -1341,20 +1341,25 @@
             window.location.href = 'memory_palace.html';
         }
 
-        let _hapticCtx = null;
+        let _hapticLabel = null;
         function haptic() {
             try {
                 if (navigator.vibrate) { navigator.vibrate(10); return; }
-                if (!_hapticCtx) _hapticCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (_hapticCtx.state === 'suspended') _hapticCtx.resume();
-                const buf = _hapticCtx.createBuffer(1, 1, 22050);
-                buf.getChannelData(0)[0] = 0.001;
-                const src = _hapticCtx.createBufferSource();
-                src.buffer = buf;
-                const g = _hapticCtx.createGain();
-                g.gain.value = 0.01;
-                src.connect(g).connect(_hapticCtx.destination);
-                src.start();
+                if (!_hapticLabel) {
+                    const id = 'wh-' + Math.random().toString(36).slice(2, 8);
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.id = id;
+                    input.setAttribute('switch', '');
+                    input.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:0;height:0';
+                    const label = document.createElement('label');
+                    label.htmlFor = id;
+                    label.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:0;height:0';
+                    label.appendChild(input);
+                    document.body.appendChild(label);
+                    _hapticLabel = label;
+                }
+                _hapticLabel.click();
             } catch(e) {}
         }
 
@@ -1412,8 +1417,8 @@
             if (!key) {
                 key = 'gre-' + randomBase36(6) + '-' + randomBase36(5) + '-' + randomBase36(6);
                 localStorage.setItem('greCloudKey', key);
-                const input = document.getElementById('setting-cloud-key');
-                if (input) input.value = key;
+                const el = document.getElementById('setting-cloud-key');
+                if (el) el.textContent = key;
             }
             return key;
         }
@@ -1629,7 +1634,8 @@
             }
             
             const cloudKeySetting = localStorage.getItem('greCloudKey') || '';
-            document.getElementById('setting-cloud-key').value = cloudKeySetting;
+            const cloudKeyEl = document.getElementById('setting-cloud-key');
+            if (cloudKeyEl) cloudKeyEl.textContent = cloudKeySetting || '\u00a0';
             
             let themeSetting = localStorage.getItem('greTheme') || 'default';
             if (themeSetting === 'turquoise') {
@@ -1760,42 +1766,40 @@
         }
 
         async function copyCloudKey() {
-            const input = document.getElementById('setting-cloud-key');
-            const key = input.value;
+            const el = document.getElementById('setting-cloud-key');
+            const key = (el.textContent || '').trim();
             if (!key) return;
             try {
                 await navigator.clipboard.writeText(key);
-                const btn = input.nextElementSibling;
+                const btn = el.parentElement.querySelector('button');
                 const origHTML = btn.innerHTML;
                 btn.innerHTML = '<svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>';
                 setTimeout(() => { btn.innerHTML = origHTML; }, 1200);
             } catch(e) {}
         }
 
-        (function initKeyboardGuard() {
+        (function initModalKeyboardGuard() {
             if (!window.visualViewport) return;
-            const settingsScreen = document.getElementById('settings-screen');
-            const cloudInput = document.getElementById('setting-cloud-key');
-            let isActive = false;
-            let baseHeight = 0;
-            function updateMaxHeight() {
-                if (!isActive) return;
+            const modal = document.getElementById('cloud-confirm-modal');
+            const modalInner = modal ? modal.querySelector('[onclick]') : null;
+            const keyInput = document.getElementById('cloud-confirm-key-input');
+            if (!keyInput || !modal) return;
+            function onResize() {
+                if (!keyInput.matches(':focus')) return;
                 const vh = window.visualViewport.height;
-                if (vh < baseHeight * 0.85) {
-                    settingsScreen.style.maxHeight = Math.round(vh * 0.3) + 'px';
-                }
+                modal.style.alignItems = 'flex-end';
+                modal.style.paddingBottom = Math.round(vh * 0.05) + 'px';
             }
-            cloudInput.addEventListener('focus', () => {
-                isActive = true;
-                baseHeight = window.visualViewport.height;
-                settingsScreen.style.transition = 'max-height 0.2s ease';
-                window.visualViewport.addEventListener('resize', updateMaxHeight);
+            keyInput.addEventListener('focus', () => {
+                modal.style.transition = 'padding 0.2s ease';
+                window.visualViewport.addEventListener('resize', onResize);
+                onResize();
             });
-            cloudInput.addEventListener('blur', () => {
-                isActive = false;
-                settingsScreen.style.maxHeight = '';
-                settingsScreen.style.transition = '';
-                window.visualViewport.removeEventListener('resize', updateMaxHeight);
+            keyInput.addEventListener('blur', () => {
+                modal.style.alignItems = '';
+                modal.style.paddingBottom = '';
+                modal.style.transition = '';
+                window.visualViewport.removeEventListener('resize', onResize);
             });
         })();
 
@@ -1886,7 +1890,7 @@
                 
                 // Also update the key input in the main settings UI
                 const mainKeyInput = document.getElementById('setting-cloud-key');
-                if (mainKeyInput) mainKeyInput.value = cloudKey;
+                if (mainKeyInput) mainKeyInput.textContent = cloudKey;
 
                 const success = await pullAndMergeCloud(cloudKey);
                 
