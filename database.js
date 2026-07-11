@@ -14227,11 +14227,25 @@ const coreDatabase = {
                 "long_example": "The physical therapist instructed the patient to elevate his injured ankle on a stack of pillows each night to reduce swelling and improve circulation in the joint."
             },
             {
+                "word": "flatter",
+                "type": "verb",
+                "def": "To praise someone lavishly or insincerely, often to gain favor",
+                "example": "He tried to flatter the manager in hopes of getting a promotion.",
+                "long_example": "Hoping to convince the wealthy investor to fund his dubious business venture, the desperate entrepreneur spent the entire evening trying to flatter her by endlessly complimenting her brilliant financial instincts and impeccable fashion sense."
+            },
+            {
                 "word": "grandstand",
                 "type": "verb",
                 "def": "To perform ostentatiously in order to impress an audience",
                 "example": "The player tried to grandstand to impress the college scouts.",
                 "long_example": "Rather than focusing on the legal merits of the case, the ambitious prosecutor began to grandstand for the television cameras gathered outside the courthouse to advance his political career."
+            },
+            {
+                "word": "grave",
+                "type": "adj.",
+                "def": "Giving cause for alarm; highly serious or solemn in manner",
+                "example": "The doctor's grave expression told us the test results were concerning.",
+                "long_example": "As the raging hurricane approached the vulnerable coastal town, the local meteorologist issued a grave warning, urging all residents to evacuate immediately to avoid the life-threatening storm surge and catastrophic winds."
             },
             {
                 "word": "hew",
@@ -14295,6 +14309,13 @@ const coreDatabase = {
                 "def": "To soak in a liquid to extract flavor or soften; or to fill, saturate, or imbue thoroughly with a quality or influence",
                 "example": "The tea leaves were steeped in hot water for five minutes.",
                 "long_example": "The young historian was steeped in the rich history and local legends of the ancient castle after spending three months conducting research in the dark archives."
+            },
+            {
+                "word": "strive",
+                "type": "verb",
+                "def": "To make great efforts to achieve or obtain something",
+                "example": "We must strive for excellence in everything we do.",
+                "long_example": "Despite facing numerous financial setbacks and overwhelming competition in the market, the small tech startup continued to strive relentlessly to build a product that would completely revolutionize the healthcare industry."
             },
             {
                 "word": "unearth",
@@ -27032,11 +27053,11 @@ const coreDatabase = {
                 "long_example": "The skilled engraver used an extremely fine diamond-tipped tool to carefully incise the client's family crest onto the polished gold surface of the vintage pocket watch."
             },
             {
-                "word": "ingnue",
+                "word": "ingénue",
                 "type": "noun",
-                "def": "Nave, unsophisticated person",
-                "example": "The actress was tired of always playing the innocent ingnue.",
-                "long_example": "The theater director cast the talented young actress as the naive ingnue, a role that required her to portray innocence and vulnerability on the grand stage."
+                "def": "Naive, unsophisticated person",
+                "example": "The actress was tired of always playing the innocent ingénue.",
+                "long_example": "The theater director cast the talented young actress as the naive ingénue, a role that required her to portray innocence and vulnerability on the grand stage."
             },
             {
                 "word": "juxtaposition",
@@ -36871,7 +36892,7 @@ const coreDatabase = {
             {
                 "word": "furrow",
                 "type": "noun",
-                "def": "A long narrow trench made in the ground by a plow, especially for planting seeds or for irrigation.",
+                "def": "A long narrow trench made in the ground by a plow, especially for planting seeds or for irrigation; or wrinkle on face",
                 "example": "The plow left a deep, straight furrow in the brown soil.",
                 "long_example": "The experienced farmer carefully guided his heavy tractor across the field, carving a perfectly straight furrow in the rich, dark soil where he planned to plant the corn seeds."
             },
@@ -39836,10 +39857,10 @@ const coreDatabase = {
                 "long_example": "The heavy engineering crew used a massive rotary drill to bore a deep tunnel through the solid granite mountain, establishing a direct rail link between the two major cities."
             },
             {
-                "word": "chaffing",
+                "word": "chaff",
                 "type": "verb",
                 "def": "To tease someone in a playful manner",
-                "example": "The two old friends engaged in playful chaffing during dinner.",
+                "example": "The two old friends chaffed each other during dinner.",
                 "long_example": "The seasoned sailors spent their leisure hours on the deck chaffing the young recruit about his exaggerated fear of sea monsters during his first voyage across the ocean."
             },
             {
@@ -40013,18 +40034,18 @@ const coreDatabase = {
                 "long_example": "The amateur plumber managed to completely botch the installation of the new sink, causing a major leak that ruined the kitchen floor and required expensive home repairs."
             },
             {
-                "word": "chafing",
-                "type": "verb",
-                "def": "To make sore by rubbing",
-                "example": "The rough strap was chafing the skin on her shoulder.",
-                "long_example": "The tight collar of the dress uniform was chafing the soldier's neck throughout the long parade, leaving a painful red mark that lasted for several days afterward."
-            },
-            {
                 "word": "concerted",
                 "type": "adj.",
                 "def": "Jointly arranged, planned, or carried out",
                 "example": "The team made a concerted effort to finish the work on time.",
                 "long_example": "Recognizing the urgency of the situation, the engineering team made a concerted effort to complete the complex software updates and deliver the final project on schedule."
+            },
+            {
+                "word": "crease",
+                "type": "noun",
+                "def": "A small fold in a soft and otherwise smooth surface [crease (v)]",
+                "example": "He ironed a sharp crease into his trousers.",
+                "long_example": "The detective noticed a distinct crease across the corner of the faded map, suggesting it had been folded up and carried around in someone's pocket for years."
             },
             {
                 "word": "dart",

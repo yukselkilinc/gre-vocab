@@ -501,6 +501,81 @@
         }
         .dash-cat-card:active { transform: scale(0.97); }
 
+        /* Color palette inline toggle */
+        .theme-toggle-track {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgb(229 231 235);
+            border-radius: 9999px;
+            padding: 4px;
+            gap: 2px;
+        }
+        .dark .theme-toggle-track { background: rgb(38 38 38); }
+        .theme-toggle-dot {
+            position: relative;
+            z-index: 1;
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+            border: none;
+            background: transparent;
+            padding: 0;
+        }
+        .theme-toggle-dot:hover { transform: scale(1.15); }
+        .theme-toggle-dot:active { transform: scale(0.92); }
+        .theme-toggle-dot .swatch {
+            width: 18px;
+            height: 18px;
+            border-radius: 9999px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s ease;
+        }
+        .theme-toggle-dot.active .swatch {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .dark .theme-toggle-dot.active .swatch {
+            box-shadow: 0 0 0 3px rgba(38,38,38,0.8), 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .theme-slider {
+            position: absolute;
+            top: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: white;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+            transition: left 0.35s cubic-bezier(0.4,0,0.2,1), background 0.35s ease;
+            z-index: 0;
+        }
+        .dark .theme-slider { background: rgb(64 64 64); }
+
+        /* Theme change animation */
+        .theme-flash {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: themeFlash 0.5s ease-out forwards;
+        }
+        @keyframes themeFlash {
+            0% { opacity: 0.18; transform: scale(0.8); }
+            50% { opacity: 0.08; }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        /* Fill-in-the-blanks word spacing */
+        .fillblanks-mode #card-front-fillblanks {
+            word-spacing: -0.08em;
+        }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-black dark:text-slate-100 font-sans h-screen flex flex-col overflow-hidden transition-colors duration-300">
@@ -755,23 +830,16 @@
 
                 <hr class="border-slate-200 dark:border-neutral-800" />
                 
-                <div class="mb-2">
-                    <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-3">Color Palette</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="relative cursor-pointer">
-                            <input type="radio" name="color-palette" value="default" class="sr-only peer" onchange="changeTheme(this.value)" checked>
-                            <div class="flex flex-col items-center justify-center p-3 border-2 border-slate-200 dark:border-neutral-800 rounded-xl peer-checked:border-[#14b8a6] peer-checked:bg-[#f0fdfa] dark:peer-checked:bg-[#134e4a]/40 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                                <div class="w-6 h-6 rounded-full bg-[#14b8a6] shadow-sm mb-2"></div>
-                                <span class="text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300">Turquoise</span>
-                            </div>
-                        </label>
-                        <label class="relative cursor-pointer">
-                            <input type="radio" name="color-palette" value="indigo" class="sr-only peer" onchange="changeTheme(this.value)">
-                            <div class="flex flex-col items-center justify-center p-3 border-2 border-slate-200 dark:border-neutral-800 rounded-xl peer-checked:border-[#6366f1] peer-checked:bg-[#eef2ff] dark:peer-checked:bg-[#312e81]/40 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                                <div class="w-6 h-6 rounded-full bg-[#6366f1] shadow-sm mb-2"></div>
-                                <span class="text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300">Indigo</span>
-                            </div>
-                        </label>
+                <div class="mb-2 flex items-center justify-between">
+                    <label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Color Palette</label>
+                    <div class="theme-toggle-track">
+                        <div id="theme-slider" class="theme-slider" style="left:4px;"></div>
+                        <button class="theme-toggle-dot active" id="theme-btn-default" onclick="changeTheme('default')" title="Turquoise">
+                            <div class="swatch bg-[#14b8a6]"></div>
+                        </button>
+                        <button class="theme-toggle-dot" id="theme-btn-indigo" onclick="changeTheme('indigo')" title="Indigo">
+                            <div class="swatch bg-[#6366f1]"></div>
+                        </button>
                     </div>
                 </div>
 
@@ -1509,10 +1577,6 @@
                 themeSetting = 'default';
                 localStorage.setItem('greTheme', 'default');
             }
-            const themeRadios = document.getElementsByName('color-palette');
-            themeRadios.forEach(radio => {
-                if (radio.value === themeSetting) radio.checked = true;
-            });
             changeTheme(themeSetting, true);
         }
 
@@ -1525,6 +1589,32 @@
                 document.documentElement.removeAttribute('data-theme');
             } else {
                 document.documentElement.setAttribute('data-theme', themeName);
+            }
+            updateThemeToggle(themeName, init);
+        }
+
+        function updateThemeToggle(themeName, skipFlash) {
+            const slider = document.getElementById('theme-slider');
+            const btnDefault = document.getElementById('theme-btn-default');
+            const btnIndigo = document.getElementById('theme-btn-indigo');
+            if (!slider) return;
+            if (themeName === 'indigo') {
+                slider.style.left = 'calc(100% - 36px)';
+                btnDefault.classList.remove('active');
+                btnIndigo.classList.add('active');
+            } else {
+                slider.style.left = '4px';
+                btnIndigo.classList.remove('active');
+                btnDefault.classList.add('active');
+            }
+            if (!skipFlash) {
+                const flash = document.createElement('div');
+                flash.className = 'theme-flash';
+                flash.style.background = themeName === 'indigo'
+                    ? 'radial-gradient(circle, #818cf8 0%, transparent 70%)'
+                    : 'radial-gradient(circle, #2dd4bf 0%, transparent 70%)';
+                document.body.appendChild(flash);
+                flash.addEventListener('animationend', () => flash.remove());
             }
         }
 	
