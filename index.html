@@ -729,7 +729,7 @@
             </div>
 
             <!-- Error message container (hidden by default) -->
-            <div id="cloud-confirm-error" class="hidden px-6 pb-4 text-xs text-rose-600 dark:text-rose-400 font-medium">
+            <div id="cloud-confirm-error" class="hidden px-6 pb-4 text-xs text-rose-600 dark:text-rose-400 font-medium mt-[5px]">
                 Failed to sync with cloud. Please check your internet connection.
             </div>
             
@@ -1344,6 +1344,24 @@
         function haptic() {
             if (navigator.vibrate) navigator.vibrate(10);
         }
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            const colors = type === 'success'
+                ? 'bg-emerald-600 text-white'
+                : type === 'error'
+                    ? 'bg-rose-600 text-white'
+                    : 'bg-slate-700 text-white';
+            toast.className = 'fixed top-6 left-1/2 -translate-x-1/2 z-[200] px-5 py-3 rounded-xl shadow-2xl text-sm font-semibold ' + colors;
+            toast.textContent = message;
+            toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            toast.style.opacity = '1';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 1500);
+        }
         function initHapticOverlays() {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
                 || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -1799,6 +1817,7 @@
                 if (modal) {
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');
+                    document.querySelector('main').style.pointerEvents = 'none';
                 }
                 
                 const errorDiv = document.getElementById('cloud-confirm-error');
@@ -1824,6 +1843,7 @@
             if (modal) {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
+                document.querySelector('main').style.pointerEvents = '';
             }
             // Ensure the toggle is unchecked
             document.getElementById('setting-enable-cloud').checked = false;
@@ -1889,9 +1909,10 @@
                     if (modal) {
                         modal.classList.add('hidden');
                         modal.classList.remove('flex');
+                        document.querySelector('main').style.pointerEvents = '';
                     }
                     
-                    alert("Cloud Sync enabled successfully! Your local progress has been merged with the cloud.");
+                    showToast("Cloud Sync enabled! Progress merged.", "success");
                 } else {
                     throw new Error("Could not sync with the cloud database.");
                 }
