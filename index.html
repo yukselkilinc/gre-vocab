@@ -729,7 +729,7 @@
             </div>
 
             <!-- Error message container (hidden by default) -->
-            <div id="cloud-confirm-error" class="hidden px-6 pb-4 text-xs text-rose-600 dark:text-rose-400 font-medium mt-[5px]">
+            <div id="cloud-confirm-error" class="hidden px-6 pb-4 text-xs text-rose-600 dark:text-rose-400 font-medium mt-[10px]">
                 Failed to sync with cloud. Please check your internet connection.
             </div>
             
@@ -1351,7 +1351,8 @@
                 : type === 'error'
                     ? 'bg-rose-600 text-white'
                     : 'bg-slate-700 text-white';
-            toast.className = 'fixed top-6 left-1/2 -translate-x-1/2 z-[200] px-5 py-3 rounded-xl shadow-2xl text-sm font-semibold ' + colors;
+            toast.className = 'fixed left-1/2 -translate-x-1/2 z-[200] px-5 py-3 rounded-xl shadow-2xl text-sm font-semibold ' + colors;
+            toast.style.top = 'calc(env(safe-area-inset-top) + 4.5rem)';
             toast.textContent = message;
             toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
             toast.style.opacity = '1';
