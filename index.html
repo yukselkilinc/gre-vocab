@@ -11,7 +11,7 @@
         }
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=overlays-content">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1341,16 +1341,20 @@
             window.location.href = 'memory_palace.html';
         }
 
+        let _hapticCtx = null;
         function haptic() {
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                gain.gain.value = 0;
-                osc.start(ctx.currentTime);
-                osc.stop(ctx.currentTime + 0.01);
+                if (navigator.vibrate) { navigator.vibrate(10); return; }
+                if (!_hapticCtx) _hapticCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (_hapticCtx.state === 'suspended') _hapticCtx.resume();
+                const buf = _hapticCtx.createBuffer(1, 1, 22050);
+                buf.getChannelData(0)[0] = 0.001;
+                const src = _hapticCtx.createBufferSource();
+                src.buffer = buf;
+                const g = _hapticCtx.createGain();
+                g.gain.value = 0.01;
+                src.connect(g).connect(_hapticCtx.destination);
+                src.start();
             } catch(e) {}
         }
 
@@ -1778,7 +1782,7 @@
                 if (!isActive) return;
                 const vh = window.visualViewport.height;
                 if (vh < baseHeight * 0.85) {
-                    settingsScreen.style.maxHeight = Math.round(vh * 0.6) + 'px';
+                    settingsScreen.style.maxHeight = Math.round(vh * 0.3) + 'px';
                 }
             }
             cloudInput.addEventListener('focus', () => {
