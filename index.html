@@ -809,7 +809,7 @@
 
         <div id="settings-screen" class="hidden w-full max-w-xl bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300">
             <div class="flex items-center gap-3 p-4 sm:p-5 border-b border-slate-200 dark:border-neutral-800 shrink-0">
-                <button data-haptic onclick="haptic(); toggleSettings()" class="p-1.5 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Back">
+                <button onclick="toggleSettings()" class="p-1.5 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Back">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <h3 class="text-base sm:text-lg font-bold">Settings</h3>
@@ -829,8 +829,8 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Auto-Show Sentences</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quiz and Flashcard modes only</span>
                     </div>
-                    <label data-haptic class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="setting-auto-show-sentences" onchange="haptic(); toggleAutoShowSentences(this.checked)" class="sr-only peer">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" switch id="setting-auto-show-sentences" onchange="haptic(); toggleAutoShowSentences(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
                 </div>
@@ -840,8 +840,8 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Auto-Pronounce Words</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quiz, Flashcard, and Fill in the Blanks</span>
                     </div>
-                    <label data-haptic class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="setting-auto-pronounce" onchange="haptic(); toggleAutoPronounce(this.checked)" class="sr-only peer">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" switch id="setting-auto-pronounce" onchange="haptic(); toggleAutoPronounce(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
                 </div>
@@ -853,8 +853,8 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Enable Cloud Sync</span>
                         <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Closing the webpage or PWA synces data.</p>
                     </div>
-                    <label data-haptic class="relative inline-flex items-center cursor-pointer flex-shrink-0">
-                        <input type="checkbox" id="setting-enable-cloud" onchange="haptic(); toggleCloudSync(this.checked)" class="sr-only peer">
+                    <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                        <input type="checkbox" switch id="setting-enable-cloud" onchange="haptic(); toggleCloudSync(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
                 </div>
@@ -4320,7 +4320,6 @@
                     frontText.innerText = "🎉 Set Complete!";
                     frontText.classList.remove('text-slate-800', 'dark:text-white', 'capitalize', 'lowercase', 'uppercase');
                     frontText.classList.add('text-emerald-600', 'dark:text-emerald-400', 'normal-case');
-                    haptic();
                     
                     flashcard.classList.remove('cursor-pointer');
                     flashcard.classList.remove('flipped');
@@ -4418,7 +4417,6 @@
                 frontText.innerText = "🎉 Set Complete!";
                 frontText.classList.remove('text-slate-800', 'dark:text-white', 'capitalize', 'lowercase', 'uppercase');
                 frontText.classList.add('text-emerald-600', 'dark:text-emerald-400', 'normal-case');
-                haptic();
                 
                 flashcard.classList.remove('cursor-pointer');
                 flashcard.classList.remove('flipped');
