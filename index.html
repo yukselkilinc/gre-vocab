@@ -809,7 +809,7 @@
 
         <div id="settings-screen" class="hidden w-full max-w-xl bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300">
             <div class="flex items-center gap-3 p-4 sm:p-5 border-b border-slate-200 dark:border-neutral-800 shrink-0">
-                <button onclick="haptic(); toggleSettings()" class="p-1.5 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Back">
+                <button data-haptic onclick="haptic(); toggleSettings()" class="p-1.5 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Back">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <h3 class="text-base sm:text-lg font-bold">Settings</h3>
@@ -829,7 +829,7 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Auto-Show Sentences</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quiz and Flashcard modes only</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
+                    <label data-haptic class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="setting-auto-show-sentences" onchange="haptic(); toggleAutoShowSentences(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
@@ -840,7 +840,7 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Auto-Pronounce Words</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quiz, Flashcard, and Fill in the Blanks</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
+                    <label data-haptic class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="setting-auto-pronounce" onchange="haptic(); toggleAutoPronounce(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
@@ -853,7 +853,7 @@
                         <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Enable Cloud Sync</span>
                         <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Closing the webpage or PWA synces data.</p>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                    <label data-haptic class="relative inline-flex items-center cursor-pointer flex-shrink-0">
                         <input type="checkbox" id="setting-enable-cloud" onchange="haptic(); toggleCloudSync(this.checked)" class="sr-only peer">
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                     </label>
@@ -863,7 +863,7 @@
                     <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-2">Cloud Sync Key</label>
                     <div class="flex items-center gap-2">
                         <div id="setting-cloud-key" class="flex-1 min-w-0 bg-slate-100 dark:bg-neutral-800/50 border border-slate-300 dark:border-neutral-700 rounded-lg px-4 py-3 dark:text-white font-mono text-sm truncate">&nbsp;</div>
-                        <button onclick="haptic(); copyCloudKey()" class="flex-shrink-0 p-3 rounded-lg border border-slate-300 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800/50 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-neutral-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" title="Copy Key">
+                        <button data-haptic onclick="haptic(); copyCloudKey()" class="flex-shrink-0 p-3 rounded-lg border border-slate-300 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800/50 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-neutral-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" title="Copy Key">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                         </button>
                     </div>
@@ -876,10 +876,10 @@
                     <label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Color Palette</label>
                     <div class="theme-toggle-track">
                         <div id="theme-slider" class="theme-slider" style="left:4px;"></div>
-                        <button class="theme-toggle-dot active" id="theme-btn-default" onclick="haptic(); changeTheme('default')" title="Turquoise">
+                        <button data-haptic class="theme-toggle-dot active" id="theme-btn-default" onclick="haptic(); changeTheme('default')" title="Turquoise">
                             <div class="swatch bg-[#14b8a6]"></div>
                         </button>
-                        <button class="theme-toggle-dot" id="theme-btn-indigo" onclick="haptic(); changeTheme('indigo')" title="Indigo">
+                        <button data-haptic class="theme-toggle-dot" id="theme-btn-indigo" onclick="haptic(); changeTheme('indigo')" title="Indigo">
                             <div class="swatch bg-[#6366f1]"></div>
                         </button>
                     </div>
@@ -888,10 +888,10 @@
                 <hr class="border-slate-200 dark:border-neutral-800" />
                 
                 <div class="flex flex-col gap-2">
-                    <button onclick="haptic(); resetProgress()" class="w-full py-3 px-4 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-900/50 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 rounded-xl text-sm font-bold transition-colors shadow-sm focus:outline-none">
+                    <button data-haptic onclick="haptic(); resetProgress()" class="w-full py-3 px-4 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-900/50 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 rounded-xl text-sm font-bold transition-colors shadow-sm focus:outline-none">
                         Reset Progress
                     </button>
-                    <button onclick="haptic(); resetProgressLocal()" class="w-full py-2 px-4 text-xs font-semibold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors focus:outline-none bg-transparent border-0">
+                    <button data-haptic onclick="haptic(); resetProgressLocal()" class="w-full py-2 px-4 text-xs font-semibold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors focus:outline-none bg-transparent border-0">
                         Reset Progress Locally Only
                     </button>
                 </div>
@@ -1341,26 +1341,30 @@
             window.location.href = 'memory_palace.html';
         }
 
-        let _hapticLabel = null;
         function haptic() {
-            try {
-                if (navigator.vibrate) { navigator.vibrate(10); return; }
-                if (!_hapticLabel) {
-                    const id = 'wh-' + Math.random().toString(36).slice(2, 8);
-                    const input = document.createElement('input');
-                    input.type = 'checkbox';
-                    input.id = id;
-                    input.setAttribute('switch', '');
-                    input.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:0;height:0';
-                    const label = document.createElement('label');
-                    label.htmlFor = id;
-                    label.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:0;height:0';
-                    label.appendChild(input);
-                    document.body.appendChild(label);
-                    _hapticLabel = label;
-                }
-                _hapticLabel.click();
-            } catch(e) {}
+            if (navigator.vibrate) navigator.vibrate(10);
+        }
+        function initHapticOverlays() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+                || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            if (!isIOS) return;
+            document.querySelectorAll('[data-haptic]').forEach(el => {
+                if (el.querySelector('[data-haptic-trigger]')) return;
+                const sw = document.createElement('input');
+                sw.type = 'checkbox';
+                sw.setAttribute('switch', '');
+                sw.setAttribute('data-haptic-trigger', '');
+                sw.setAttribute('aria-hidden', 'true');
+                sw.tabIndex = -1;
+                Object.assign(sw.style, {
+                    position: 'absolute', inset: '0', width: '100%', height: '100%',
+                    margin: '0', opacity: '0', clipPath: 'inset(0 round 999px)',
+                    touchAction: 'manipulation', zIndex: '9999'
+                });
+                sw.style.setProperty('-webkit-tap-highlight-color', 'transparent');
+                if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+                el.appendChild(sw);
+            });
         }
 
         function toggleSettings() {
@@ -1781,21 +1785,32 @@
         (function initModalKeyboardGuard() {
             if (!window.visualViewport) return;
             const modal = document.getElementById('cloud-confirm-modal');
-            const modalInner = modal ? modal.querySelector('[onclick]') : null;
             const keyInput = document.getElementById('cloud-confirm-key-input');
             if (!keyInput || !modal) return;
+            const modalBox = modal.querySelector('.relative') || modal.firstElementChild;
             function onResize() {
                 if (!keyInput.matches(':focus')) return;
                 const vh = window.visualViewport.height;
-                modal.style.alignItems = 'flex-end';
-                modal.style.paddingBottom = Math.round(vh * 0.05) + 'px';
+                const keyboardHeight = window.innerHeight - vh;
+                modal.style.position = 'fixed';
+                modal.style.left = '0';
+                modal.style.right = '0';
+                modal.style.top = '';
+                modal.style.bottom = (keyboardHeight + vh * 0.05) + 'px';
+                modal.style.alignItems = 'center';
+                modal.style.paddingBottom = '0';
             }
             keyInput.addEventListener('focus', () => {
-                modal.style.transition = 'padding 0.2s ease';
+                modal.style.transition = 'bottom 0.2s ease';
                 window.visualViewport.addEventListener('resize', onResize);
                 onResize();
             });
             keyInput.addEventListener('blur', () => {
+                modal.style.position = '';
+                modal.style.left = '';
+                modal.style.right = '';
+                modal.style.top = '';
+                modal.style.bottom = '';
                 modal.style.alignItems = '';
                 modal.style.paddingBottom = '';
                 modal.style.transition = '';
@@ -4523,6 +4538,9 @@
                 }
             }
         }, { passive: false });
+
+        document.addEventListener('DOMContentLoaded', initHapticOverlays);
+        if (document.readyState !== 'loading') initHapticOverlays();
     </script>
 </body>
 </html>
