@@ -469,14 +469,18 @@
             display: none !important;
         }
 
-        /* Customize Fill in the Blanks sentence display */
         .fillblanks-mode .card-face {
             padding-top: 5px !important;
-            padding-bottom: 5px !important;
+            padding-bottom: 12px !important;
             padding-left: 12px !important;
             padding-right: 12px !important;
             justify-content: center !important;
             align-items: stretch !important;
+        }
+        @media (min-width: 640px) {
+            .fillblanks-mode .card-face {
+                padding-bottom: 5px !important;
+            }
         }
         .fillblanks-mode #card-front-fillblanks {
             position: relative !important;
@@ -613,6 +617,209 @@
 
 
 
+        /* Library CSS Styles */
+        .tome-card {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .tome-card {
+            background: linear-gradient(135deg, #171717, #1f1f1f);
+            border: 1px solid #262626;
+        }
+        .tome-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+            border-color: rgb(var(--primary-500));
+        }
+
+        .library-shelf-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1.25rem;
+            padding: 1rem 0.75rem 0.25rem 0.75rem;
+            position: relative;
+        }
+        @media (min-width: 640px) {
+            .library-shelf-container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        .book-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .book-cover {
+            width: 130px;
+            height: 190px;
+            border-radius: 4px 12px 12px 4px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+            box-shadow: 
+                -4px 4px 10px rgba(0, 0, 0, 0.35), 
+                inset 1px 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem 0.75rem 1rem 1.25rem;
+            color: white;
+            overflow: hidden;
+        }
+        @media (min-width: 640px) {
+            .book-cover {
+                width: 155px;
+                height: 225px;
+            }
+        }
+
+        /* 3D spine simulation */
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.0) 100%);
+            border-right: 1px solid rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+        
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+
+        .book-cover:hover {
+            transform: rotateY(-12deg) translateY(-8px);
+            box-shadow: 
+                -12px 12px 20px rgba(0, 0, 0, 0.4), 
+                0 0 15px rgba(20, 184, 166, 0.25);
+        }
+
+        .book-title {
+            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            margin-top: 1rem;
+        }
+        @media (min-width: 640px) {
+            .book-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        .book-range {
+            font-size: 0.75rem;
+            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            font-style: italic;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            border-top: 1px solid rgba(255,255,255,0.25);
+            padding-top: 0.5rem;
+            word-break: break-word;
+        }
+
+        .book-spine-label {
+            position: absolute;
+            top: 50%;
+            left: 2px;
+            transform: translateY(-50%) rotate(-90deg) translateX(-50%);
+            transform-origin: left top;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            width: 100px;
+            text-align: center;
+        }
+
+        /* Bookshelf divider */
+        .shelf-wood {
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to bottom, #a16207 0%, #854d0e 30%, #451a03 100%);
+            border-top: 2px solid rgba(254, 240, 138, 0.4);
+            border-radius: 2px;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+        }
+        .dark .shelf-wood {
+            background: linear-gradient(to bottom, #78350f 0%, #451a03 30%, #1c0a00 100%);
+            border-top: 2px solid rgba(251, 191, 36, 0.15);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* Reader View */
+        .library-word-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .dark .library-word-card {
+            border: 1px solid #262626;
+            background-color: #171717;
+        }
+        .library-word-card.learned {
+            background-color: #f0fdf4 !important;
+            border-color: #bbf7d0 !important;
+        }
+        .dark .library-word-card.learned {
+            background-color: rgba(20, 83, 45, 0.2) !important;
+            border-color: rgba(34, 197, 94, 0.4) !important;
+        }
+        .library-word-card.learned .learned-check-icon {
+            display: inline-block !important;
+        }
+        .book-cover.fully-learned {
+            filter: grayscale(0.85) contrast(0.8) brightness(0.95);
+            opacity: 0.65;
+        }
+        .book-cover.fully-learned:hover {
+            filter: grayscale(0.4) contrast(0.9) brightness(1.05);
+            opacity: 0.85;
+        }
+
+        /* Navbar More Menu expand animations */
+        #nav-more-menu {
+            transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out, gap 0.3s ease-out;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        #nav-more-menu.expanded {
+            max-width: 110px;
+            opacity: 1;
+            gap: 0.25rem;
+        }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-black dark:text-slate-100 font-sans h-screen flex flex-col overflow-hidden transition-colors duration-300">
@@ -636,12 +843,32 @@
         </div>
         
         <div class="flex items-center gap-2 sm:gap-4">
-            <!-- Memory Palace Switch Button -->
-            <button onclick="goToMemoryPalace()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Memory Palace">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h1M4 21h1M9 10v11M15 10v11M20 10h1M20 21h1"></path>
+            <!-- Expandable Sub-menu -->
+            <div id="nav-more-menu">
+                <!-- Library Button -->
+                <button onclick="goToLibrary()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Library">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M5 6h3v15H5zM9 3h4v18H9zM14 8l4 13M17 7l4 13M14 8l3-1M18 21l3-1"></path>
+                    </svg>
+                </button>
+                <!-- Memory Palace Switch Button -->
+                <button onclick="goToMemoryPalace()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Memory Palace">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h1M4 21h1M9 10v11M15 10v11M20 10h1M20 21h1"></path>
+                    </svg>
+                </button>
+                <!-- Separator line -->
+                <div class="h-4 w-px bg-slate-200 dark:bg-neutral-800 mx-1 shrink-0"></div>
+            </div>
+
+            <!-- More Options Toggle Button -->
+            <button onclick="toggleMoreNavMenu()" id="more-nav-btn" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="More Options">
+                <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h.01M12 12h.01M19 12h.01"></path>
                 </svg>
             </button>
+
+            <!-- Dashboard Button -->
             <button onclick="toggleDashboardModal()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Dashboard">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
             </button>
@@ -895,6 +1122,26 @@
                         Reset Progress Locally Only
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <div id="library-screen" class="hidden w-full max-w-4xl bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300 p-6 sm:p-8">
+            <!-- Header with title & back button -->
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 dark:border-neutral-800 pb-4 shrink-0">
+                <div class="flex items-center gap-3">
+                    <button onclick="libraryBack()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-500 dark:text-slate-400 transition-colors" title="Back">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    </button>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-serif italic text-slate-800 dark:text-white font-bold leading-tight" id="library-title">Library</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 dark:text-slate-500 font-sans" id="library-subtitle">Choose a category to browse</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen Contents -->
+            <div id="library-content" class="flex-grow overflow-y-auto min-h-[300px]">
+                <!-- Injected dynamically -->
             </div>
         </div>
 
@@ -1269,9 +1516,9 @@
         let _navStack = ['setup-screen'];
 
         function _hideAllContentScreens() {
-            ['setup-screen','dashboard-screen','settings-screen','study-screen'].forEach(id => {
+            ['setup-screen','dashboard-screen','settings-screen','study-screen','library-screen'].forEach(id => {
                 const el = document.getElementById(id);
-                if (id === 'study-screen') {
+                if (id === 'study-screen' || id === 'library-screen') {
                     el.classList.add('hidden');
                     el.classList.remove('flex');
                 } else {
@@ -1304,6 +1551,14 @@
                 document.getElementById('game-header').classList.add('flex');
                 document.body.classList.add('overflow-hidden');
                 document.body.style.touchAction = 'none';
+            } else if (id === 'library-screen') {
+                document.getElementById('library-screen').classList.remove('hidden');
+                document.getElementById('library-screen').classList.add('flex');
+                document.getElementById('end-session-btn').classList.add('hidden');
+                document.getElementById('nav-branding').classList.remove('hidden');
+                document.querySelector('main').style.paddingTop = 'max(1.25rem, 2.5vh)';
+                document.body.classList.remove('overflow-hidden');
+                document.body.style.touchAction = '';
             } else {
                 document.getElementById(id).classList.remove('hidden');
                 document.getElementById('end-session-btn').classList.add('hidden');
@@ -1334,11 +1589,402 @@
             _showScreen(_navStack[_navStack.length - 1] || 'setup-screen');
         }
 
+        function toggleMoreNavMenu() {
+            const menu = document.getElementById('nav-more-menu');
+            const btn = document.getElementById('more-nav-btn');
+            const isOpen = menu.classList.contains('expanded');
+            
+            if (!isOpen) {
+                menu.classList.add('expanded');
+                btn.querySelector('svg').classList.add('rotate-90');
+                btn.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white');
+            } else {
+                menu.classList.remove('expanded');
+                btn.querySelector('svg').classList.remove('rotate-90');
+                btn.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white');
+            }
+            haptic();
+        }
+
         function goToMemoryPalace() {
             if (_navStack.includes('study-screen') && !confirm('Leave your current study session and go to Memory Palace? Progress will be saved.')) {
                 return;
             }
             window.location.href = 'memory_palace.html';
+        }
+
+        // =========================================================
+        // LIBRARY MODULE
+        // =========================================================
+        let libraryState = {
+            view: 'tomes', // 'tomes', 'books', 'words'
+            category: null,
+            set: null,
+            sort: 'az'
+        };
+
+        function goToLibrary() {
+            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and open the Library? Progress will be saved.')) {
+                return;
+            }
+            _navStack = ['setup-screen', 'library-screen'];
+            _showScreen('library-screen');
+            showLibraryTomes();
+        }
+
+        function libraryBack() {
+            if (libraryState.view === 'words') {
+                selectLibraryCategory(libraryState.category);
+            } else if (libraryState.view === 'books') {
+                showLibraryTomes();
+            } else {
+                _navStack.pop();
+                _showScreen('setup-screen');
+            }
+        }
+
+        function showLibraryTomes() {
+            libraryState.view = 'tomes';
+            libraryState.category = null;
+            libraryState.set = null;
+
+            document.getElementById('library-title').innerText = "Library";
+            document.getElementById('library-subtitle').innerText = "Choose a category to browse";
+
+            const container = document.getElementById('library-content');
+            container.scrollTop = 0;
+            const mainEl = document.querySelector('main');
+            if (mainEl) mainEl.scrollTop = 0;
+
+            const categories = Object.keys(vocabularyDB).filter(cat => Object.keys(vocabularyDB[cat]).length > 0);
+
+            if (categories.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-400 dark:text-slate-500 font-medium">No categories found. Load database.js first.</div>`;
+                return;
+            }
+
+            // Generate category cards
+            const gridHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2">
+                    ${categories.map((cat, idx) => {
+                        // Count sets and total words
+                        const sets = Object.keys(vocabularyDB[cat]);
+                        let wordCount = 0;
+                        sets.forEach(s => { wordCount += vocabularyDB[cat][s].length; });
+
+                        // Nice subtle gradient index-based styling
+                        const gradients = [
+                            'from-emerald-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:to-teal-500/5',
+                            'from-cyan-500/10 to-blue-500/10 dark:from-cyan-500/5 dark:to-blue-500/5',
+                            'from-indigo-500/10 to-purple-500/10 dark:from-indigo-500/5 dark:to-purple-500/5',
+                            'from-rose-500/10 to-orange-500/10 dark:from-rose-500/5 dark:to-orange-500/5'
+                        ];
+                        const gradientClass = gradients[idx % gradients.length];
+
+                        return `
+                            <div onclick="selectLibraryCategory('${cat}')" class="tome-card bg-gradient-to-br ${gradientClass} rounded-2xl p-6 cursor-pointer flex flex-col justify-between min-h-[140px] shadow-sm relative overflow-hidden group">
+                                <div class="relative z-10">
+                                    <h3 class="text-lg sm:text-xl font-bold font-serif text-slate-800 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">${cat}</h3>
+                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">${sets.length} Books</p>
+                                </div>
+                                <div class="flex justify-between items-end mt-4 relative z-10">
+                                    <span class="text-xs font-semibold px-2.5 py-1 bg-white/60 dark:bg-neutral-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-700/50 rounded-full text-slate-600 dark:text-slate-300">${wordCount} Words</span>
+                                    <span class="text-primary-600 dark:text-primary-400 text-sm font-semibold inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        Browse
+                                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </span>
+                                </div>
+                                <!-- Background watermark icon -->
+                                <svg class="absolute -right-4 -bottom-4 w-24 h-24 text-slate-200/40 dark:text-neutral-800/20 transform -rotate-12 pointer-events-none transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            container.innerHTML = gridHTML;
+        }
+
+        function selectLibraryCategory(cat) {
+            libraryState.view = 'books';
+            libraryState.category = cat;
+            libraryState.set = null;
+
+            document.getElementById('library-title').innerText = cat;
+            document.getElementById('library-subtitle').innerText = "Choose a book to read";
+
+            const container = document.getElementById('library-content');
+            container.scrollTop = 0;
+            const mainEl = document.querySelector('main');
+            if (mainEl) mainEl.scrollTop = 0;
+
+            const sets = Object.keys(vocabularyDB[cat] || {});
+
+            if (sets.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-400 dark:text-slate-500 font-medium">No books found in this category.</div>`;
+                return;
+            }
+
+            // Read learned words
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+
+            // Build detailed book items
+            const bookDetailsList = sets.map(s => {
+                const setWords = [...vocabularyDB[cat][s]];
+                const totalWords = setWords.length;
+                const learnedCount = setWords.filter(w => learnedSet.has(w.word.trim().toLowerCase())).length;
+                const ratio = totalWords > 0 ? (learnedCount / totalWords) : 0;
+                return {
+                    name: s,
+                    words: setWords,
+                    totalWords,
+                    learnedCount,
+                    ratio
+                };
+            });
+
+            // Sort by progress descending. If equal, sort numerically (Set 1 before Set 2)
+            bookDetailsList.sort((a, b) => {
+                if (b.ratio !== a.ratio) {
+                    return b.ratio - a.ratio; // progress descending
+                }
+                return a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'});
+            });
+
+            // Render shelves of books
+            // We group books into rows of 4 for beautiful visual presentation
+            const booksPerRow = 4;
+            let shelfHTML = `<div class="flex flex-col gap-2 p-2">`;
+
+            for (let i = 0; i < bookDetailsList.length; i += booksPerRow) {
+                const rowDetails = bookDetailsList.slice(i, i + booksPerRow);
+                shelfHTML += `
+                    <div class="library-shelf-container">
+                        ${rowDetails.map((book, idx) => {
+                            const s = book.name;
+                            const setWords = [...book.words].sort((a, b) => a.word.localeCompare(b.word));
+                            const totalWords = book.totalWords;
+                            const learnedCount = book.learnedCount;
+                            const isFullyLearned = (totalWords > 0 && learnedCount === totalWords);
+                            const fullyLearnedClass = isFullyLearned ? " fully-learned" : "";
+
+                            const firstWord = setWords[0] ? setWords[0].word : '';
+                            const lastWord = setWords[setWords.length - 1] ? setWords[setWords.length - 1].word : '';
+                            
+                            // Format according to word casing settings
+                            const displayFirst = formatWordBySetting(firstWord);
+                            const displayLast = formatWordBySetting(lastWord);
+
+                            // Generate a distinct book cover color based on category and set index
+                            const bookColors = [
+                                'from-[#881337] to-[#4c0519] border-rose-950', // deep crimson
+                                'from-[#064e3b] to-[#022c22] border-emerald-950', // emerald green
+                                'from-[#1e3a8a] to-[#172554] border-blue-950', // navy blue
+                                'from-[#701a75] to-[#4a044e] border-fuchsia-950', // deep purple
+                                'from-[#7c2d12] to-[#451a03] border-orange-950', // warm brown
+                                'from-[#115e59] to-[#134e4a] border-teal-950'  // teal
+                            ];
+                            const coverColor = bookColors[(i + idx) % bookColors.length];
+
+                            return `
+                                <div class="book-container">
+                                    <div onclick="openLibraryBook('${s}')" class="book-cover bg-gradient-to-br ${coverColor} border-t border-r border-b${fullyLearnedClass}">
+                                        <div class="book-spine-label">${cat}</div>
+                                        <div class="book-title-container">
+                                            <div class="book-title">${s}</div>
+                                            <div class="text-[9px] sm:text-[10px] opacity-80 mt-1 font-sans">Learned ${learnedCount}/${totalWords} words</div>
+                                        </div>
+                                        <div class="book-range">${displayFirst}<br/><span class="opacity-50 text-[10px]">to</span><br/>${displayLast}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="shelf-wood"></div>
+                `;
+            }
+            shelfHTML += `</div>`;
+            container.innerHTML = shelfHTML;
+        }
+
+        function openLibraryBook(set) {
+            libraryState.view = 'words';
+            libraryState.set = set;
+
+            const cat = libraryState.category;
+            document.getElementById('library-title').innerText = `${cat} / ${set}`;
+            document.getElementById('library-subtitle').innerText = "Double tap to mark learned";
+
+            const container = document.getElementById('library-content');
+            container.scrollTop = 0;
+            const mainEl = document.querySelector('main');
+            if (mainEl) mainEl.scrollTop = 0;
+
+            const sortedWords = [...vocabularyDB[cat][set]].sort((a, b) => a.word.localeCompare(b.word));
+
+            if (sortedWords.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-400 dark:text-slate-500 font-medium">No words found in this book.</div>`;
+                return;
+            }
+
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+
+            // Generate Word List
+            const listHTML = `
+                <div class="space-y-4 p-2 pb-12">
+                    <div class="flex justify-between items-center bg-slate-50 dark:bg-neutral-800/40 p-3 rounded-xl border border-slate-200/50 dark:border-neutral-800/50 mb-4 shrink-0">
+                        <span class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">${sortedWords.length} Words in Book</span>
+                        <button onclick="toggleAllLibraryExamples(this)" class="px-3 py-1.5 bg-primary-600 text-white hover:bg-primary-700 rounded-lg text-xs font-semibold shadow-sm transition-colors focus:outline-none">
+                            Expand All Examples
+                        </button>
+                    </div>
+                    ${sortedWords.map((w, idx) => {
+                        const wordId = `lib-word-ex-${idx}`;
+                        // We will check if both examples exist
+                        const sentence1 = w.example || "";
+                        const sentence2 = w.long_example || "";
+                        const hasExamples = sentence1 || sentence2;
+                        
+                        // Format according to word casing settings
+                        const displayWord = formatWordBySetting(w.word);
+                        
+                        const isWordLearned = learnedSet.has(w.word.trim().toLowerCase());
+                        const learnedClass = isWordLearned ? " learned" : "";
+
+                        return `
+                            <div class="library-word-card p-4 sm:p-5 flex flex-col gap-3 transition-colors duration-200 cursor-pointer${learnedClass}" onclick="handleLibraryWordClick(event, this, '${w.word.replace(/'/g, "\\'")}')">
+                                <div class="flex items-start justify-between gap-3 w-full">
+                                    <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                                        <h3 class="text-lg sm:text-xl font-bold font-serif text-slate-800 dark:text-white flex items-center gap-1.5">
+                                            <span>${displayWord}</span>
+                                            <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400 hidden learned-check-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        </h3>
+                                        <span class="px-2 py-0.5 bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 rounded-full text-xs text-slate-500 dark:text-slate-400 font-mono italic">${w.type}</span>
+                                    </div>
+                                    ${hasExamples ? `
+                                        <button onclick="toggleLibraryWordExamples(this, '${wordId}')" class="shrink-0 px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 border border-slate-200 dark:border-neutral-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 transition-colors focus:outline-none inline-flex items-center gap-1.5">
+                                            <span class="hidden sm:inline">Show Examples</span>
+                                            <span class="inline sm:hidden [@media(max-width:350px)]:hidden">Examples</span>
+                                            <span class="[@media(max-width:350px)]:inline hidden">Ex.</span>
+                                            <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                                        </button>
+                                    ` : ''}
+                                </div>
+                                <div class="text-sm sm:text-[15px] text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+                                    ${w.def}
+                                </div>
+                                
+                                ${hasExamples ? `
+                                    <div id="${wordId}" class="hidden flex flex-col gap-3 border-t border-slate-100 dark:border-neutral-800 pt-3 mt-1 fade-in-slow">
+                                        ${sentence1 ? `
+                                            <div class="pl-3.5 border-l-2 border-slate-300 dark:border-white">
+                                                <p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Example 1</p>
+                                                <p class="font-serif italic text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed">${sentence1}</p>
+                                            </div>
+                                        ` : ''}
+                                        ${sentence2 ? `
+                                            <div class="pl-3.5 border-l-2 border-primary-500 dark:border-primary-600">
+                                                <p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Example 2</p>
+                                                <p class="font-serif italic text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed">${sentence2}</p>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            container.innerHTML = listHTML;
+        }
+
+        function handleLibraryWordClick(event, cardEl, word) {
+            // Ignore if clicked on the toggle button or copy buttons/links inside
+            if (event.target.closest('button') || event.target.closest('a')) {
+                return;
+            }
+
+            const now = Date.now();
+            const lastTap = parseInt(cardEl.dataset.lastTap || '0', 10);
+            
+            if (now - lastTap < 300) {
+                // Double tap detected!
+                toggleLibraryWordLearned(cardEl, word);
+                cardEl.dataset.lastTap = '0'; // Reset so subsequent taps don't toggle immediately
+            } else {
+                cardEl.dataset.lastTap = now.toString();
+            }
+        }
+
+        function toggleLibraryWordLearned(cardEl, word) {
+            const cleanWord = word.trim().toLowerCase();
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+
+            if (learnedSet.has(cleanWord)) {
+                learnedSet.delete(cleanWord);
+                cardEl.classList.remove('learned');
+                showToast(`"${word}" unmarked as learned`, "success");
+            } else {
+                learnedSet.add(cleanWord);
+                cardEl.classList.add('learned');
+                showToast(`"${word}" marked as learned!`, "success");
+            }
+
+            localStorage.setItem('learned-words', JSON.stringify(Array.from(learnedSet)));
+            hasUnsavedChanges = true;
+            pushToCloud();
+            haptic();
+        }
+
+        function toggleLibraryWordExamples(btn, elementId, forceState) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const svg = btn.querySelector('svg');
+            const spans = btn.querySelectorAll('span');
+
+            const isCurrentlyHidden = el.classList.contains('hidden');
+            const shouldShow = forceState !== undefined ? forceState : isCurrentlyHidden;
+
+            if (shouldShow) {
+                el.classList.remove('hidden');
+                if (spans[0]) spans[0].innerText = "Hide Examples";
+                if (spans[1]) spans[1].innerText = "Hide";
+                if (spans[2]) spans[2].innerText = "Hide";
+                if (svg) svg.classList.add('rotate-180');
+            } else {
+                el.classList.add('hidden');
+                if (spans[0]) spans[0].innerText = "Show Examples";
+                if (spans[1]) spans[1].innerText = "Examples";
+                if (spans[2]) spans[2].innerText = "Ex.";
+                if (svg) svg.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleAllLibraryExamples(btn) {
+            const allCards = document.querySelectorAll('.library-word-card');
+            const expandAll = btn.innerText.includes('Expand');
+
+            allCards.forEach(card => {
+                const toggleBtn = card.querySelector('button[onclick^="toggleLibraryWordExamples"]');
+                const exContainer = card.querySelector('[id^="lib-word-ex-"]');
+                if (toggleBtn && exContainer) {
+                    toggleLibraryWordExamples(toggleBtn, exContainer.id, expandAll);
+                }
+            });
+
+            if (expandAll) {
+                btn.innerText = "Collapse All Examples";
+                btn.classList.remove('bg-primary-600', 'hover:bg-primary-700');
+                btn.classList.add('bg-slate-600', 'hover:bg-slate-700');
+            } else {
+                btn.innerText = "Expand All Examples";
+                btn.classList.add('bg-primary-600', 'hover:bg-primary-700');
+                btn.classList.remove('bg-slate-600', 'hover:bg-slate-700');
+            }
         }
 
         function haptic() {

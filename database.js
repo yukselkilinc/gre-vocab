@@ -18178,7 +18178,7 @@ const coreDatabase = {
             {
                 "word": "venerated",
                 "type": "adj.",
-                "def": "To regard with great respect",
+                "def": "Regarded with great respect",
                 "example": "The tribal elders are deeply venerated by the younger members of the community.",
                 "long_example": "The venerated spiritual leader warmly welcomed the villagers who had traveled long distances to seek his wise counsel and blessings before they undertook any significant life journeys."
             }
