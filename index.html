@@ -860,8 +860,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h1M4 21h1M9 10v11M15 10v11M20 10h1M20 21h1"></path>
                     </svg>
                 </button>
-                <!-- Separator line -->
-                <div class="h-4 w-px bg-slate-200 dark:bg-neutral-800 mx-1 shrink-0"></div>
             </div>
 
             <!-- More Options Toggle Button -->
@@ -1664,6 +1662,10 @@
                 return;
             }
 
+            // Read learned words
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+
             // Generate category cards
             const gridHTML = `
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2">
@@ -1671,22 +1673,27 @@
                         // Count sets and total words
                         const sets = Object.keys(vocabularyDB[cat]);
                         let wordCount = 0;
-                        sets.forEach(s => { wordCount += vocabularyDB[cat][s].length; });
+                        let completedBooks = 0;
+                        
+                        sets.forEach(s => {
+                            const setWords = vocabularyDB[cat][s];
+                            const totalWords = setWords.length;
+                            const learnedCount = setWords.filter(w => learnedSet.has(w.word.trim().toLowerCase())).length;
+                            if (totalWords > 0 && learnedCount === totalWords) {
+                                completedBooks++;
+                            }
+                            wordCount += totalWords;
+                        });
 
-                        // Nice subtle gradient index-based styling
-                        const gradients = [
-                            'from-emerald-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:to-teal-500/5',
-                            'from-cyan-500/10 to-blue-500/10 dark:from-cyan-500/5 dark:to-blue-500/5',
-                            'from-indigo-500/10 to-purple-500/10 dark:from-indigo-500/5 dark:to-purple-500/5',
-                            'from-rose-500/10 to-orange-500/10 dark:from-rose-500/5 dark:to-orange-500/5'
-                        ];
-                        const gradientClass = gradients[idx % gradients.length];
+                        const completionText = completedBooks > 0
+                            ? ` • <span class="text-emerald-600 dark:text-emerald-400 font-semibold">${completedBooks} completed</span>`
+                            : '';
 
                         return `
-                            <div onclick="selectLibraryCategory('${cat}')" class="tome-card bg-gradient-to-br ${gradientClass} rounded-2xl p-6 cursor-pointer flex flex-col justify-between min-h-[140px] shadow-sm relative overflow-hidden group">
+                            <div onclick="selectLibraryCategory('${cat}')" class="tome-card rounded-2xl p-6 cursor-pointer flex flex-col justify-between min-h-[140px] shadow-sm relative overflow-hidden group">
                                 <div class="relative z-10">
                                     <h3 class="text-lg sm:text-xl font-bold font-serif text-slate-800 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">${cat}</h3>
-                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">${sets.length} Books</p>
+                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">${sets.length} Books${completionText}</p>
                                 </div>
                                 <div class="flex justify-between items-end mt-4 relative z-10">
                                     <span class="text-xs font-semibold px-2.5 py-1 bg-white/60 dark:bg-neutral-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-700/50 rounded-full text-slate-600 dark:text-slate-300">${wordCount} Words</span>
