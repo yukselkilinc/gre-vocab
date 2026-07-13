@@ -806,9 +806,11 @@
 
         /* Navbar More Menu expand animations */
         #nav-more-menu {
-            transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out, gap 0.3s ease-out;
+            transition: max-width 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.1s ease-out, gap 0.15s ease-out, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
             max-width: 0;
             opacity: 0;
+            transform: scaleX(0.9) translateX(5px);
+            transform-origin: right center;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -817,6 +819,7 @@
         #nav-more-menu.expanded {
             max-width: 110px;
             opacity: 1;
+            transform: scaleX(1) translateX(0);
             gap: 0.25rem;
         }
 
@@ -1597,11 +1600,9 @@
             if (!isOpen) {
                 menu.classList.add('expanded');
                 btn.querySelector('svg').classList.add('rotate-90');
-                btn.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white');
             } else {
                 menu.classList.remove('expanded');
                 btn.querySelector('svg').classList.remove('rotate-90');
-                btn.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white');
             }
             haptic();
         }
@@ -1855,7 +1856,7 @@
                         const learnedClass = isWordLearned ? " learned" : "";
 
                         return `
-                            <div class="library-word-card p-4 sm:p-5 flex flex-col gap-3 transition-colors duration-200 cursor-pointer${learnedClass}" onclick="handleLibraryWordClick(event, this, '${w.word.replace(/'/g, "\\'")}')">
+                            <div class="library-word-card p-4 sm:p-5 flex flex-col gap-3 transition-colors duration-200 cursor-pointer${learnedClass}" onpointerdown="handleLibraryWordPointerDown(event, this, '${w.word.replace(/'/g, "\\'")}')" onpointerup="handleLibraryWordPointerUp(event, this, '${w.word.replace(/'/g, "\\'")}')">
                                 <div class="flex items-start justify-between gap-3 w-full">
                                     <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
                                         <h3 class="text-lg sm:text-xl font-bold font-serif text-slate-800 dark:text-white flex items-center gap-1.5">
@@ -1901,21 +1902,40 @@
             container.innerHTML = listHTML;
         }
 
-        function handleLibraryWordClick(event, cardEl, word) {
-            // Ignore if clicked on the toggle button or copy buttons/links inside
+        function handleLibraryWordPointerDown(event, cardEl, word) {
             if (event.target.closest('button') || event.target.closest('a')) {
                 return;
             }
+            if (!event.isPrimary) return;
+            cardEl.dataset.startX = event.clientX.toString();
+            cardEl.dataset.startY = event.clientY.toString();
+            cardEl.dataset.tapTime = Date.now().toString();
+        }
 
-            const now = Date.now();
-            const lastTap = parseInt(cardEl.dataset.lastTap || '0', 10);
+        function handleLibraryWordPointerUp(event, cardEl, word) {
+            if (event.target.closest('button') || event.target.closest('a')) {
+                return;
+            }
+            if (!event.isPrimary) return;
+
+            const startX = parseFloat(cardEl.dataset.startX || '0');
+            const startY = parseFloat(cardEl.dataset.startY || '0');
+            const tapTime = parseInt(cardEl.dataset.tapTime || '0', 10);
             
-            if (now - lastTap < 300) {
-                // Double tap detected!
-                toggleLibraryWordLearned(cardEl, word);
-                cardEl.dataset.lastTap = '0'; // Reset so subsequent taps don't toggle immediately
-            } else {
-                cardEl.dataset.lastTap = now.toString();
+            const dist = Math.hypot(event.clientX - startX, event.clientY - startY);
+            const duration = Date.now() - tapTime;
+            
+            // If they moved less than 12px (not scrolling) and lifted within 250ms (clean tap)
+            if (dist < 12 && duration < 250) {
+                const now = Date.now();
+                const lastTap = parseInt(cardEl.dataset.lastTap || '0', 10);
+                
+                if (now - lastTap < 300) {
+                    toggleLibraryWordLearned(cardEl, word);
+                    cardEl.dataset.lastTap = '0'; // Reset so subsequent taps don't toggle immediately
+                } else {
+                    cardEl.dataset.lastTap = now.toString();
+                }
             }
         }
 
@@ -1927,11 +1947,9 @@
             if (learnedSet.has(cleanWord)) {
                 learnedSet.delete(cleanWord);
                 cardEl.classList.remove('learned');
-                showToast(`"${word}" unmarked as learned`, "success");
             } else {
                 learnedSet.add(cleanWord);
                 cardEl.classList.add('learned');
-                showToast(`"${word}" marked as learned!`, "success");
             }
 
             localStorage.setItem('learned-words', JSON.stringify(Array.from(learnedSet)));
