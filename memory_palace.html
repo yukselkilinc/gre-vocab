@@ -687,7 +687,9 @@ try {
 }
 let storageReady = false;
 let hasUnsavedChanges = false;
-const FIREBASE_URL = "https://gre-vocab-master-default-rtdb.europe-west1.firebasedatabase.app/";
+const SUPABASE_URL = "https://ejxiptrgbcqezleafbcy.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_qhoYqU_u2FXCVnGvt64Thw_D9eADKqf";
+const CLOUD_PREFIX = "d5107002710815f8b57d323e7c84997619ed04b3074d122fa2d2238000a7eaac";
 
 async function sha256(message) {
   if (!message || message === 'public') return 'public';
@@ -703,6 +705,7 @@ function pushToCloud() {
   if (localStorage.getItem('greCloudSyncEnabled') !== 'true') return;
   if (!hasUnsavedChanges) return;
   if (!cachedCloudKeyHash) return;
+  if (!SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return;
 
   try {
     let progressDB = {};
@@ -729,10 +732,20 @@ function pushToCloud() {
       lastUpdated: Date.now()
     };
 
-    fetch(`${FIREBASE_URL}/${cachedCloudKeyHash}.json`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+    const fullKey = CLOUD_PREFIX + '/' + cachedCloudKeyHash;
+    fetch(`${SUPABASE_URL}/rest/v1/user_progress?on_conflict=key_hash`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({
+        key_hash: fullKey,
+        data: data,
+        last_updated: data.lastUpdated
+      }),
       keepalive: true
     });
     hasUnsavedChanges = false;
@@ -756,31 +769,44 @@ async function loadProgress(){
     if (cloudKey) {
       try {
         cachedCloudKeyHash = await sha256(cloudKey);
-        const res = await fetch(`${FIREBASE_URL}/${cachedCloudKeyHash}.json`);
+        const fullKey = CLOUD_PREFIX + '/' + cachedCloudKeyHash;
+        if (!SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return;
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/user_progress?key_hash=eq.${fullKey}&select=data`, {
+          method: 'GET',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
         if (res.ok) {
-          const data = await res.json();
-          if (data && data.learnedWords) {
-            const cloudSet = new Set(data.learnedWords);
-            let merged = false;
-            
-            // Check if local has words not in cloud
-            for (let w of learned) {
-              if (!cloudSet.has(w)) {
-                merged = true;
-                break;
+          const rows = await res.json();
+          if (rows && rows.length > 0) {
+            const data = rows[0].data;
+            if (data && data.learnedWords) {
+              const cloudSet = new Set(data.learnedWords);
+              let merged = false;
+              
+              // Check if local has words not in cloud
+              for (let w of learned) {
+                if (!cloudSet.has(w)) {
+                  merged = true;
+                  break;
+                }
               }
-            }
-            
-            // Add cloud words to local
-            for (let w of data.learnedWords) {
-              if (!learned.has(w)) {
-                learned.add(w);
-                merged = true;
+              
+              // Add cloud words to local
+              for (let w of data.learnedWords) {
+                if (!learned.has(w)) {
+                  learned.add(w);
+                  merged = true;
+                }
               }
-            }
-            
-            if (merged) {
-              localStorage.setItem('learned-words', JSON.stringify(Array.from(learned)));
+              
+              if (merged) {
+                localStorage.setItem('learned-words', JSON.stringify(Array.from(learned)));
+                hasUnsavedChanges = true;
+              }
+            } else if (learned.size > 0) {
               hasUnsavedChanges = true;
             }
           } else if (learned.size > 0) {

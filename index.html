@@ -2359,12 +2359,9 @@
         // =========================================================
         // 2.5 CLOUD SYNC LOGIC
         // =========================================================
-        const FIREBASE_URL = "https://gre-vocab-master-default-rtdb.europe-west1.firebasedatabase.app/";
-        let CLOUD_PREFIX = '';
-
-        (async () => {
-                CLOUD_PREFIX = await sha256('26d5e52abc5366c9ff9a1edf0dbdc6be1c2677331debfa113b1949b944a22b25'.toUpperCase());
-        })();
+        const SUPABASE_URL = "https://ejxiptrgbcqezleafbcy.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_qhoYqU_u2FXCVnGvt64Thw_D9eADKqf";
+        const CLOUD_PREFIX = "d5107002710815f8b57d323e7c84997619ed04b3074d122fa2d2238000a7eaac";
 
         function randomBase36(len = 6) {
             const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -2397,7 +2394,7 @@
         async function pushToCloud() {
             if (localStorage.getItem('greCloudSyncEnabled') !== 'true') return;
             if (!hasUnsavedChanges) return;
-            if (!FIREBASE_URL || FIREBASE_URL === "YOUR_FIREBASE_URL_HERE") return;
+            if (!SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return;
             const cloudKey = getCloudKey();
             const data = {
                 progressDB: safeLocalStorageGetJSON('greProgressDB', {}),
@@ -2421,11 +2418,24 @@
 
             try {
                 const cloudKeyHash = await sha256(cloudKey);
-                await fetch(`${FIREBASE_URL}/${CLOUD_PREFIX}/${cloudKeyHash}.json`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                const fullKey = CLOUD_PREFIX + '/' + cloudKeyHash;
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/user_progress?on_conflict=key_hash`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'resolution=merge-duplicates'
+                    },
+                    body: JSON.stringify({
+                        key_hash: fullKey,
+                        data: data,
+                        last_updated: data.lastUpdated
+                    })
                 });
+                if (!res.ok) {
+                    throw new Error(`Supabase push failed with status ${res.status}`);
+                }
                 hasUnsavedChanges = false;
             } catch (err) {
                 console.error("Failed to sync to cloud:", err);
@@ -2438,56 +2448,68 @@
                 pushToCloud();
             }
         });
+
         window.addEventListener("pagehide", () => {
             pushToCloud();
         });
 
         async function pullFromCloud(cloudKey) {
-            if (!cloudKey || !FIREBASE_URL || FIREBASE_URL === "YOUR_FIREBASE_URL_HERE") return false;
+            if (!cloudKey || !SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return false;
             try {
                 const cloudKeyHash = await sha256(cloudKey);
-                const res = await fetch(`${FIREBASE_URL}/${CLOUD_PREFIX}/${cloudKeyHash}.json`);
-                const data = await res.json();
-                if (data) {
-                    if (data.progressDB && Object.keys(data.progressDB).length > 0) {
-                        localStorage.setItem('greProgressDB', JSON.stringify(data.progressDB));
-                        progressDB = data.progressDB;
-                    } else {
-                        localStorage.removeItem('greProgressDB');
-                        progressDB = {};
+                const fullKey = CLOUD_PREFIX + '/' + cloudKeyHash;
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/user_progress?key_hash=eq.${fullKey}&select=data`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
                     }
-                    if (data.missedWordsDB && Object.keys(data.missedWordsDB).length > 0) {
-                        migrateMissedWordsToIndexes(data.missedWordsDB);
-                        localStorage.setItem('greMissedWords', JSON.stringify(data.missedWordsDB));
-                        missedWordsDB = data.missedWordsDB;
-                    } else {
-                        localStorage.removeItem('greMissedWords');
-                        missedWordsDB = {};
+                });
+                if (!res.ok) throw new Error(`Supabase pull failed with status ${res.status}`);
+                const rows = await res.json();
+                if (rows && rows.length > 0) {
+                    const data = rows[0].data;
+                    if (data) {
+                        if (data.progressDB && Object.keys(data.progressDB).length > 0) {
+                            localStorage.setItem('greProgressDB', JSON.stringify(data.progressDB));
+                            progressDB = data.progressDB;
+                        } else {
+                            localStorage.removeItem('greProgressDB');
+                            progressDB = {};
+                        }
+                        if (data.missedWordsDB && Object.keys(data.missedWordsDB).length > 0) {
+                            migrateMissedWordsToIndexes(data.missedWordsDB);
+                            localStorage.setItem('greMissedWords', JSON.stringify(data.missedWordsDB));
+                            missedWordsDB = data.missedWordsDB;
+                        } else {
+                            localStorage.removeItem('greMissedWords');
+                            missedWordsDB = {};
+                        }
+                        if (data.learnedWords) {
+                            localStorage.setItem('learned-words', JSON.stringify(data.learnedWords));
+                        } else {
+                            localStorage.removeItem('learned-words');
+                        }
+                        if (data.wordStatuses) {
+                            localStorage.setItem('greWordStatuses', JSON.stringify(data.wordStatuses));
+                        } else {
+                            localStorage.removeItem('greWordStatuses');
+                        }
+                        if (data.gamification) {
+                            if (data.gamification.streak) localStorage.setItem('greStreak', data.gamification.streak);
+                            if (data.gamification.wordsToday) localStorage.setItem('greWordsLearnedToday', data.gamification.wordsToday);
+                            if (data.gamification.lastDate) localStorage.setItem('greLastStudyDate', data.gamification.lastDate);
+                            if (typeof initGamification === 'function') initGamification();
+                        }
+                        if (data.settings) {
+                            if (data.settings.wordCase) localStorage.setItem('greWordCase', data.settings.wordCase);
+                            if (data.settings.autoShow !== undefined) localStorage.setItem('greAutoShowSentences', data.settings.autoShow);
+                            if (data.settings.autoPronounce !== undefined) localStorage.setItem('greAutoPronounce', data.settings.autoPronounce);
+                            if (data.settings.syncMasteredToLearned !== undefined) localStorage.setItem('greSyncMasteredToLearned', data.settings.syncMasteredToLearned);
+                        }
+                        hasUnsavedChanges = false;
+                        return true;
                     }
-                    if (data.learnedWords) {
-                        localStorage.setItem('learned-words', JSON.stringify(data.learnedWords));
-                    } else {
-                        localStorage.removeItem('learned-words');
-                    }
-                    if (data.wordStatuses) {
-                        localStorage.setItem('greWordStatuses', JSON.stringify(data.wordStatuses));
-                    } else {
-                        localStorage.removeItem('greWordStatuses');
-                    }
-                    if (data.gamification) {
-                        if (data.gamification.streak) localStorage.setItem('greStreak', data.gamification.streak);
-                        if (data.gamification.wordsToday) localStorage.setItem('greWordsLearnedToday', data.gamification.wordsToday);
-                        if (data.gamification.lastDate) localStorage.setItem('greLastStudyDate', data.gamification.lastDate);
-                        if (typeof initGamification === 'function') initGamification();
-                    }
-                    if (data.settings) {
-                        if (data.settings.wordCase) localStorage.setItem('greWordCase', data.settings.wordCase);
-                        if (data.settings.autoShow !== undefined) localStorage.setItem('greAutoShowSentences', data.settings.autoShow);
-                        if (data.settings.autoPronounce !== undefined) localStorage.setItem('greAutoPronounce', data.settings.autoPronounce);
-                        if (data.settings.syncMasteredToLearned !== undefined) localStorage.setItem('greSyncMasteredToLearned', data.settings.syncMasteredToLearned);
-                    }
-                    hasUnsavedChanges = false;
-                    return true;
                 }
             } catch (err) {
                 console.error("Failed to pull from cloud:", err);
@@ -2504,7 +2526,7 @@
             // re-sharing this tab's current URL doesn't repeat this flow.
             window.history.replaceState({}, document.title, window.location.pathname);
 
-            if (!FIREBASE_URL || FIREBASE_URL === "YOUR_FIREBASE_URL_HERE") {
+            if (!SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") {
                 alert("Cloud sync isn't configured for this app, so this link can't be used.");
                 return;
             }
@@ -2549,7 +2571,7 @@
         async function silentInitialPull() {
             if (localStorage.getItem('greCloudSyncEnabled') !== 'true') return;
             const cloudKey = getCloudKey();
-            if (!cloudKey || !FIREBASE_URL || FIREBASE_URL === "YOUR_FIREBASE_URL_HERE") return;
+            if (!cloudKey || !SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return;
             const success = await pullFromCloud(cloudKey);
             if (success) {
                 if (typeof updateMissedUI === 'function') updateMissedUI();
@@ -2653,13 +2675,22 @@
 	}
 		
         async function pullAndMergeCloud(cloudKey) {
-            if (!cloudKey || !FIREBASE_URL || FIREBASE_URL === "YOUR_FIREBASE_URL_HERE") return false;
+            if (!cloudKey || !SUPABASE_URL || SUPABASE_URL === "YOUR_SUPABASE_URL_HERE" || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === "YOUR_SUPABASE_ANON_KEY_HERE") return false;
             try {
                 const cloudKeyHash = await sha256(cloudKey);
-                const res = await fetch(`${FIREBASE_URL}/${CLOUD_PREFIX}/${cloudKeyHash}.json`);
+                const fullKey = CLOUD_PREFIX + '/' + cloudKeyHash;
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/user_progress?key_hash=eq.${fullKey}&select=data`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
                 if (!res.ok) throw new Error(`Cloud request failed with status ${res.status}`);
-                const data = await res.json();
-                if (data) {
+                const rows = await res.json();
+                if (rows && rows.length > 0) {
+                    const data = rows[0].data;
+                    if (data) {
                     // 1. Merge progressDB: take the max progress for each set
                     let mergedProgress = safeLocalStorageGetJSON('greProgressDB', {});
                     if (data.progressDB) {
@@ -2738,12 +2769,13 @@
                         if (data.settings.syncMasteredToLearned !== undefined) localStorage.setItem('greSyncMasteredToLearned', data.settings.syncMasteredToLearned);
                     }
                 }
+            }
 
-                // Update UI to match the newly merged state
-                if (typeof updateMissedUI === 'function') updateMissedUI();
-                if (typeof updateSetOptions === 'function') updateSetOptions();
-                initSettings();
-                return true;
+            // Update UI to match the newly merged state
+            if (typeof updateMissedUI === 'function') updateMissedUI();
+            if (typeof updateSetOptions === 'function') updateSetOptions();
+            initSettings();
+            return true;
             } catch (err) {
                 console.error("Failed to pull and merge from cloud:", err);
                 return false;
@@ -2983,7 +3015,7 @@
                 if (typeof initGamification === 'function') initGamification();
                 
                 // Force sync progress reset to cloud even if cloud sync is disabled
-                if (FIREBASE_URL && FIREBASE_URL !== "YOUR_FIREBASE_URL_HERE") {
+                if (SUPABASE_URL && SUPABASE_URL !== "YOUR_SUPABASE_URL_HERE" && SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY_HERE") {
                     const cloudKey = localStorage.getItem('greCloudKey') || 'public';
                     const data = {
                         progressDB: {},
@@ -3001,10 +3033,20 @@
                     };
                     try {
                         const cloudKeyHash = await sha256(cloudKey);
-                        await fetch(`${FIREBASE_URL}/${CLOUD_PREFIX}/${cloudKeyHash}.json`, {
-                            method: 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(data)
+                        const fullKey = CLOUD_PREFIX + '/' + cloudKeyHash;
+                        await fetch(`${SUPABASE_URL}/rest/v1/user_progress?on_conflict=key_hash`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'apikey': SUPABASE_ANON_KEY,
+                                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                                'Prefer': 'resolution=merge-duplicates'
+                            },
+                            body: JSON.stringify({
+                                key_hash: fullKey,
+                                data: data,
+                                last_updated: data.lastUpdated
+                            })
                         });
                         hasUnsavedChanges = false;
                     } catch (err) {
