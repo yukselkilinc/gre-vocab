@@ -104,6 +104,24 @@
             touch-action: manipulation;
         }
 
+        #library-content {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+        }
+        #library-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        #library-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #library-content::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 3px;
+        }
+        #library-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.6);
+        }
+
         .perspective-1000 { perspective: 1000px; }
         
         .flip-card-inner {
@@ -1138,6 +1156,7 @@
                         <p class="text-xs sm:text-sm text-slate-400 dark:text-slate-500 font-sans" id="library-subtitle">Choose a category to browse</p>
                     </div>
                 </div>
+                <div id="library-sub-actions" class="shrink-0 flex items-center pr-1"></div>
             </div>
 
             <!-- Screen Contents -->
@@ -1622,6 +1641,39 @@
             sort: 'az'
         };
 
+        function getFriendlyModeName(rawMode) {
+            if (rawMode === 'mcq') return 'Quiz';
+            if (rawMode === 'flashcard') return 'Flashcard';
+            if (rawMode === 'matching') return 'Match';
+            if (rawMode === 'fillblanks') return 'Fill in the Blanks';
+            return rawMode;
+        }
+
+        function recordWordGameStatus(word, status) {
+            if (!word) return;
+            const cleanWord = word.trim().toLowerCase();
+            const friendlyMode = getFriendlyModeName(mode);
+            
+            const wordStatuses = safeLocalStorageGetJSON('greWordStatuses', {});
+            wordStatuses[cleanWord] = {
+                status: status,
+                mode: friendlyMode,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('greWordStatuses', JSON.stringify(wordStatuses));
+            hasUnsavedChanges = true;
+
+            if (status === 'mastered' && localStorage.getItem('greSyncMasteredToLearned') === 'true') {
+                const learnedList = safeLocalStorageGetJSON('learned-words', []);
+                const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+                if (!learnedSet.has(cleanWord)) {
+                    learnedSet.add(cleanWord);
+                    localStorage.setItem('learned-words', JSON.stringify(Array.from(learnedSet)));
+                }
+            }
+        }
+
         function goToLibrary() {
             if (_navStack.includes('study-screen') && !confirm('Leave your current study session and open the Library? Progress will be saved.')) {
                 return;
@@ -1649,6 +1701,8 @@
 
             document.getElementById('library-title').innerText = "Library";
             document.getElementById('library-subtitle').innerText = "Choose a category to browse";
+
+            renderLibrarySubActions();
 
             const container = document.getElementById('library-content');
             container.scrollTop = 0;
@@ -1721,6 +1775,11 @@
 
             document.getElementById('library-title').innerText = cat;
             document.getElementById('library-subtitle').innerText = "Choose a book to read";
+
+            const actionsContainer = document.getElementById('library-sub-actions');
+            if (actionsContainer) {
+                actionsContainer.innerHTML = '';
+            }
 
             const container = document.getElementById('library-content');
             container.scrollTop = 0;
@@ -1825,6 +1884,11 @@
             document.getElementById('library-title').innerText = `${cat} / ${set}`;
             document.getElementById('library-subtitle').innerText = "Double tap to mark learned";
 
+            const actionsContainer = document.getElementById('library-sub-actions');
+            if (actionsContainer) {
+                actionsContainer.innerHTML = '';
+            }
+
             const container = document.getElementById('library-content');
             container.scrollTop = 0;
             const mainEl = document.querySelector('main');
@@ -1839,15 +1903,36 @@
 
             const learnedList = safeLocalStorageGetJSON('learned-words', []);
             const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+            const wordStatuses = safeLocalStorageGetJSON('greWordStatuses', {});
 
             // Generate Word List
             const listHTML = `
                 <div class="space-y-4 p-2 pb-12">
-                    <div class="flex justify-between items-center bg-slate-50 dark:bg-neutral-800/40 p-3 rounded-xl border border-slate-200/50 dark:border-neutral-800/50 mb-4 shrink-0">
-                        <span class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300">${sortedWords.length} Words in Book</span>
-                        <button onclick="toggleAllLibraryExamples(this)" class="px-3 py-1.5 bg-primary-600 text-white hover:bg-primary-700 rounded-lg text-xs font-semibold shadow-sm transition-colors focus:outline-none">
-                            Expand All Examples
-                        </button>
+                    <div class="flex flex-col gap-3 bg-slate-50 dark:bg-neutral-800/40 px-2.5 sm:px-3.5 py-3 rounded-xl border border-slate-200/50 dark:border-neutral-800/50 mb-4 shrink-0">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300" id="library-word-count">${sortedWords.length} Words in Book</span>
+                            <button onclick="toggleAllLibraryExamples(this)" class="px-3 py-1.5 bg-primary-600 text-white hover:bg-primary-700 rounded-lg text-xs font-semibold shadow-sm transition-colors focus:outline-none">
+                                Expand All Examples
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-x-2.5 sm:gap-x-4 gap-y-2 text-xs font-semibold text-slate-500 dark:text-slate-400 border-t border-slate-200/50 dark:border-neutral-800/50 pt-2.5 mt-1 select-none flex-wrap">
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer hover:text-slate-800 dark:hover:text-neutral-200 transition-colors">
+                                <input type="radio" name="lib-filter" value="all" checked onchange="filterLibraryWords(this.value)" class="w-3.5 h-3.5 accent-primary-600 dark:accent-primary-400 cursor-pointer">
+                                <span>All</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer hover:text-slate-800 dark:hover:text-neutral-200 transition-colors">
+                                <input type="radio" name="lib-filter" value="mastered" onchange="filterLibraryWords(this.value)" class="w-3.5 h-3.5 accent-primary-600 dark:accent-primary-400 cursor-pointer">
+                                <span>Mastered</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer hover:text-slate-800 dark:hover:text-neutral-200 transition-colors">
+                                <input type="radio" name="lib-filter" value="review" onchange="filterLibraryWords(this.value)" class="w-3.5 h-3.5 accent-primary-600 dark:accent-primary-400 cursor-pointer">
+                                <span>In Review</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer hover:text-slate-800 dark:hover:text-neutral-200 transition-colors">
+                                <input type="radio" name="lib-filter" value="notseen" onchange="filterLibraryWords(this.value)" class="w-3.5 h-3.5 accent-primary-600 dark:accent-primary-400 cursor-pointer">
+                                <span>Not Seen</span>
+                            </label>
+                        </div>
                     </div>
                     ${sortedWords.map((w, idx) => {
                         const wordId = `lib-word-ex-${idx}`;
@@ -1862,8 +1947,18 @@
                         const isWordLearned = learnedSet.has(w.word.trim().toLowerCase());
                         const learnedClass = isWordLearned ? " learned" : "";
 
+                        const cleanWord = w.word.trim().toLowerCase();
+                        const statusEntry = wordStatuses[cleanWord];
+                        
+                        let statusType = 'notseen';
+                        if (isWordLearned || (statusEntry && statusEntry.status === 'mastered')) {
+                            statusType = 'mastered';
+                        } else if ((w.word in missedWordsDB) || (cleanWord in missedWordsDB) || (statusEntry && statusEntry.status === 'bookmarked')) {
+                            statusType = 'review';
+                        }
+
                         return `
-                            <div class="library-word-card p-4 sm:p-5 flex flex-col gap-3 transition-colors duration-200 cursor-pointer${learnedClass}" onpointerdown="handleLibraryWordPointerDown(event, this, '${w.word.replace(/'/g, "\\'")}')" onpointerup="handleLibraryWordPointerUp(event, this, '${w.word.replace(/'/g, "\\'")}')">
+                            <div class="library-word-card p-4 sm:p-5 flex flex-col gap-3 transition-colors duration-200 cursor-pointer${learnedClass}" data-status="${statusType}" onpointerdown="handleLibraryWordPointerDown(event, this, '${w.word.replace(/'/g, "\\'")}')" onpointerup="handleLibraryWordPointerUp(event, this, '${w.word.replace(/'/g, "\\'")}')">
                                 <div class="flex items-start justify-between gap-3 w-full">
                                     <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
                                         <h3 class="text-lg sm:text-xl font-bold font-serif text-slate-800 dark:text-white flex items-center gap-1.5">
@@ -1907,6 +2002,180 @@
                 </div>
             `;
             container.innerHTML = listHTML;
+        }
+
+        function filterLibraryWords(val) {
+            const cards = document.querySelectorAll('.library-word-card');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const status = card.dataset.status;
+                if (val === 'all' || status === val) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            const countEl = document.getElementById('library-word-count');
+            if (countEl) {
+                const suffix = visibleCount === 1 ? 'Word' : 'Words';
+                if (val === 'all') {
+                    countEl.innerText = `${visibleCount} ${suffix} in Book`;
+                } else if (val === 'mastered') {
+                    countEl.innerText = `${visibleCount} Mastered ${suffix}`;
+                } else if (val === 'review') {
+                    countEl.innerText = `${visibleCount} ${suffix} in Review`;
+                } else if (val === 'notseen') {
+                    countEl.innerText = `${visibleCount} Not Seen ${suffix}`;
+                }
+            }
+        }
+
+        function toggleSyncMasteredToLearned(checked) {
+            localStorage.setItem('greSyncMasteredToLearned', checked ? 'true' : 'false');
+            if (checked) {
+                syncAllMasteredToLearned();
+            }
+        }
+
+        function syncAllMasteredToLearned() {
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+            let changed = false;
+
+            // 1. Check greWordStatuses
+            const wordStatuses = safeLocalStorageGetJSON('greWordStatuses', {});
+            for (const word in wordStatuses) {
+                if (wordStatuses[word].status === 'mastered') {
+                    const cleanWord = word.trim().toLowerCase();
+                    if (!learnedSet.has(cleanWord)) {
+                        learnedSet.add(cleanWord);
+                        changed = true;
+                    }
+                }
+            }
+
+            // 2. Check vocabularyDB for isMasteredWord
+            Object.keys(vocabularyDB).forEach(cat => {
+                Object.keys(vocabularyDB[cat]).forEach(set => {
+                    vocabularyDB[cat][set].forEach(w => {
+                        if (isMasteredWord(w)) {
+                            const cleanWord = w.word.trim().toLowerCase();
+                            if (!learnedSet.has(cleanWord)) {
+                                learnedSet.add(cleanWord);
+                                changed = true;
+                            }
+                        }
+                    });
+                });
+            });
+
+            if (changed) {
+                localStorage.setItem('learned-words', JSON.stringify(Array.from(learnedSet)));
+                hasUnsavedChanges = true;
+                pushToCloud();
+                showToast("Mastered words synced to learned list", "success");
+            }
+        }
+
+        function getUnsyncedMasteredCount() {
+            const learnedList = safeLocalStorageGetJSON('learned-words', []);
+            const learnedSet = new Set(learnedList.map(w => w.trim().toLowerCase()));
+            const masteredSet = new Set();
+
+            const wordStatuses = safeLocalStorageGetJSON('greWordStatuses', {});
+            for (const word in wordStatuses) {
+                if (wordStatuses[word].status === 'mastered') {
+                    masteredSet.add(word.trim().toLowerCase());
+                }
+            }
+
+            Object.keys(vocabularyDB).forEach(cat => {
+                Object.keys(vocabularyDB[cat]).forEach(set => {
+                    vocabularyDB[cat][set].forEach(w => {
+                        if (isMasteredWord(w)) {
+                            masteredSet.add(w.word.trim().toLowerCase());
+                        }
+                    });
+                });
+            });
+
+            let count = 0;
+            masteredSet.forEach(w => {
+                if (!learnedSet.has(w)) {
+                    count++;
+                }
+            });
+            return count;
+        }
+
+        function renderLibrarySubActions() {
+            const actionsContainer = document.getElementById('library-sub-actions');
+            if (!actionsContainer) return;
+            
+            const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
+            
+            actionsContainer.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <button onclick="handleSyncMasteredClick()" class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isEnabled ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-neutral-800'}" aria-label="Toggle sync mastered to learned" style="-webkit-tap-highlight-color: transparent;">
+                        <span class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isEnabled ? 'translate-x-4' : 'translate-x-0'}"></span>
+                    </button>
+                    
+                    <div class="relative inline-block">
+                        <button id="sync-help-btn"
+                            onmouseenter="showLibraryTooltip()" onmouseleave="hideLibraryTooltip()" ontouchstart="showLibraryTooltipTouch()"
+                            class="flex items-center justify-center w-5 h-5 rounded-full border border-slate-300 dark:border-neutral-700 text-slate-500 dark:text-slate-400 text-[10px] font-bold transition-colors focus:outline-none hover:bg-slate-50 dark:hover:bg-neutral-800"
+                            style="-webkit-tap-highlight-color: transparent;">
+                            ?
+                        </button>
+                        <div id="library-tooltip" class="absolute top-full right-0 mt-2 w-48 sm:w-56 z-[250] bg-slate-800 dark:bg-neutral-800 text-slate-100 text-xs font-medium rounded-lg py-2 px-3 shadow-xl border border-slate-700 dark:border-neutral-700 opacity-0 pointer-events-none transition-opacity duration-150 text-left leading-normal whitespace-normal">
+                            Mark past and future mastered words as learned
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSyncMasteredClick() {
+            const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
+            if (!isEnabled) {
+                const count = getUnsyncedMasteredCount();
+                if (confirm(`Mark past and future mastered words in any game mode as learned? This will mark ${count} words as learned.`)) {
+                    toggleSyncMasteredToLearned(true);
+                    renderLibrarySubActions();
+                }
+            } else {
+                if (confirm("Stop marking future mastered words as learned?")) {
+                    toggleSyncMasteredToLearned(false);
+                    renderLibrarySubActions();
+                }
+            }
+        }
+
+        let tooltipTimeout = null;
+        function showLibraryTooltip() {
+            const tooltip = document.getElementById('library-tooltip');
+            if (tooltip) {
+                if (tooltipTimeout) { clearTimeout(tooltipTimeout); tooltipTimeout = null; }
+                tooltip.classList.remove('opacity-0', 'pointer-events-none');
+                tooltip.classList.add('opacity-100');
+            }
+        }
+
+        function hideLibraryTooltip() {
+            const tooltip = document.getElementById('library-tooltip');
+            if (tooltip) {
+                tooltip.classList.remove('opacity-100');
+                tooltip.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function showLibraryTooltipTouch() {
+            showLibraryTooltip();
+            if (tooltipTimeout) clearTimeout(tooltipTimeout);
+            tooltipTimeout = setTimeout(() => {
+                hideLibraryTooltip();
+            }, 3000);
         }
 
         function handleLibraryWordPointerDown(event, cardEl, word) {
@@ -2134,6 +2403,7 @@
                 progressDB: safeLocalStorageGetJSON('greProgressDB', {}),
                 missedWordsDB: safeLocalStorageGetJSON('greMissedWords', {}),
                 learnedWords: safeLocalStorageGetJSON('learned-words', []),
+                wordStatuses: safeLocalStorageGetJSON('greWordStatuses', {}),
                 gamification: {
                     streak: localStorage.getItem('greStreak') || '0',
                     wordsToday: localStorage.getItem('greWordsLearnedToday') || '0',
@@ -2143,7 +2413,8 @@
                     wordCase: localStorage.getItem('greWordCase'),
                     autoShow: localStorage.getItem('greAutoShowSentences'),
                     autoPronounce: localStorage.getItem('greAutoPronounce'),
-                    theme: localStorage.getItem('greTheme')
+                    theme: localStorage.getItem('greTheme'),
+                    syncMasteredToLearned: localStorage.getItem('greSyncMasteredToLearned')
                 },
                 lastUpdated: Date.now()
             };
@@ -2198,6 +2469,11 @@
                     } else {
                         localStorage.removeItem('learned-words');
                     }
+                    if (data.wordStatuses) {
+                        localStorage.setItem('greWordStatuses', JSON.stringify(data.wordStatuses));
+                    } else {
+                        localStorage.removeItem('greWordStatuses');
+                    }
                     if (data.gamification) {
                         if (data.gamification.streak) localStorage.setItem('greStreak', data.gamification.streak);
                         if (data.gamification.wordsToday) localStorage.setItem('greWordsLearnedToday', data.gamification.wordsToday);
@@ -2208,6 +2484,7 @@
                         if (data.settings.wordCase) localStorage.setItem('greWordCase', data.settings.wordCase);
                         if (data.settings.autoShow !== undefined) localStorage.setItem('greAutoShowSentences', data.settings.autoShow);
                         if (data.settings.autoPronounce !== undefined) localStorage.setItem('greAutoPronounce', data.settings.autoPronounce);
+                        if (data.settings.syncMasteredToLearned !== undefined) localStorage.setItem('greSyncMasteredToLearned', data.settings.syncMasteredToLearned);
                     }
                     hasUnsavedChanges = false;
                     return true;
@@ -2428,6 +2705,19 @@
                     }
                     localStorage.setItem('learned-words', JSON.stringify(Array.from(mergedLearned)));
 
+                    // Merge wordStatuses: merge by comparing timestamps
+                    let mergedWordStatuses = safeLocalStorageGetJSON('greWordStatuses', {});
+                    if (data.wordStatuses) {
+                        for (const w in data.wordStatuses) {
+                            const cloudEntry = data.wordStatuses[w];
+                            const localEntry = mergedWordStatuses[w];
+                            if (!localEntry || (cloudEntry.timestamp && (!localEntry.timestamp || cloudEntry.timestamp > localEntry.timestamp))) {
+                                mergedWordStatuses[w] = cloudEntry;
+                            }
+                        }
+                    }
+                    localStorage.setItem('greWordStatuses', JSON.stringify(mergedWordStatuses));
+
                     if (data.gamification) {
                         const cDate = data.gamification.lastDate;
                         const lDate = localStorage.getItem('greLastStudyDate');
@@ -2445,6 +2735,7 @@
                         if (data.settings.autoShow !== undefined) localStorage.setItem('greAutoShowSentences', data.settings.autoShow);
                         if (data.settings.autoPronounce !== undefined) localStorage.setItem('greAutoPronounce', data.settings.autoPronounce);
                         if (data.settings.theme) localStorage.setItem('greTheme', data.settings.theme);
+                        if (data.settings.syncMasteredToLearned !== undefined) localStorage.setItem('greSyncMasteredToLearned', data.settings.syncMasteredToLearned);
                     }
                 }
 
@@ -2685,6 +2976,8 @@
                 localStorage.removeItem('greLastStudyDate');
                 localStorage.removeItem('greWordsLearnedToday');
                 localStorage.removeItem('learned-words');
+                localStorage.removeItem('greWordStatuses');
+                localStorage.removeItem('greSyncMasteredToLearned');
                 missedWordsDB = {};
                 progressDB = {};
                 if (typeof initGamification === 'function') initGamification();
@@ -2696,10 +2989,12 @@
                         progressDB: {},
                         missedWordsDB: {},
                         learnedWords: [],
+                        wordStatuses: {},
                         settings: {
                             wordCase: localStorage.getItem('greWordCase'),
                             autoShow: localStorage.getItem('greAutoShowSentences'),
                             autoPronounce: localStorage.getItem('greAutoPronounce'),
+                            syncMasteredToLearned: 'false',
                             cloudKey: cloudKey
                         },
                         lastUpdated: Date.now()
@@ -2738,6 +3033,8 @@
                 localStorage.removeItem('greLastStudyDate');
                 localStorage.removeItem('greWordsLearnedToday');
                 localStorage.removeItem('learned-words');
+                localStorage.removeItem('greWordStatuses');
+                localStorage.removeItem('greSyncMasteredToLearned');
                 missedWordsDB = {};
                 progressDB = {};
                 if (typeof initGamification === 'function') initGamification();
@@ -4423,6 +4720,12 @@
             const madeMistake = matchingMistakes.has(wordObj.word);
             addToLastSeen(wordObj, !madeMistake);
             
+            if (madeMistake) {
+                recordWordGameStatus(wordObj.word, 'bookmarked');
+            } else {
+                recordWordGameStatus(wordObj.word, 'mastered');
+            }
+            
             // Update words in review: remove from missedWordsDB if matched correctly in review mode
             if (isReviewMode && !madeMistake) {
                 delete missedWordsDB[wordObj.word];
@@ -4472,6 +4775,7 @@
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
             }
+            recordWordGameStatus(wordObj.word, 'bookmarked');
             
             const card = dropZone.closest('.matching-card');
             
@@ -4553,6 +4857,7 @@
                 missedWordsDB[currentWordObj.word] = getWordIndex(currentWordObj);
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
+                recordWordGameStatus(currentWordObj.word, 'bookmarked');
                 if (isReviewMode) {
                     const tossed = appData.splice(currentIndex, 1)[0];
                     appData.push(tossed);
@@ -4563,15 +4868,22 @@
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
                 reviewCorrectCount++;
+                recordWordGameStatus(currentWordObj.word, 'mastered');
             }
 
             // Save progress immediately in Quiz mode on every answer
             if (!isReviewMode && catSelect.value !== 'Random') {
                 completeWord(currentIndex);
+                if (isCorrect) {
+                    recordWordGameStatus(currentWordObj.word, 'mastered');
+                }
             } else if (!isReviewMode && catSelect.value === 'Random') {
+                if (isCorrect) {
                     progressDB['RM_' + currentWordObj.word] = true;
-                localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
-                hasUnsavedChanges = true;
+                    localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
+                    hasUnsavedChanges = true;
+                    recordWordGameStatus(currentWordObj.word, 'mastered');
+                }
             }
 
             document.querySelectorAll('.option-btn').forEach(btn => {
@@ -4626,6 +4938,7 @@
                 missedWordsDB[currentWordObj.word] = getWordIndex(currentWordObj);
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
+                recordWordGameStatus(currentWordObj.word, 'bookmarked');
                 if (isReviewMode) {
                     appData.splice(currentIndex, 1);
                     appData.push(currentWordObj);
@@ -4637,10 +4950,14 @@
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
                 reviewCorrectCount++;
+                recordWordGameStatus(currentWordObj.word, 'mastered');
             } else if (!isReviewMode && catSelect.value === 'Random' && knewIt) {
                 progressDB['RM_' + currentWordObj.word] = true;
                 localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
                 hasUnsavedChanges = true;
+                recordWordGameStatus(currentWordObj.word, 'mastered');
+            } else {
+                recordWordGameStatus(currentWordObj.word, 'mastered');
             }
             nextWord();
         }
@@ -4842,6 +5159,7 @@
                 missedWordsDB[correctWordObj.word] = getWordIndex(correctWordObj);
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
+                recordWordGameStatus(correctWordObj.word, 'bookmarked');
                 if (isReviewMode) {
                     const tossed = appData.splice(currentIndex, 1)[0];
                     appData.push(tossed);
@@ -4852,15 +5170,22 @@
                 localStorage.setItem('greMissedWords', JSON.stringify(missedWordsDB));
                 hasUnsavedChanges = true;
                 reviewCorrectCount++;
+                recordWordGameStatus(correctWordObj.word, 'mastered');
             }
 
             // Save progress immediately on every answer so progress bar advances
             if (!isReviewMode && catSelect.value !== 'Random') {
                 completeWord(currentIndex);
+                if (isCorrect) {
+                    recordWordGameStatus(correctWordObj.word, 'mastered');
+                }
             } else if (!isReviewMode && catSelect.value === 'Random') {
-                progressDB['RM_' + correctWordObj.word] = true;
-                localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
-                hasUnsavedChanges = true;
+                if (isCorrect) {
+                    progressDB['RM_' + correctWordObj.word] = true;
+                    localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
+                    hasUnsavedChanges = true;
+                    recordWordGameStatus(correctWordObj.word, 'mastered');
+                }
             }
 
             // Reveal definitions and color option buttons

@@ -31561,7 +31561,7 @@ const coreDatabase = {
             {
                 "word": "deputize",
                 "type": "verb",
-                "def": "To appoint someone as a substitute with power to act.",
+                "def": "To appoint someone as a substitute with power to act",
                 "example": "The sheriff decided to deputize the local citizens to help.",
                 "long_example": "Due to the sudden shortage of emergency responders during the blizzard, the sheriff decided to deputize several local volunteers to assist with search and rescue operations."
             },
@@ -31589,7 +31589,7 @@ const coreDatabase = {
             {
                 "word": "gratuity",
                 "type": "noun",
-                "def": "A sum of money given to someone for their services, especially as a tip.",
+                "def": "A sum of money given to someone for their services, especially as a tip",
                 "example": "We left a ten-percent gratuity for the waiter after dinner.",
                 "long_example": "The upscale restaurant automatically added an eighteen percent gratuity to the final bill for parties of six or more to ensure that the waitstaff was fairly compensated."
             },
@@ -31617,7 +31617,7 @@ const coreDatabase = {
             {
                 "word": "meter",
                 "type": "noun",
-                "def": "A device for measuring and recording the quantity, degree, or rate of something.",
+                "def": "A device for measuring and recording the quantity, degree, or rate of something",
                 "example": "The city installed a new meter to measure the water consumption.",
                 "long_example": "The municipal technician carefully inspected the digital water meter located outside the main building to ensure it was accurately recording the volume consumed by the tenants."
             },
@@ -31631,21 +31631,21 @@ const coreDatabase = {
             {
                 "word": "parameter",
                 "type": "noun",
-                "def": "A limit or boundary that defines the scope of a process or activity.",
+                "def": "A limit or boundary that defines the scope of a process or activity",
                 "example": "The budget is a strict parameter that we must stay within for this project.",
                 "long_example": "The strict budget guidelines served as a parameter that the design team had to work within, preventing them from incorporating more expensive materials into the final product."
             },
             {
                 "word": "plumage",
                 "type": "noun",
-                "def": "The feathers covering a bird's body.",
+                "def": "The feathers covering a bird's body",
                 "example": "The male peacock displayed his magnificent, colorful plumage to attract a mate.",
                 "long_example": "During the mating season, the male bird of paradise displays its vibrant, multicolored plumage in an elaborate dance to attract the attention of potential female mates."
             },
             {
                 "word": "puny",
                 "type": "adj.",
-                "def": "Small and weak",
+                "def": "Small and weak; or poor in quality, amount, or size",
                 "example": "The school bully easily pushed the puny, weak kid to the ground.",
                 "long_example": "Compared to the massive oak trees that lined the driveway, the puny sapling we planted in the backyard last spring looked incredibly fragile and unlikely to survive the winter."
             },
@@ -31659,7 +31659,7 @@ const coreDatabase = {
             {
                 "word": "scarify",
                 "type": "verb",
-                "def": "To make shallow cuts in the surface of something, often for the purpose of aeration or to promote growth.",
+                "def": "To make shallow cuts in the surface of something, often for the purpose of aeration or to promote growth",
                 "example": "The expert gardener will carefully scarify the hard soil to help the new seeds quickly sprout.",
                 "long_example": "The groundskeeper explained that he needed to scarify the compacted lawn before winter set in, allowing water, oxygen, and nutrients to penetrate deep into the roots of the grass."
             },
@@ -40658,7 +40658,7 @@ const coreDatabase = {
             {
                 "word": "perimeter",
                 "type": "noun",
-                "def": "The continuous line forming the boundary of a closed geometric figure.",
+                "def": "The continuous line forming the boundary of a closed geometric figure",
                 "example": "A tall electric fence surrounds the entire perimeter of the military base.",
                 "long_example": "Security guards accompanied by trained patrol dogs walked along the outer perimeter of the high-security facility every hour to ensure that no intruders had breached the fences."
             },
