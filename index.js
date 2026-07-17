@@ -5089,11 +5089,11 @@
                 if (isCorrect) {
                     badge.innerText = "Correct";
                     badge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 border border-emerald-250 dark:border-emerald-900/50";
-                    explContainer.className = "mt-6 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/20 dark:bg-emerald-950/10";
+                    explContainer.className = "mt-6 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/20 dark:bg-emerald-950/10 transition-all duration-300";
                 } else {
                     badge.innerText = "Incorrect";
                     badge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-100 dark:bg-rose-900/40 text-rose-800 dark:text-rose-300 border border-rose-250 dark:border-rose-900/50";
-                    explContainer.className = "mt-6 p-4 rounded-xl border border-rose-200 dark:border-rose-900/40 bg-rose-50/20 dark:bg-rose-950/10";
+                    explContainer.className = "mt-6 p-4 rounded-xl border border-rose-200 dark:border-rose-900/40 bg-rose-50/20 dark:bg-rose-950/10 transition-all duration-300";
                 }
                 
                 document.getElementById('passage-explanation-text').innerText = question.explanation;
@@ -5226,7 +5226,9 @@
             savePassageState();
             renderPassageQuestion(passageState.currentIdx);
             
-            setTimeout(() => {
+            // Scroll to the absolute bottom as the explanation appears and grows (especially on mobile)
+            let scrollAttempts = 0;
+            const scrollInterval = setInterval(() => {
                 const mainEl = document.querySelector('main');
                 if (mainEl) {
                     mainEl.scrollTo({ top: mainEl.scrollHeight, behavior: 'smooth' });
@@ -5234,6 +5236,10 @@
                 const questionContainer = document.getElementById('passage-question-card')?.parentElement;
                 if (questionContainer) {
                     questionContainer.scrollTo({ top: questionContainer.scrollHeight, behavior: 'smooth' });
+                }
+                scrollAttempts++;
+                if (scrollAttempts >= 10) {
+                    clearInterval(scrollInterval);
                 }
             }, 60);
         }
