@@ -791,8 +791,8 @@
             
             actionsContainer.innerHTML = `
                 <div class="flex items-center gap-2">
-                    <label data-haptic class="relative inline-flex items-center cursor-pointer flex-shrink-0" style="-webkit-tap-highlight-color: transparent;">
-                        <input type="checkbox" id="setting-sync-mastered" onchange="handleSyncMasteredClick(this.checked)" class="sr-only peer" ${isEnabled ? 'checked' : ''}>
+                    <label class="relative inline-flex items-center cursor-pointer flex-shrink-0" style="-webkit-tap-highlight-color: transparent;">
+                        <input type="checkbox" switch id="setting-sync-mastered" onchange="haptic(); handleSyncMasteredClick(this.checked)" class="sr-only peer" ${isEnabled ? 'checked' : ''}>
                         <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
                     </label>
                     
@@ -809,11 +809,9 @@
                     </div>
                 </div>
             `;
-            initHapticOverlays();
         }
 
         function handleSyncMasteredClick(checked) {
-            haptic();
             const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
             if (checked) {
                 const count = getUnsyncedMasteredCount();
