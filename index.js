@@ -5226,22 +5226,50 @@
             savePassageState();
             renderPassageQuestion(passageState.currentIdx);
             
-            // Scroll to the absolute bottom as the explanation appears and grows (especially on mobile)
-            let scrollAttempts = 0;
-            const scrollInterval = setInterval(() => {
+            // Custom smooth scroll animation that dynamically adjusts to growing content
+            function smoothScrollToBottom(element) {
+                if (!element) return;
+                const start = element.scrollTop;
+                const duration = 500; // ms
+                const startTime = performance.now();
+                
+                function animate(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Ease-in-out quadratic
+                    const ease = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    const target = element.scrollHeight - element.clientHeight;
+                    if (target > 0) {
+                        element.scrollTop = start + (target - start) * ease;
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        if (target > 0) {
+                            element.scrollTop = element.scrollHeight;
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            // Scroll both main container (for mobile) and question container (for desktop)
+            setTimeout(() => {
                 const mainEl = document.querySelector('main');
-                if (mainEl) {
-                    mainEl.scrollTo({ top: mainEl.scrollHeight, behavior: 'smooth' });
-                }
                 const questionContainer = document.getElementById('passage-question-card')?.parentElement;
-                if (questionContainer) {
-                    questionContainer.scrollTo({ top: questionContainer.scrollHeight, behavior: 'smooth' });
-                }
-                scrollAttempts++;
-                if (scrollAttempts >= 10) {
-                    clearInterval(scrollInterval);
-                }
-            }, 60);
+                
+                if (mainEl) smoothScrollToBottom(mainEl);
+                if (questionContainer) smoothScrollToBottom(questionContainer);
+                
+                // Backup scroll for document/body just in case
+                smoothScrollToBottom(document.documentElement);
+                smoothScrollToBottom(document.body);
+            }, 50);
         }
 
         function passageNextQuestion() {
