@@ -86,7 +86,7 @@ button{ cursor:pointer; }
   border-bottom:1px solid var(--line);
   backdrop-filter:blur(6px);
   padding-top: env(safe-area-inset-top, 0px);
-  transition: padding-top 0.2s ease, background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 .masthead-inner{
   max-width:1200px; margin:0 auto; padding:14px 24px;
@@ -387,6 +387,9 @@ button{ cursor:pointer; }
 html.pwa-standalone .detail-panel {
   padding-top: 110px;
 }
+html.pwa-standalone .masthead {
+  padding-top: max(47px, env(safe-area-inset-top, 47px)) !important;
+}
 html.pwa-standalone .detail-close,
 html.pwa-standalone .detail-close-left,
 html.pwa-standalone .learn-toggle {
@@ -507,6 +510,12 @@ html.pwa-standalone .learn-toggle {
     left:7px;
     width:10px;
     height:10px;
+  }
+  .search-results{
+    left: auto !important;
+    right: -42px !important;
+    width: 280px !important;
+    max-width: calc(100vw - 24px) !important;
   }
   .masthead-book-btn{
     order: 4 !important;

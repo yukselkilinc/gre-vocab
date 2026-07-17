@@ -2,6 +2,8 @@ const CACHE_NAME = 'gre-vocab';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './index.js',
+  './index.css',
   './memory_palace.html',
   './database.js',
   './manifest.json',
