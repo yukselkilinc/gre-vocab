@@ -812,23 +812,27 @@
         }
 
         function handleSyncMasteredClick(checked) {
-            const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
-            if (checked) {
-                const count = getUnsyncedMasteredCount();
-                if (confirm(`Mark past and future mastered words in any game mode as learned? This will mark ${count} words as learned.`)) {
-                    toggleSyncMasteredToLearned(true);
-                    renderLibrarySubActions();
+            setTimeout(() => {
+                const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
+                if (checked) {
+                    const count = getUnsyncedMasteredCount();
+                    if (confirm(`Mark past and future mastered words in any game mode as learned? This will mark ${count} words as learned.`)) {
+                        toggleSyncMasteredToLearned(true);
+                        renderLibrarySubActions();
+                    } else {
+                        const cb = document.getElementById('setting-sync-mastered');
+                        if (cb) cb.checked = false;
+                    }
                 } else {
-                    document.getElementById('setting-sync-mastered').checked = false;
+                    if (confirm("Stop marking future mastered words as learned?")) {
+                        toggleSyncMasteredToLearned(false);
+                        renderLibrarySubActions();
+                    } else {
+                        const cb = document.getElementById('setting-sync-mastered');
+                        if (cb) cb.checked = true;
+                    }
                 }
-            } else {
-                if (confirm("Stop marking future mastered words as learned?")) {
-                    toggleSyncMasteredToLearned(false);
-                    renderLibrarySubActions();
-                } else {
-                    document.getElementById('setting-sync-mastered').checked = true;
-                }
-            }
+            }, 100);
         }
 
         let tooltipTimeout = null;
