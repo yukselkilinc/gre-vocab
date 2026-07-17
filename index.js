@@ -832,7 +832,7 @@
                         if (cb) cb.checked = true;
                     }
                 }
-            }, 100);
+            }, 50);
         }
 
         let tooltipTimeout = null;
