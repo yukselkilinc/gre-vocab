@@ -474,6 +474,45 @@ html.pwa-standalone .learn-toggle {
 .no-siblings{ font-size:0.82rem; color:var(--parchment-dim); font-style:italic; opacity:0.8; }
 
 @media (max-width:640px){
+  .brand{ display:none !important; }
+  .progress-pill{ display:none !important; }
+  .masthead-inner{
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+  }
+  .masthead-back-btn{
+    order: 1 !important;
+    flex-shrink: 0 !important;
+  }
+  .mode-select{
+    order: 2 !important;
+    flex-shrink: 0 !important;
+    max-width: 140px !important;
+    font-size: 0.72rem !important;
+    padding: 6px 10px !important;
+  }
+  .masthead-search{
+    order: 3 !important;
+    flex: 1 1 auto !important;
+    max-width: 110px !important;
+    margin: 0 4px !important;
+  }
+  .masthead-search input{
+    padding:5px 8px 5px 22px;
+    font-size:12px;
+  }
+  .search-icon{
+    left:7px;
+    width:10px;
+    height:10px;
+  }
+  .masthead-book-btn{
+    order: 4 !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
   .hero-stats{ gap:20px; }
   .room-title-block h2{ font-size:1.6rem; }
   .detail-word{ font-size:2rem; }
@@ -1361,6 +1400,8 @@ function masthead(){
   const r = 15, c = 2*Math.PI*r;
   const offset = c - (pct/100)*c;
   const isCollapsed = currentView.type === 'room' || (currentView.type === 'floor' && window.scrollY > 40);
+  const isMobile = window.innerWidth <= 640;
+  const placeholderText = isMobile ? "Search" : `Search any of ${total.toLocaleString()} words…`;
   return `
     <div class="masthead ${isCollapsed ? 'collapsed' : ''}">
       <div class="masthead-inner">
@@ -1374,14 +1415,11 @@ function masthead(){
         }
         <div class="brand">
           <span class="brand-mark">Memory Palace</span>
-          <span class="brand-sub">GRE Vocabulary</span>
+          <span class="brand-sub">GRE Verbal Reasoning</span>
         </div>
-        <button class="masthead-book-btn focus-ring" onclick="window.location.href='index.html'" title="Go to GRE Vocab Games">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-        </button>
         <div class="masthead-search">
           <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="searchInput" placeholder="Search any of ${total.toLocaleString()} words&hellip;" autocomplete="off" class="focus-ring">
+          <input type="text" id="searchInput" placeholder="${placeholderText}" autocomplete="off" class="focus-ring">
           <div class="search-results" id="searchResults"></div>
         </div>
         <select class="mode-select focus-ring" onchange="setLearnedMode(this.value)" title="Learned words display">
@@ -1398,6 +1436,9 @@ function masthead(){
           </div>
           <div class="progress-text"><b>${learned.size}</b> / ${total} learned</div>
         </div>
+        <button class="masthead-book-btn focus-ring" onclick="window.location.href='index.html'" title="Go to GRE Verbal Reasoning Games">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+        </button>
       </div>
     </div>`;
 }
@@ -1644,6 +1685,15 @@ window.addEventListener('scroll', function() {
     }
   }
 }, { passive: true });
+
+// Dynamic search input placeholder on resize
+window.addEventListener('resize', () => {
+  const input = document.getElementById('searchInput');
+  if (input) {
+    const isMobile = window.innerWidth <= 640;
+    input.placeholder = isMobile ? "Search" : `Search any of ${totalWords().toLocaleString()} words…`;
+  }
+});
 
 // Completely block zoom on mobile
 document.addEventListener('touchstart', function(e) {

@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
-    <title>GRE Vocab</title>
+    <title>GRE Vocab & Verbal Reasoning</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -835,7 +835,7 @@
             gap: 0;
         }
         #nav-more-menu.expanded {
-            max-width: 110px;
+            max-width: 130px;
             opacity: 1;
             transform: scaleX(1) translateX(0);
             gap: 0.25rem;
@@ -859,13 +859,19 @@
             </button>
             <div id="nav-branding" onclick="goToMainFromNav()" class="flex items-center gap-2 cursor-pointer select-none" title="Main Menu">
                 <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                <h1 class="text-xl font-bold tracking-tight hidden sm:block">GRE Vocab</h1>
+                <h1 id="nav-brand-title" class="text-xl font-bold tracking-tight hidden sm:block">GRE Vocab</h1>
             </div>
         </div>
         
         <div class="flex items-center gap-2 sm:gap-4">
             <!-- Expandable Sub-menu -->
             <div id="nav-more-menu">
+                <!-- Reading Comprehension Button -->
+                <button onclick="goToPassageMode()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Reading & Reasoning">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </button>
                 <!-- Library Button -->
                 <button onclick="goToLibrary()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors" title="Library">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -997,8 +1003,7 @@
 
     <main style="padding-top: max(1.25rem, 2.5vh); padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));" 
           class="flex-grow flex items-start justify-center w-full overflow-y-auto">
-        
-        <div id="dashboard-screen" class="hidden w-full lg:w-[80vw] max-w-4xl bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300 p-4 sm:p-5">
+                <div id="dashboard-screen" class="hidden w-full lg:w-[80vw] max-w-4xl bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300 p-4 sm:p-5">
             <div class="flex items-center gap-3 mb-4 shrink-0">
                 <button onclick="toggleDashboardModal()" class="p-1.5 -ml-1 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Back">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -1162,6 +1167,162 @@
             <!-- Screen Contents -->
             <div id="library-content" class="flex-grow overflow-y-auto min-h-[300px]">
                 <!-- Injected dynamically -->
+            </div>
+        </div>
+
+        <div id="passage-screen" class="hidden w-full max-w-[96vw] md:h-[calc(100vh-6.5rem)] bg-white dark:bg-neutral-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-neutral-800 flex flex-col transition-colors duration-300 p-4 sm:p-5 md:p-6">
+            <!-- Header with title & back button -->
+            <div class="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-neutral-800 pb-4 shrink-0">
+                <div class="flex items-center gap-3">
+                    <button onclick="passageBack()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-500 dark:text-slate-400 transition-colors" title="Back">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    </button>
+                    <div>
+                        <h2 class="text-lg sm:text-2xl font-serif italic text-slate-800 dark:text-white font-bold leading-tight">Reading & Reasoning</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 dark:text-slate-500 font-sans">GRE Reading Comprehension & Critical Reasoning</p>
+                    </div>
+                </div>
+                <!-- Mini Stats / Reset Button -->
+                <div class="shrink-0 flex items-center gap-2">
+                    <button onclick="resetPassageProgress()" class="text-xs font-semibold text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 transition-colors bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50 py-1.5 px-3 rounded-lg shadow-sm" title="Reset quiz progress">
+                        Reset Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Selector Overlay -->
+            <div id="passage-quiz-selector" class="hidden flex-grow flex flex-col items-center justify-center p-4 sm:p-6 w-full">
+                <div class="max-w-lg w-full space-y-5">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white font-serif">Choose a Quiz</h3>
+                        <p class="text-sm text-slate-400 dark:text-slate-500 mt-1">Select a verbal reasoning quiz to practice</p>
+                    </div>
+
+                    <!-- Quiz 1 Card -->
+                    <button id="quiz-select-quiz1" onclick="selectQuiz('quiz1')" class="w-full text-left p-5 rounded-2xl border-2 border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800/50 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50/30 dark:hover:bg-primary-950/20 transition-all duration-200 group shadow-sm hover:shadow-md">
+                        <div class="flex items-start gap-4">
+                            <span class="text-3xl">📖</span>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-slate-800 dark:text-white text-base sm:text-lg group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">Quiz 1 — Reading & Critical Reasoning</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Maya Civilization Passage + Critical Reasoning</p>
+                                <p class="quiz-select-progress hidden text-xs font-semibold text-primary-600 dark:text-primary-400 mt-2 bg-primary-50 dark:bg-primary-950/30 px-2.5 py-1 rounded-lg inline-block"></p>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-300 dark:text-neutral-600 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                    </button>
+
+                    <!-- Quiz 2 Card -->
+                    <button id="quiz-select-quiz2" onclick="selectQuiz('quiz2')" class="w-full text-left p-5 rounded-2xl border-2 border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800/50 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50/30 dark:hover:bg-primary-950/20 transition-all duration-200 group shadow-sm hover:shadow-md">
+                        <div class="flex items-start gap-4">
+                            <span class="text-3xl">✍️</span>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-slate-800 dark:text-white text-base sm:text-lg group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">Quiz 2 — Full Verbal Reasoning</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Text Completion, Sentence Equivalence, RC & CR</p>
+                                <p class="quiz-select-progress hidden text-xs font-semibold text-primary-600 dark:text-primary-400 mt-2 bg-primary-50 dark:bg-primary-950/30 px-2.5 py-1 rounded-lg inline-block"></p>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-300 dark:text-neutral-600 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Content Container (Active during testing / review) -->
+            <div id="passage-quiz-container" class="hidden flex-grow flex flex-col md:flex-row gap-6 overflow-hidden min-h-[400px]">
+                <!-- Left Pane: Passage or CR scenario -->
+                <div class="w-full md:w-1/2 flex flex-col bg-slate-50 dark:bg-neutral-900/20 border border-slate-200/60 dark:border-neutral-800 rounded-xl overflow-hidden min-h-[250px] md:h-full">
+                    <div class="bg-slate-100 dark:bg-neutral-800/60 px-4 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider border-b border-slate-200/50 dark:border-neutral-800 flex justify-between items-center shrink-0">
+                        <span id="passage-pane-title">Reading Passage</span>
+                    </div>
+                    <div id="passage-scroll-container" class="flex-grow overflow-y-auto p-5 font-sans text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-[17px] select-text">
+                        <!-- Passage text with spans injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right Pane: Question stem, options, buttons, explanation -->
+                <div class="w-full md:w-1/2 flex flex-col min-h-[300px] md:h-full justify-between gap-4">
+                    <!-- Progress Tracker: Dots indicating correct / incorrect / current / remaining -->
+                    <div id="passage-progress-dots" class="flex items-center justify-between gap-1 border-b border-slate-100 dark:border-neutral-800 pb-3 shrink-0">
+                        <!-- Dots 1-12 generated dynamically -->
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="flex-grow overflow-y-auto overflow-x-hidden pr-1">
+                        <div id="passage-question-card" class="space-y-4">
+                            <!-- Question Text -->
+                            <h3 id="passage-question-text" class="text-base sm:text-[17px] font-semibold text-slate-800 dark:text-white leading-snug">
+                                Loading question...
+                            </h3>
+                            
+                            <!-- Options Container -->
+                            <div id="passage-options-container" class="space-y-2">
+                                <!-- Dynamically generated buttons/checkboxes -->
+                            </div>
+                        </div>
+
+                        <!-- Feedback and Explanation Block -->
+                        <div id="passage-explanation-container" class="hidden mt-6 p-4 rounded-xl border transition-all duration-300">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span id="passage-feedback-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                                    Correct
+                                </span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Explanation</h4>
+                            <p id="passage-explanation-text" class="text-sm text-black dark:text-white leading-relaxed font-sans">
+                                Explanation content...
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Footer Action Buttons (Submit, Next) -->
+                    <div class="flex items-center justify-between border-t border-slate-100 dark:border-neutral-800 pt-4 shrink-0 gap-3">
+                        <button id="passage-prev-btn" onclick="passagePrevQuestion()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-slate-50 dark:hover:bg-neutral-700 text-slate-700 dark:text-slate-300 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                            Previous
+                        </button>
+                        <button id="passage-submit-btn" onclick="submitPassageAnswer()" class="flex-grow bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-sm disabled:bg-slate-200 disabled:dark:bg-neutral-800 disabled:text-slate-400 disabled:dark:text-slate-500 disabled:cursor-not-allowed text-sm">
+                            Submit Answer
+                        </button>
+                        <button id="passage-next-btn" onclick="passageNextQuestion()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-slate-50 dark:hover:bg-neutral-700 text-slate-700 dark:text-slate-300 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Results Screen (Visible when completed) -->
+            <div id="passage-results-container" class="hidden flex-grow flex flex-col items-center justify-center p-4 max-w-2xl mx-auto space-y-6 w-full">
+                <div class="text-center space-y-2">
+                    <div class="inline-flex p-4 rounded-full bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 mb-2">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white font-serif">Quiz Completed!</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">You have finished the Verbal Reasoning quiz.</p>
+                </div>
+
+                <!-- Score Card -->
+                <div class="w-full bg-slate-50 dark:bg-neutral-800/40 border border-slate-200/60 dark:border-neutral-800 rounded-2xl p-6 grid grid-cols-2 gap-4 text-center">
+                    <div class="border-r border-slate-200 dark:border-neutral-700">
+                        <span class="text-2xl sm:text-4xl font-black text-primary-600 dark:text-primary-400" id="passage-results-score">10/12</span>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">Score</p>
+                    </div>
+                    <div>
+                        <span class="text-2xl sm:text-4xl font-black text-primary-600 dark:text-primary-400" id="passage-results-pct">83%</span>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">Accuracy</p>
+                    </div>
+                </div>
+
+                <!-- Question Review List -->
+                <div class="w-full space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Question Review</h4>
+                    <div id="passage-review-list" class="space-y-2">
+                        <!-- Questions 1-12 list injected here -->
+                    </div>
+                </div>
+
+                <button onclick="resetPassageProgress()" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md text-sm">
+                    Retry Quiz
+                </button>
             </div>
         </div>
 
@@ -1536,9 +1697,17 @@
         let _navStack = ['setup-screen'];
 
         function _hideAllContentScreens() {
-            ['setup-screen','dashboard-screen','settings-screen','study-screen','library-screen'].forEach(id => {
+            // Reset PC-only scroll locks
+            const mainEl = document.querySelector('main');
+            if (mainEl) {
+                mainEl.classList.remove('md:overflow-hidden');
+            }
+            document.body.classList.remove('md:overflow-hidden');
+
+            ['setup-screen','dashboard-screen','settings-screen','study-screen','library-screen','passage-screen'].forEach(id => {
                 const el = document.getElementById(id);
-                if (id === 'study-screen' || id === 'library-screen') {
+                if (!el) return;
+                if (id === 'study-screen' || id === 'library-screen' || id === 'passage-screen') {
                     el.classList.add('hidden');
                     el.classList.remove('flex');
                 } else {
@@ -1552,6 +1721,15 @@
 
         function _showScreen(id) {
             _hideAllContentScreens();
+            const brandTitle = document.getElementById('nav-brand-title');
+            if (brandTitle) {
+                if (id === 'passage-screen') {
+                    brandTitle.innerText = "GRE Verbal Reasoning";
+                } else {
+                    brandTitle.innerText = "GRE Vocab";
+                }
+            }
+
             if (id === 'setup-screen') {
                 document.getElementById('setup-screen').classList.remove('hidden');
                 document.getElementById('end-session-btn').classList.add('hidden');
@@ -1579,6 +1757,21 @@
                 document.querySelector('main').style.paddingTop = 'max(1.25rem, 2.5vh)';
                 document.body.classList.remove('overflow-hidden');
                 document.body.style.touchAction = '';
+            } else if (id === 'passage-screen') {
+                document.getElementById('passage-screen').classList.remove('hidden');
+                document.getElementById('passage-screen').classList.add('flex');
+                document.getElementById('end-session-btn').classList.add('hidden');
+                document.getElementById('nav-branding').classList.remove('hidden');
+                document.querySelector('main').style.paddingTop = 'max(1.25rem, 2.5vh)';
+                
+                // Lock body/main scrolling on PC only
+                const mainEl = document.querySelector('main');
+                if (mainEl) {
+                    mainEl.classList.add('md:overflow-hidden');
+                }
+                document.body.classList.add('md:overflow-hidden');
+                
+                document.body.style.touchAction = '';
             } else {
                 document.getElementById(id).classList.remove('hidden');
                 document.getElementById('end-session-btn').classList.add('hidden');
@@ -1592,7 +1785,7 @@
         }
 
         function goToMainFromNav() {
-            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and go to main menu? Progress will be saved.')) {
+            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and return to main menu? Progress will be saved.')) {
                 return;
             }
             _navStack = ['setup-screen'];
@@ -2137,6 +2330,7 @@
         }
 
         function handleSyncMasteredClick() {
+            haptic();
             const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
             if (!isEnabled) {
                 const count = getUnsyncedMasteredCount();
@@ -4016,27 +4210,30 @@
             }
         }
         function completeWord(idx) {
-            if (isReviewMode || catSelect.value === 'Random') return;
+            if (isReviewMode) return;
             
-            const progressKey = `${catSelect.value}|${setSelect.value}`;
             sessionMatchedIndices.add(idx);
-            progressDB[progressKey + '_matched'] = Array.from(sessionMatchedIndices);
             
-            // Re-calculate the first unmatched index to see what to set progressDB[progressKey] to
-            let startIdx = 0;
-            while (startIdx < appData.length && sessionMatchedIndices.has(startIdx)) {
-                startIdx++;
+            if (catSelect.value !== 'Random') {
+                const progressKey = `${catSelect.value}|${setSelect.value}`;
+                progressDB[progressKey + '_matched'] = Array.from(sessionMatchedIndices);
+                
+                // Re-calculate the first unmatched index to see what to set progressDB[progressKey] to
+                let startIdx = 0;
+                while (startIdx < appData.length && sessionMatchedIndices.has(startIdx)) {
+                    startIdx++;
+                }
+                
+                if (startIdx >= appData.length) {
+                    progressDB[progressKey] = 'COMPLETED';
+                    delete progressDB[progressKey + '_matched'];
+                } else {
+                    progressDB[progressKey] = startIdx;
+                }
+                
+                localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
+                hasUnsavedChanges = true;
             }
-            
-            if (startIdx >= appData.length) {
-                progressDB[progressKey] = 'COMPLETED';
-                delete progressDB[progressKey + '_matched'];
-            } else {
-                progressDB[progressKey] = startIdx;
-            }
-            
-            localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
-            hasUnsavedChanges = true;
         }
 
         function renderCard() {
@@ -4914,17 +5111,15 @@
             }
 
             // Save progress immediately in Quiz mode on every answer
-            if (!isReviewMode && catSelect.value !== 'Random') {
+            if (!isReviewMode) {
                 completeWord(currentIndex);
                 if (isCorrect) {
                     recordWordGameStatus(currentWordObj.word, 'mastered');
-                }
-            } else if (!isReviewMode && catSelect.value === 'Random') {
-                if (isCorrect) {
-                    progressDB['RM_' + currentWordObj.word] = true;
-                    localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
-                    hasUnsavedChanges = true;
-                    recordWordGameStatus(currentWordObj.word, 'mastered');
+                    if (catSelect.value === 'Random') {
+                        progressDB['RM_' + currentWordObj.word] = true;
+                        localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
+                        hasUnsavedChanges = true;
+                    }
                 }
             }
 
@@ -5216,17 +5411,15 @@
             }
 
             // Save progress immediately on every answer so progress bar advances
-            if (!isReviewMode && catSelect.value !== 'Random') {
+            if (!isReviewMode) {
                 completeWord(currentIndex);
                 if (isCorrect) {
                     recordWordGameStatus(correctWordObj.word, 'mastered');
-                }
-            } else if (!isReviewMode && catSelect.value === 'Random') {
-                if (isCorrect) {
-                    progressDB['RM_' + correctWordObj.word] = true;
-                    localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
-                    hasUnsavedChanges = true;
-                    recordWordGameStatus(correctWordObj.word, 'mastered');
+                    if (catSelect.value === 'Random') {
+                        progressDB['RM_' + correctWordObj.word] = true;
+                        localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
+                        hasUnsavedChanges = true;
+                    }
                 }
             }
 
@@ -5545,8 +5738,1151 @@
             }
         }, { passive: false });
 
-        document.addEventListener('DOMContentLoaded', initHapticOverlays);
-        if (document.readyState !== 'loading') initHapticOverlays();
+        // =========================================================================
+        // READING COMPREHENSION & CRITICAL REASONING QUIZ MODULE
+        // =========================================================================
+
+        let activeQuizId = localStorage.getItem('greActiveQuizId') || 'quiz1';
+
+        const passageQuizzes = {
+            quiz1: {
+                id: 'quiz1',
+                title: 'Quiz 1 — Reading & Critical Reasoning',
+                subtitle: 'Maya Civilization Passage + Critical Reasoning',
+                icon: '📖',
+                storageKey: 'grePassageProgress'
+            },
+            quiz2: {
+                id: 'quiz2',
+                title: 'Quiz 2 — Full Verbal Reasoning',
+                subtitle: 'Text Completion, Sentence Equivalence, RC & CR',
+                icon: '✍️',
+                storageKey: 'grePassageProgress2'
+            }
+        };
+
+        const passageDataQuiz1 = {
+            passageTitle: "Classic Maya Civilization Collapse",
+            passageParagraphs: [
+                [
+                    "The decline of the Classic Maya civilization during the eighth and ninth centuries remains one of archaeology’s most fiercely contested debates, primarily divided between environmental determinists and political theorists.",
+                    "For decades, the prevailing consensus favored internal systemic failure—warfare, agricultural degradation, or peasant revolts.",
+                    "However, the turn of the twenty-first century witnessed a dramatic paradigm shift, catalyzed by paleoclimatologist Richardson Gill’s sweeping hypothesis that a series of catastrophic megadroughts was the singular, proximate cause of the collapse.",
+                    "Gill’s model, relying on sedimentary cores from the Yucatan Peninsula, offers an elegant, if rigid, explanation: without water, the intensely centralized divine kingships simply imploded."
+                ],
+                [
+                    "Yet, treating the Maya collapse as a monolithic event ignores critical geographic and temporal variances.",
+                    "Scholars like James Aimers argue that the term \"collapse\" itself is a misnomer, masking a highly nuanced process of regional adaptation and relocation.",
+                    "In the northern lowlands, for instance, cities like Chichen Itza actually flourished during the very period the southern centers were being abandoned.",
+                    "Aimers’s critique trades the catastrophic for the gradual, suggesting that while drought undoubtedly strained resources, the ultimate dissolution of Classic Maya society was mediated by local political flexibility and trade network resilience.",
+                    "To attribute the fall of an entire civilization to a single meteorological anomaly is to reduce complex statecraft to mere ecology."
+                ],
+                [
+                    "A further complication arises from the work of archaeologist David Webster, who suggests that endemic warfare, driven by demographic pressures and elite overproduction, had already hollowed out the institutional stability of the southern lowlands before the severe droughts manifested.",
+                    "In Webster’s view, the environmental crises did not initiate the collapse but rather served as the coup de grâce for a system already teetering on the brink of structural insolvency.",
+                    "While Gill’s supporters counter that the escalating warfare itself was a direct consequence of resource scarcity induced by early dry spells, this defense risks circular reasoning.",
+                    "It leaves unanswered whether the political architecture of the Maya could have withstood the droughts had it not been fundamentally compromised by centuries of unsustainable baseline growth and elite competition.",
+                    "Ultimately, the synthesis of these viewpoints suggests that the collapse was not a uniform curtain drop, but an unevenly distributed dissolution wherein environmental pressures acted upon highly variable regional vulnerabilities."
+                ]
+            ],
+            questions: [
+                {
+                    id: "p_q1",
+                    type: "single",
+                    passageBased: true,
+                    question: "In the context in which it is used, “monolithic” most nearly means",
+                    options: ["architectural", "uniform", "ancient", "unyielding", "monumental"],
+                    answer: 1,
+                    explanation: "The passage contrasts a \"monolithic event\" with \"geographic and temporal variances\" in the very same sentence. It further details how different regions experienced different outcomes (some cities flourished while others were abandoned). Therefore, in this context, \"monolithic\" means uniform or entirely homogenous. (B) is the correct answer."
+                },
+                {
+                    id: "p_q2",
+                    type: "single",
+                    passageBased: true,
+                    question: "The author of the passage would take exception to all of the following statements regarding Gill’s hypothesis EXCEPT?",
+                    options: [
+                        "Gill’s hypothesis is characterized by a high degree of nuance regarding regional geographic differences.",
+                        "Gill's model successfully accounts for the flourishing of northern lowland cities like Chichen Itza.",
+                        "The explanatory power of Gill's megadrought theory is uniformly applicable across the entirety of the Yucatan Peninsula.",
+                        "Gill's hypothesis offers an explanation that lacks flexibility despite its empirical basis.",
+                        "Gill's work completely aligns with the classical twentieth-century consensus on Maya decline."
+                    ],
+                    answer: 3,
+                    explanation: "\"Take exception to\" means to disagree with. Because this is an EXCEPT question, the correct answer is a statement the author would agree with or would not dispute. In the first paragraph, the author calls Gill's hypothesis \"elegant, if rigid,\" indicating that it lacks flexibility despite its reliance on empirical data like sedimentary cores. Therefore, the author agrees with statement (D). The author explicitly disputes or contradicts the assertions made in A, B, C, and E throughout the text."
+                },
+                {
+                    id: "p_q3",
+                    type: "multiple",
+                    passageBased: true,
+                    question: "According to the passage, James Aimers’s view of the Maya decline differs from Richardson Gill’s model in which of the following ways? (Select ALL answers that apply.)",
+                    options: [
+                        "Aimers emphasizes regional adaptation and relocation rather than a total societal implosion.",
+                        "Aimers rejects the premise that environmental factors played any role in the strain on Maya resources.",
+                        "Aimers views the phenomenon as a gradual socio-political shift rather than an abrupt, uniform catastrophe."
+                    ],
+                    answer: [0, 2],
+                    explanation: "Statement (A) is correct because the second paragraph explicitly states that Aimers argues the term collapse masks a \"highly nuanced process of regional adaptation and relocation.\"\n\nStatement (B) is incorrect because the text notes that Aimers suggests \"drought undoubtedly strained resources,\" meaning he does not reject the role of environmental factors entirely.\n\nStatement (C) is correct because the text states that Aimers's critique \"trades the catastrophic for the gradual.\" Therefore, both A and C apply."
+                },
+                {
+                    id: "p_q4",
+                    type: "sentence",
+                    passageBased: true,
+                    question: "Select the sentence that identifies a potential logical flaw in the counterargument made by proponents of the environmental explanation.",
+                    answer: "While Gill’s supporters counter that the escalating warfare itself was a direct consequence of resource scarcity induced by early dry spells, this defense risks circular reasoning.",
+                    explanation: "The third paragraph outlines the debate between David Webster's structural warfare theory and Gill's environmental theory. The selected sentence directly points out that the counterargument offered by Gill's supporters \"risks circular reasoning,\" which is a logical flaw."
+                },
+                {
+                    id: "p_q5",
+                    type: "single",
+                    passageBased: true,
+                    question: "It can be inferred from the passage that David Webster would be most likely to agree with which of the following statements?",
+                    options: [
+                        "Environmental factors were entirely irrelevant to the abandonment of the southern lowland centers.",
+                        "Internal socio-political pressures had already compromised Maya institutional stability prior to the worst of the climate crises.",
+                        "Elite overproduction was a direct consequence of the megadroughts described by Gill.",
+                        "The Maya political system was robust enough to survive structural insolvency if climate conditions had remained stable.",
+                        "Southern lowland centers were abandoned primarily due to peasant revolts rather than inter-city warfare."
+                    ],
+                    answer: 1,
+                    explanation: "The third paragraph states that in Webster's view, \"endemic warfare, driven by demographic pressures and elite overproduction, had already hollowed out the institutional stability of the southern lowlands before the severe droughts manifested.\" This directly supports the inference that socio-political pressures compromised stability prior to the climate crisis, making (B) the correct answer."
+                },
+                {
+                    id: "p_q6",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A major technology corporation has observed a surge in employee complaints regarding digital eye strain. In an effort to curb these symptoms and improve workplace wellness, the company has replaced traditional backlit LCD monitors with reflective e-ink displays across its primary corporate offices. The company's executive board predicts that the number of eye strain complaints will significantly decrease over the next quarter following this installation.",
+                    question: "Which of the following, if true, most strengthens the validity of the conclusion?",
+                    options: [
+                        "Most employees at the company use their workstations for greater than six hours per day.",
+                        "Reflective e-ink displays emit significantly less high-energy blue light, which clinical studies have directly linked to corporate eye strain complaints.",
+                        "The capital expense required to procure e-ink displays is higher than that of maintaining traditional LCD monitors.",
+                        "Employees who wore corrective prescription lenses reported no changes in visual comfort during a brief pre-installation trial phase.",
+                        "Other corporations that introduced ergonomic keyboard setups saw a minor decrease in repetitive strain injuries."
+                    ],
+                    answer: 1,
+                    explanation: "The argument assumes a causal link between installing e-ink displays and reducing eye strain complaints. (B) strengthens the argument by providing the missing empirical link: it explains why e-ink displays would reduce strain (by eliminating high-energy blue light, a proven cause of the complaints). This validates the board's prediction."
+                },
+                {
+                    id: "p_q7",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Organic produce at Meadowbrook Farms grocery store costs roughly 30 percent more than conventional produce of the exact same variety. A consumer advocacy group claims that the grocery franchise is simply taking advantage of its reputation for health-conscious options to reap artificially higher profit margins on those organic items.",
+                    question: "In evaluating the argument, it would be most useful to compare",
+                    options: [
+                        "the nutritional and vitamin content of the organic produce with that of the conventional produce at Meadowbrook Farms.",
+                        "the wholesale procurement, handling, and farming overhead costs of organic produce with the comparable costs for conventional produce.",
+                        "the average household income of consumers who shop at Meadowbrook Farms with the national average household income.",
+                        "the sales volume of conventional produce at Meadowbrook Farms with the sales volume of conventional produce at competing grocery chains.",
+                        "the percentage of profit derived from organic vegetables versus organic fruits within Meadowbrook Farms stores."
+                    ],
+                    answer: 1,
+                    explanation: "The consumer group claims that the higher price is purely due to price gouging (\"exploiting its reputation\"). To evaluate this claim, we must check if there is an alternative, valid reason for the higher price—such as higher production or operating costs. (B) allows us to make this comparison. If organic items cost 30 percent more to procure and handle, the store isn't necessarily exploiting anyone; if the overhead costs are identical, the group's argument is highly strengthened."
+                },
+                {
+                    id: "p_q8",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Economist: To revitalize the manufacturing sector in the province of Oakhaven, the regional government should provide tax credits exclusively to firms that construct automated robotics factories. While this policy targets a highly specific sub-sector, the resulting industrial ecosystem will make Oakhaven more economically resilient than any other province. This is not to say that tax credits should be distributed to all technology firms. Rather, only to those directly manufacturing industrial robotics.",
+                    question: "The conclusion drawn above depends on which of the following assumptions?",
+                    options: [
+                        "Traditional manufacturing sub-sectors, such as textiles and steel, are completely incapable of experiencing job growth.",
+                        "Oakhaven currently possesses a significantly higher unemployment rate than neighboring provinces.",
+                        "Industrial robotics manufacturing capability is the primary indicator and driver of a province's long-term economic resilience.",
+                        "It is impossible for automated robotics factories to operate successfully without relying heavily on imported raw materials.",
+                        "The tax revenue lost from these targeted credits will be instantly offset by corporate property taxes within two fiscal years."
+                    ],
+                    answer: 2,
+                    explanation: "The economist concludes that subsidizing this single, specific sub-sector will make Oakhaven \"more economically resilient than any other province.\" For this to hold true, the economist must assume that industrial robotics is the central, defining factor in economic resilience. If something else matters more, or if robotics doesn't drive resilience, the argument fails. This directly points to (C)."
+                },
+                {
+                    id: "p_q9",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "In a certain territory, over 75 percent of households own a personal vehicle, but historically, premium comprehensive vehicle insurance policies have sold poorly in this region. The percentage of land and population devoted to car ownership is not expected to change, and the average traffic accident rate has slowly risen over the past decade. Despite this trend, a new international insurance firm is building a large headquarters in the territory, and its business plan for success depends on strong local sales of its premium insurance plans. Both the firm's executives and industry analysts expect this venture to be highly profitable over the next few years.",
+                    question: "Which of the following, if true, most helps to provide a justification for the firm's and the analysts' optimistic expectations?",
+                    options: [
+                        "The average cost of medical care and vehicle replacement parts has spiked drastically, making basic legal-minimum liability coverage insufficient to protect drivers from catastrophic financial ruin.",
+                        "The new insurance firm plans to launch an aggressive marketing campaign focused on sponsoring major professional sporting events in the capital.",
+                        "The regional government recently voted to decrease the mandatory minimum liability coverage required for registered drivers.",
+                        "Premium insurance policies offer a wider variety of digital customer service hotlines than standard or basic insurance policies do.",
+                        "Many citizens prefer to use public transit networks during peak weekend traffic hours rather than driving their personal vehicles."
+                    ],
+                    answer: 0,
+                    explanation: "The paradox is that premium insurance historically sells poorly and accident rates are rising, yet analysts expect a new premium insurance company to thrive on local sales. (A) resolves the paradox by explaining why consumer behavior is about to change: basic insurance is no longer sufficient due to skyrocketing medical and repair costs, forcing drivers to upgrade to premium plans to avoid financial ruin."
+                },
+                {
+                    id: "p_q10",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A municipal transit authority observed that city bus ridership declined by 15 percent immediately after they implemented a 50-cent fare increase. In an effort to restore ridership to its previous historical levels, the authority plans to lower fares back to their original rate next month, concluding that this price reduction will bring back all the lost passengers.",
+                    question: "Which of the following, if true, most seriously weakens the validity of the conclusion?",
+                    options: [
+                        "The temporary fare increase successfully allowed the transit authority to balance its structural budget deficit for the fiscal year.",
+                        "During the period of the fare increase, a new subterranean light rail network opened along identical transit routes, permanently drawing commuter habits away from the bus system.",
+                        "A small percentage of city residents rely on the bus system daily regardless of fluctuations in the fare price.",
+                        "The transit authority did not aggressively publicize the initial fare increase before it went into effect last year.",
+                        "Neighboring municipalities charge higher average transit fares than this city does."
+                    ],
+                    answer: 1,
+                    explanation: "The transit authority assumes that price was the only reason ridership dropped and that reversing the price change will reverse the effect. (B) introduces an alternative, permanent cause for the drop in ridership: the opening of a competing light rail network. If commuters have permanently switched to the light rail, simply lowering bus fares will not bring them back, severely weakening the authority's conclusion."
+                },
+                {
+                    id: "p_q11",
+                    type: "sentence",
+                    passageBased: true,
+                    question: "Select the sentence that introduces an empirical data source used to support a monocausal theory of the Maya collapse.",
+                    answer: "Gill’s model, relying on sedimentary cores from the Yucatan Peninsula, offers an elegant, if rigid, explanation: without water, the intensely centralized divine kingships simply imploded.",
+                    explanation: "This sentence mentions \"sedimentary cores\" (the empirical data source) used by Richardson Gill to support his megadrought theory (the monocausal, or single-cause, theory)."
+                },
+                {
+                    id: "p_q12",
+                    type: "sentence",
+                    passageBased: true,
+                    question: "Select the sentence that provides specific historical evidence to challenge the idea of a uniform, civilization-wide decline.",
+                    answer: "In the northern lowlands, for instance, cities like Chichen Itza actually flourished during the very period the southern centers were being abandoned.",
+                    explanation: "This sentence offers a concrete historical example (Chichen Itza flourishing while the south was abandoned) to prove that the collapse was not uniform or \"monolithic.\""
+                }
+            ]
+        };
+
+        const passageDataQuiz2 = {
+            passageTitle: "Historical Linguistics & Population Migration",
+            passageParagraphs: [
+                [
+                    "For decades, historical linguists operated under the structuralist assumption that language evolution is primarily an internal, self-contained mechanism driven by phonetic drift and grammaticalization.",
+                    "This view posits that languages change over generations as speakers naturally streamline complex pronunciations or repurpose lexical items into structural markers, entirely independent of external societal disruptions.",
+                    "However, recent sociolinguistic frameworks have challenged this insular paradigm, arguing instead that large-scale linguistic shifts are intrinsically bound to demic diffusion\u2014the physical migration of human populations\u2014and cultural contact.",
+                    "By cross-referencing phylogenetic language trees with ancient DNA (aDNA) analysis, researchers have demonstrated that the expansion of the Indo-European language family closely correlates with the pastoralist migrations of the Yamnaya culture from the Pontic-Caspian steppe during the Early Bronze Age.",
+                    "This interdisciplinary synthesis suggests that linguistic maps cannot be decoupled from demographic history.",
+                    "Critics of this contact-driven model caution against an over-reliance on genetic data, arguing that language can diffuse across static populations through trade networks and elite dominance without substantial genetic turnover, as seen in the historical spread of Latin across Western Europe.",
+                    "Nonetheless, the integration of biomolecular archaeology has fundamentally destabilized the notion of language as a pristine, closed system evolving in an environmental vacuum."
+                ]
+            ],
+            questions: [
+                {
+                    id: "v2_q1",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Given the absolute lack of empirical evidence supporting the claim, the committee\u2019s decision to greenlight the multi-million dollar expansion project was viewed by many as entirely _______.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select the word that best completes the sentence.",
+                    options: ["judicious", "capricious", "inevitable", "verified", "customary"],
+                    answer: 1,
+                    explanation: "The sentence contrasts the action (greenlighting a huge project) with the basis for it (absolute lack of empirical evidence). Acting without evidence means the decision was arbitrary or impulsive. \"Capricious\" perfectly captures this.\n\nWhy the others fail: \"Judicious\" (wise) and \"verified\" (proven) contradict the lack of evidence. \"Inevitable\" (unavoidable) and \"customary\" (traditional) are unsupported."
+                },
+                {
+                    id: "v2_q2",
+                    type: "two_blank",
+                    passageBased: false,
+                    prompt: "Although the professor\u2019s lectures were initially criticized for being excessively (i)_______, careful review of his course syllabus revealed a surprisingly (ii)_______ underlying structure that unified the seemingly disparate topics.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["rigorous", "disjointed", "pedantic"] },
+                        { label: "Blank (ii)", options: ["convoluted", "coherent", "redundant"] }
+                    ],
+                    answer: [1, 1],
+                    explanation: "\"Although\" signals contrast between the two blanks. The second half mentions the structure \"unified\" topics that were \"seemingly disparate.\" The initial criticism (Blank i) must mean scattered \u2192 disjointed. The contrast backed by \"unified\" means the structure was well-organized \u2192 coherent."
+                },
+                {
+                    id: "v2_q3",
+                    type: "three_blank",
+                    passageBased: false,
+                    prompt: "Early internet pioneers envisioned a decentralized digital landscape that would (i)_______ traditional institutional gatekeepers; however, the contemporary reality features an unprecedented consolidation of power by a handful of tech conglomerates, a development that many critics find profoundly (ii)_______ and completely at odds with the network\u2019s original (iii)_______ ethos.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["bypass", "entrench", "scrutinize"] },
+                        { label: "Blank (ii)", options: ["encouraging", "alarming", "predictable"] },
+                        { label: "Blank (iii)", options: ["egalitarian", "hierarchical", "mercantilist"] }
+                    ],
+                    answer: [0, 1, 0],
+                    explanation: "Blank (i): A \"decentralized\" landscape would avoid \"traditional gatekeepers\" \u2192 bypass.\n\nBlank (ii): \"However\" contrasts with \"unprecedented consolidation of power.\" Critics view this negatively \u2192 alarming.\n\nBlank (iii): The \"original ethos\" of a decentralized, distributed system \u2192 egalitarian."
+                },
+                {
+                    id: "v2_q4",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "Despite the CEO\u2019s efforts to project an aura of total transparency, her cryptic responses during the investigative press conference only served to _______ the truth behind the company\u2019s sudden financial insolvency.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["illuminate", "obfuscate", "complicate", "clarify", "expedite", "cloud"],
+                    answer: [1, 5],
+                    explanation: "\"Despite\" signals contrast between the CEO's goal (\"total transparency\") and the outcome. Her \"cryptic\" responses hid the truth. Both \"obfuscate\" and \"cloud\" mean to make obscure.\n\nWhy the others fail: \"Illuminate\" and \"clarify\" mean the opposite. \"Complicate\" doesn't form a synonym pair with another choice."
+                },
+                {
+                    id: "v2_q5",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "The ancient stone artifact discovered at the remote archaeological site was remarkably _______; it possessed no identifying markers, distinctive tool markings, or structural degradation that could definitively link it to any known regional civilization of that era.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["pristine", "anomalous", "singular", "commonplace", "enigmatic", "inscrutable"],
+                    answer: [4, 5],
+                    explanation: "The artifact has \"no identifying markers\" and cannot be linked to \"any known regional civilization.\" It is deeply mysterious. Both \"enigmatic\" and \"inscrutable\" mean mysterious or impossible to interpret.\n\nWhy the others fail: \"Pristine\" means clean/unspoiled. \"Anomalous\" and \"singular\" don't match the clue about lack of interpretive data."
+                },
+                {
+                    id: "v2_q6",
+                    type: "single",
+                    passageBased: true,
+                    question: "The primary purpose of the passage is to",
+                    options: [
+                        "defend a traditional structuralist model of language evolution against recent empirical criticisms.",
+                        "discuss how recent interdisciplinary research has challenged a long-held view of how languages change.",
+                        "argue that genetic data provides a more reliable metric for mapping language families than phonetic analysis.",
+                        "demonstrate that the spread of Latin in Western Europe is an exception to an otherwise universal linguistic rule.",
+                        "reconcile two competing theories regarding the migration patterns of Bronze Age pastoralists."
+                    ],
+                    answer: 1,
+                    explanation: "The passage opens with a long-held view (structuralist assumption), introduces a challenge (\"However, recent sociolinguistic frameworks...\"), provides interdisciplinary evidence, presents counter-arguments, and concludes the old framework is destabilized. This matches (B).\n\nWhy the others fail: (A) is the opposite. (C) goes too far. (D) treats a counter-example as the main purpose. (E) misidentifies the core topic."
+                },
+                {
+                    id: "v2_q7",
+                    type: "multiple",
+                    passageBased: true,
+                    question: "According to the passage, critics of the contact-driven model argue that language spread can occur through which mechanisms without requiring significant population migration? (Select ALL that apply.)",
+                    options: [
+                        "Commercial exchange systems",
+                        "The political or social influence of ruling classes",
+                        "Natural internal phonetic drift over generations"
+                    ],
+                    answer: [0, 1],
+                    explanation: "The passage states critics argue language can diffuse through \"trade networks and elite dominance without substantial genetic turnover.\"\n\n(A) is correct: \"trade networks\" = commercial exchange systems.\n(B) is correct: \"elite dominance\" = political/social influence of ruling classes.\n(C) is incorrect: \"phonetic drift\" is part of the structuralist model, not the critics' argument."
+                },
+                {
+                    id: "v2_q8",
+                    type: "sentence",
+                    passageBased: true,
+                    question: "Select the sentence that introduces a specific historical example used by critics to contest the idea that language expansion always requires genetic or population turnover.",
+                    answer: "Critics of this contact-driven model caution against an over-reliance on genetic data, arguing that language can diffuse across static populations through trade networks and elite dominance without substantial genetic turnover, as seen in the historical spread of Latin across Western Europe.",
+                    explanation: "This is the only sentence where the critics' counter-argument is paired with a concrete historical example: \"the historical spread of Latin across Western Europe.\""
+                },
+                {
+                    id: "v2_q9",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A marine biology institute observed a sharp decline in the health of coral reefs near a coastal tourist town. The researchers hypothesized that the primary culprit was the chemical oxybenzone, a common ingredient in commercial sunscreens used by tourists. To test this, the local town council banned all sunscreens containing oxybenzone starting exactly one year ago. Over the past twelve months, the rate of coral bleaching in the area decreased by 40 percent. The council concluded that the ban on oxybenzone sunscreens was directly responsible for the recovery of the coral reef.",
+                    promptLabel: "CRITICAL REASONING \u2014 STRENGTHEN",
+                    question: "Which of the following, if true, most strengthens the validity of the council\u2019s conclusion?",
+                    options: [
+                        "The total number of tourists visiting the coastal town\u2019s beaches increased by 15 percent over the past year.",
+                        "Local water temperatures, which are known to induce massive coral bleaching when unusually high, remained at historically normal, stable levels during the past year.",
+                        "A neighboring coastal town that did not ban oxybenzone saw a minor increase in its own coral bleaching rates over the same twelve-month period.",
+                        "Most tourists complied with the ban by purchasing alternative sunscreens that use zinc oxide or titanium dioxide as UV filters.",
+                        "The local coral reef is home to several endangered species of marine life that rely on healthy coral structures for survival."
+                    ],
+                    answer: 1,
+                    explanation: "The argument claims removing oxybenzone caused the reef\u2019s recovery. (B) strengthens this by ruling out a confounding cause: water temperatures were stable and normal. This makes the sunscreen ban more likely the true cause.\n\nWhy the others fail: (A) doesn\u2019t isolate the chemical variable. (C) is correlational from another location. (D) shows compliance but not causation. (E) is irrelevant to causal logic."
+                },
+                {
+                    id: "v2_q10",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A city manager noticed that traffic congestion at a major downtown intersection dropped significantly after a new synchronized smart-light system was installed. Seeking to reduce congestion across the entire city, the manager plans to install the identical smart-light system at all remaining intersections next month, concluding that this citywide rollout will replicate the initial reduction in traffic delays.",
+                    promptLabel: "CRITICAL REASONING \u2014 WEAKEN",
+                    question: "Which of the following, if true, most seriously weakens the city manager\u2019s conclusion?",
+                    options: [
+                        "The smart-light system costs twice as much to maintain annually as traditional timed traffic signals.",
+                        "The downtown intersection features highly predictable, uniform commuter traffic, whereas the remaining city intersections experience highly erratic and unpredictable traffic fluxes that the system\u2019s algorithm cannot process in real time.",
+                        "Several major road construction projects near the downtown intersection were completed right before the smart lights were installed, reopening two previously blocked lanes.",
+                        "Some drivers reported initial confusion when interacting with the newly timed lights during the first week of implementation.",
+                        "The software powering the smart-light system requires monthly data updates to account for seasonal daylight shifts."
+                    ],
+                    answer: 1,
+                    explanation: "The manager assumes what worked for one intersection will work everywhere. (B) shows other intersections have fundamentally different traffic patterns the algorithm can\u2019t handle.\n\nWhy the others fail: (A) is about cost, not effectiveness. (C) explains the first intersection\u2019s success but doesn\u2019t undermine deployment to others as effectively."
+                },
+                {
+                    id: "v2_q11",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Agricultural analysts observe that switching from traditional soil-based farming to vertical hydroponic indoor farming reduces water usage by 90 percent per acre of crops produced. Therefore, the analysts conclude that if the nation\u2019s agricultural sector transitions entirely to vertical indoor farming, the total amount of water consumed by the nation annually will decrease significantly.",
+                    promptLabel: "CRITICAL REASONING \u2014 ASSUMPTION",
+                    question: "The conclusion drawn by the analysts depends on which of the following assumptions?",
+                    options: [
+                        "Vertical indoor farming produces crops that are nutritionally superior to traditionally grown crops.",
+                        "The energy required to power the artificial lighting in vertical farms will not create a substantial carbon footprint.",
+                        "The agricultural sector is currently responsible for a meaningful percentage of the nation\u2019s total annual water consumption.",
+                        "The cost of constructing indoor vertical farming facilities will decrease as the technology becomes more widely adopted.",
+                        "Mainstream consumers will be willing to pay slightly higher prices for produce grown via hydroponic methods."
+                    ],
+                    answer: 2,
+                    explanation: "The argument jumps from a percentage reduction within farming to a massive reduction in national water use. For this to hold, farming must make up a significant portion of national water use. If agriculture only used 0.05% of national water, a 90% drop would change nothing nationally. (C) is a necessary assumption.\n\nWhy the others fail: Nutrition (A), carbon (B), cost (D), and consumer willingness (E) don\u2019t impact the core mathematical logic."
+                },
+                {
+                    id: "v2_q12",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A premium subscription-based streaming service recently increased its monthly fee by 25 percent. Historically, price hikes of this magnitude within the digital media industry have led to an immediate, sharp wave of subscription cancellations. However, three months after this price increase went into effect, the streaming service reported not only a record-high total number of active subscribers but also its lowest cancellation rate in five years, despite releasing no new high-profile exclusive content during this period.",
+                    promptLabel: "CRITICAL REASONING \u2014 PARADOX",
+                    question: "Which of the following, if true, most helps to resolve the apparent discrepancy described above?",
+                    options: [
+                        "The streaming service spent less money on marketing and advertising during the quarter in which the price hike occurred.",
+                        "Two major competing streaming platforms unexpectedly shut down their services permanently a week before the price hike took effect.",
+                        "Customer surveys indicate that current subscribers value high-definition video streaming quality over low cost.",
+                        "The streaming service\u2019s customer service department implemented a new automated chatbot to handle account billing questions.",
+                        "The 25 percent price increase was accompanied by a minor aesthetic restructuring of the platform\u2019s mobile application user interface."
+                    ],
+                    answer: 1,
+                    explanation: "The paradox: Why did a massive price hike lead to more subscribers and fewer cancellations? (B) explains this: two major competitors shut down, flooding this platform with displaced users who had nowhere else to go.\n\nWhy the others fail: Less marketing (A) would decrease acquisition. Preferences (C) don\u2019t explain a sudden increase. Chatbots (D) and UI updates (E) are too minor."
+                }
+            ]
+        };
+
+        let passageData = activeQuizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+
+        function switchActiveQuiz(quizId) {
+            activeQuizId = quizId;
+            localStorage.setItem('greActiveQuizId', quizId);
+            passageData = quizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+        }
+
+        let passageState = {
+            currentIdx: 0,
+            answers: {},
+            submitted: {},
+            correctness: {}
+        };
+        let selectedSentencePos = null;
+
+        function loadPassageState() {
+            const saved = localStorage.getItem(passageQuizzes[activeQuizId].storageKey);
+            if (saved) {
+                try {
+                    passageState = JSON.parse(saved);
+                } catch(e) {
+                    console.error("Error loading passage state", e);
+                }
+            } else {
+                resetPassageStateNoConfirm();
+            }
+        }
+
+        function savePassageState() {
+            localStorage.setItem(passageQuizzes[activeQuizId].storageKey, JSON.stringify(passageState));
+        }
+
+        function resetPassageStateNoConfirm() {
+            passageState = {
+                currentIdx: 0,
+                answers: {},
+                submitted: {},
+                correctness: {}
+            };
+            selectedSentencePos = null;
+            savePassageState();
+        }
+
+        function isPassageQuizComplete() {
+            return passageData.questions.every(q => passageState.submitted[q.id]);
+        }
+
+        function goToPassageMode() {
+            // Toggle off and return to main menu if already in passage-screen
+            const activeScreen = _navStack[_navStack.length - 1];
+            if (activeScreen === 'passage-screen') {
+                _navStack = ['setup-screen'];
+                _showScreen('setup-screen');
+                return;
+            }
+
+            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and open Reading & Reasoning? Progress will be saved.')) {
+                return;
+            }
+            _navStack = ['setup-screen', 'passage-screen'];
+            _showScreen('passage-screen');
+            showQuizSelector();
+        }
+
+        function showQuizSelector() {
+            document.getElementById('passage-quiz-container').classList.add('hidden');
+            document.getElementById('passage-quiz-container').classList.remove('flex');
+            document.getElementById('passage-results-container').classList.add('hidden');
+            document.getElementById('passage-quiz-selector').classList.remove('hidden');
+            
+            ['quiz1', 'quiz2'].forEach(qId => {
+                const meta = passageQuizzes[qId];
+                const data = qId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+                const saved = localStorage.getItem(meta.storageKey);
+                let progress = 0, correct = 0, total = data.questions.length;
+                if (saved) {
+                    try {
+                        const st = JSON.parse(saved);
+                        progress = Object.keys(st.submitted || {}).filter(k => st.submitted[k]).length;
+                        correct = Object.keys(st.correctness || {}).filter(k => st.correctness[k]).length;
+                    } catch(e) {}
+                }
+                const card = document.getElementById('quiz-select-' + qId);
+                if (card) {
+                    const pctEl = card.querySelector('.quiz-select-progress');
+                    if (pctEl) {
+                        if (progress > 0) {
+                            pctEl.innerText = progress === total ? `Completed \u2014 ${correct}/${total} correct` : `${progress}/${total} answered`;
+                            pctEl.classList.remove('hidden');
+                        } else {
+                            pctEl.innerText = 'Not started';
+                            pctEl.classList.remove('hidden');
+                        }
+                    }
+                }
+            });
+        }
+
+        function selectQuiz(quizId) {
+            switchActiveQuiz(quizId);
+            document.getElementById('passage-quiz-selector').classList.add('hidden');
+            
+            loadPassageState();
+            
+            if (isPassageQuizComplete()) {
+                showPassageScoreScreen();
+            } else {
+                let firstUnsubmitted = 0;
+                while (firstUnsubmitted < passageData.questions.length && passageState.submitted[passageData.questions[firstUnsubmitted].id]) {
+                    firstUnsubmitted++;
+                }
+                if (firstUnsubmitted < passageData.questions.length) {
+                    passageState.currentIdx = firstUnsubmitted;
+                } else {
+                    passageState.currentIdx = 0;
+                }
+                
+                document.getElementById('passage-quiz-container').classList.remove('hidden');
+                document.getElementById('passage-quiz-container').classList.add('flex');
+                document.getElementById('passage-results-container').classList.add('hidden');
+                
+                renderPassageQuestion(passageState.currentIdx);
+            }
+        }
+
+        function passageBack() {
+            const selector = document.getElementById('passage-quiz-selector');
+            // If quiz selector is already showing, go back to main menu
+            if (!selector.classList.contains('hidden')) {
+                _navStack = ['setup-screen'];
+                _showScreen('setup-screen');
+                return;
+            }
+            // Otherwise go back to quiz selector
+            showQuizSelector();
+        }
+
+        function renderPassageQuestion(index) {
+            passageState.currentIdx = index;
+            savePassageState();
+            
+            const question = passageData.questions[index];
+            selectedSentencePos = null;
+            
+            if (question.passageBased) {
+                document.getElementById('passage-pane-title').innerText = "Reading Passage";
+                renderPassageTextContent(question.type === 'sentence');
+            } else {
+                document.getElementById('passage-pane-title').innerText = question.promptLabel || "CRITICAL REASONING";
+                document.getElementById('passage-scroll-container').innerHTML = `
+                    <p class="mb-4 text-justify leading-relaxed font-sans text-slate-700 dark:text-slate-300 text-base sm:text-[17px] select-text">
+                        ${question.prompt}
+                    </p>
+                `;
+            }
+            
+            document.getElementById('passage-question-text').innerText = question.question;
+            
+            const optionsContainer = document.getElementById('passage-options-container');
+            optionsContainer.innerHTML = '';
+            
+            const isSubmitted = passageState.submitted[question.id];
+            const savedAnswer = passageState.answers[question.id];
+            
+            if (question.type === 'single') {
+                question.options.forEach((opt, oIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-3.5 rounded-xl border font-sans text-sm sm:text-[15px] font-medium transition-all duration-155 flex items-start gap-3 select-none text-black dark:text-white";
+                    
+                    const isSelected = savedAnswer === oIdx;
+                    
+                    if (isSubmitted) {
+                        btn.disabled = true;
+                        const isCorrect = oIdx === question.answer;
+                        if (isCorrect) {
+                            btn.className += " border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 text-black dark:text-white";
+                        } else if (isSelected) {
+                            btn.className += " border-rose-500 bg-rose-50 dark:bg-rose-950/20 text-black dark:text-white";
+                        } else {
+                            btn.className += " border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-slate-500";
+                        }
+                    } else {
+                        if (isSelected) {
+                            btn.className += " border-primary-600 bg-primary-50 dark:bg-primary-950/20 text-black dark:text-white ring-2 ring-primary-500/35";
+                        } else {
+                            btn.className += " border-slate-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800 text-black dark:text-white";
+                        }
+                        
+                        btn.onclick = () => {
+                            passageState.answers[question.id] = oIdx;
+                            savePassageState();
+                            renderPassageQuestion(index);
+                        };
+                    }
+                    
+                    const badge = document.createElement('span');
+                    badge.className = `inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold shrink-0 ${
+                        isSelected 
+                            ? 'bg-primary-600 text-white' 
+                            : isSubmitted && oIdx === question.answer
+                                ? 'bg-emerald-600 text-white'
+                                : isSubmitted && isSelected
+                                    ? 'bg-rose-600 text-white'
+                                    : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-slate-400'
+                    }`;
+                    badge.innerText = String.fromCharCode(65 + oIdx);
+                    
+                    btn.appendChild(badge);
+                    
+                    const textEl = document.createElement('span');
+                    textEl.innerText = opt;
+                    btn.appendChild(textEl);
+                    
+                    optionsContainer.appendChild(btn);
+                });
+            } else if (question.type === 'multiple') {
+                question.options.forEach((opt, oIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-3.5 rounded-xl border font-sans text-sm sm:text-[15px] font-medium transition-all duration-155 flex items-start gap-3 select-none text-black dark:text-white";
+                    
+                    const isSelected = Array.isArray(savedAnswer) && savedAnswer.includes(oIdx);
+                    const isCorrectOption = question.answer.includes(oIdx);
+                    
+                    if (isSubmitted) {
+                        btn.disabled = true;
+                        if (isCorrectOption) {
+                            btn.className += " border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 text-black dark:text-white";
+                        } else if (isSelected) {
+                            btn.className += " border-rose-500 bg-rose-50 dark:bg-rose-950/20 text-black dark:text-white";
+                        } else {
+                            btn.className += " border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-slate-500";
+                        }
+                    } else {
+                        if (isSelected) {
+                            btn.className += " border-primary-600 bg-primary-50 dark:bg-primary-950/20 text-black dark:text-white ring-2 ring-primary-500/35";
+                        } else {
+                            btn.className += " border-slate-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800 text-black dark:text-white";
+                        }
+                        
+                        btn.onclick = () => {
+                            let currentAnswers = passageState.answers[question.id] || [];
+                            if (!Array.isArray(currentAnswers)) currentAnswers = [];
+                            if (currentAnswers.includes(oIdx)) {
+                                currentAnswers = currentAnswers.filter(x => x !== oIdx);
+                            } else {
+                                currentAnswers.push(oIdx);
+                            }
+                            passageState.answers[question.id] = currentAnswers;
+                            savePassageState();
+                            renderPassageQuestion(index);
+                        };
+                    }
+                    
+                    const badge = document.createElement('span');
+                    badge.className = `inline-flex items-center justify-center w-5 h-5 rounded text-[10px] font-bold shrink-0 ${
+                        isSelected 
+                            ? 'bg-primary-600 text-white' 
+                            : isSubmitted && isCorrectOption
+                                ? 'bg-emerald-600 text-white'
+                                : isSubmitted && isSelected
+                                    ? 'bg-rose-600 text-white'
+                                    : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-slate-400'
+                    }`;
+                    badge.innerHTML = isSelected || (isSubmitted && isCorrectOption) 
+                        ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>` 
+                        : String.fromCharCode(65 + oIdx);
+                    
+                    btn.appendChild(badge);
+                    
+                    const textEl = document.createElement('span');
+                    textEl.innerText = opt;
+                    btn.appendChild(textEl);
+                    
+                    optionsContainer.appendChild(btn);
+                });
+            } else if (question.type === 'sentence') {
+                const helper = document.createElement('div');
+                helper.className = "p-4 rounded-xl border border-dashed border-amber-300 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300 text-xs sm:text-sm leading-relaxed flex gap-3";
+                helper.innerHTML = `
+                    <svg class="w-5 h-5 shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        ${isSubmitted 
+                            ? "<strong>Sentence Selection Completed.</strong> Review the highlighted passage text on the left." 
+                            : "<strong>Action Required:</strong> Click on the sentence in the reading passage on the left that best answers the question."}
+                    </div>
+                `;
+                optionsContainer.appendChild(helper);
+                
+                if (savedAnswer) {
+                    const selectedPreview = document.createElement('div');
+                    if (isSubmitted) {
+                        const isCorrect = passageState.correctness[question.id];
+                        selectedPreview.className = `p-3.5 rounded-xl border text-xs sm:text-sm font-medium text-white shadow-sm ${
+                            isCorrect
+                                ? 'border-emerald-600 bg-emerald-600 dark:bg-emerald-700'
+                                : 'border-rose-600 bg-rose-600 dark:bg-rose-700'
+                        }`;
+                        selectedPreview.innerHTML = `
+                            <div class="text-[10px] uppercase font-bold text-white/70 mb-1 tracking-wider">
+                                Selected Sentence
+                            </div>
+                            <div class="italic text-white text-sm sm:text-base font-semibold leading-relaxed">"${savedAnswer}"</div>
+                        `;
+                    } else {
+                        selectedPreview.className = "p-3.5 rounded-xl border border-slate-250 dark:border-neutral-800 bg-transparent shadow-sm";
+                        selectedPreview.innerHTML = `
+                            <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-1 tracking-wider">
+                                Selected Sentence
+                            </div>
+                            <div class="italic text-slate-800 dark:text-slate-200 text-base sm:text-lg font-semibold leading-relaxed">"${savedAnswer}"</div>
+                        `;
+                    }
+                    optionsContainer.appendChild(selectedPreview);
+                }
+            } else if (question.type === 'two_blank' || question.type === 'three_blank') {
+                // Multi-blank Text Completion
+                const blanks = question.blanks;
+                const numBlanks = blanks.length;
+                const gridCols = numBlanks === 2 ? 'grid-cols-2' : 'grid-cols-3';
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = `grid ${gridCols} gap-3`;
+                
+                blanks.forEach((blank, bIdx) => {
+                    const col = document.createElement('div');
+                    col.className = 'space-y-2';
+                    
+                    const label = document.createElement('div');
+                    label.className = 'text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1 border-b border-slate-200 dark:border-neutral-700 mb-1';
+                    label.innerText = blank.label;
+                    col.appendChild(label);
+                    
+                    blank.options.forEach((opt, oIdx) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'w-full text-left p-2.5 rounded-lg border font-sans text-xs sm:text-sm font-medium transition-all duration-150 flex items-start gap-2 select-none text-black dark:text-white';
+                        
+                        const currentAnswers = Array.isArray(savedAnswer) ? savedAnswer : [];
+                        const isSelected = currentAnswers[bIdx] === oIdx;
+                        const correctVal = question.answer[bIdx];
+                        
+                        if (isSubmitted) {
+                            btn.disabled = true;
+                            if (oIdx === correctVal) {
+                                btn.className += ' border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20';
+                            } else if (isSelected) {
+                                btn.className += ' border-rose-500 bg-rose-50 dark:bg-rose-950/20';
+                            } else {
+                                btn.className += ' border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-slate-500';
+                            }
+                        } else {
+                            if (isSelected) {
+                                btn.className += ' border-primary-600 bg-primary-50 dark:bg-primary-950/20 ring-2 ring-primary-500/35';
+                            } else {
+                                btn.className += ' border-slate-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800';
+                            }
+                            btn.onclick = () => {
+                                let answers = Array.isArray(passageState.answers[question.id]) ? [...passageState.answers[question.id]] : new Array(numBlanks).fill(undefined);
+                                answers[bIdx] = oIdx;
+                                passageState.answers[question.id] = answers;
+                                savePassageState();
+                                renderPassageQuestion(index);
+                            };
+                        }
+                        
+                        const badge = document.createElement('span');
+                        badge.className = `inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold shrink-0 ${
+                            isSelected ? 'bg-primary-600 text-white' 
+                            : isSubmitted && oIdx === correctVal ? 'bg-emerald-600 text-white'
+                            : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-slate-400'
+                        }`;
+                        badge.innerText = String.fromCharCode(65 + (bIdx * 3) + oIdx);
+                        btn.appendChild(badge);
+                        
+                        const textEl = document.createElement('span');
+                        textEl.innerText = opt;
+                        btn.appendChild(textEl);
+                        
+                        col.appendChild(btn);
+                    });
+                    
+                    wrapper.appendChild(col);
+                });
+                
+                optionsContainer.appendChild(wrapper);
+            } else if (question.type === 'sentence_equiv') {
+                // Sentence Equivalence - select exactly 2
+                const helper = document.createElement('div');
+                helper.className = 'p-3 rounded-lg border border-dashed border-primary-300 dark:border-primary-900/60 bg-primary-50/50 dark:bg-primary-950/20 text-primary-800 dark:text-primary-300 text-xs leading-relaxed mb-2 flex gap-2 items-center';
+                helper.innerHTML = `<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Select exactly <strong>two</strong> answer choices.</span>`;
+                optionsContainer.appendChild(helper);
+                
+                question.options.forEach((opt, oIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-full text-left p-3.5 rounded-xl border font-sans text-sm sm:text-[15px] font-medium transition-all duration-155 flex items-start gap-3 select-none text-black dark:text-white';
+                    
+                    const isSelected = Array.isArray(savedAnswer) && savedAnswer.includes(oIdx);
+                    const isCorrectOption = question.answer.includes(oIdx);
+                    
+                    if (isSubmitted) {
+                        btn.disabled = true;
+                        if (isCorrectOption) {
+                            btn.className += ' border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20';
+                        } else if (isSelected) {
+                            btn.className += ' border-rose-500 bg-rose-50 dark:bg-rose-950/20';
+                        } else {
+                            btn.className += ' border-slate-200 dark:border-neutral-800 text-slate-400 dark:text-slate-500';
+                        }
+                    } else {
+                        if (isSelected) {
+                            btn.className += ' border-primary-600 bg-primary-50 dark:bg-primary-950/20 ring-2 ring-primary-500/35';
+                        } else {
+                            btn.className += ' border-slate-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800';
+                        }
+                        btn.onclick = () => {
+                            let currentAnswers = passageState.answers[question.id] || [];
+                            if (!Array.isArray(currentAnswers)) currentAnswers = [];
+                            if (currentAnswers.includes(oIdx)) {
+                                currentAnswers = currentAnswers.filter(x => x !== oIdx);
+                                passageState.answers[question.id] = currentAnswers;
+                                savePassageState();
+                                renderPassageQuestion(index);
+                            } else {
+                                if (currentAnswers.length >= 2) {
+                                    // Block selection, play haptic, and shake
+                                    haptic();
+                                    btn.classList.add('animate-shake');
+                                    setTimeout(() => {
+                                        btn.classList.remove('animate-shake');
+                                    }, 350);
+                                } else {
+                                    currentAnswers.push(oIdx);
+                                    passageState.answers[question.id] = currentAnswers;
+                                    savePassageState();
+                                    renderPassageQuestion(index);
+                                }
+                            }
+                        };
+                    }
+                    
+                    const badge = document.createElement('span');
+                    badge.className = `inline-flex items-center justify-center w-5 h-5 rounded text-[10px] font-bold shrink-0 ${
+                        isSelected ? 'bg-primary-600 text-white'
+                        : isSubmitted && isCorrectOption ? 'bg-emerald-600 text-white'
+                        : 'bg-slate-100 dark:bg-neutral-800 text-slate-500 dark:text-slate-400'
+                    }`;
+                    badge.innerHTML = isSelected || (isSubmitted && isCorrectOption)
+                        ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>`
+                        : String.fromCharCode(65 + oIdx);
+                    btn.appendChild(badge);
+                    
+                    const textEl = document.createElement('span');
+                    textEl.innerText = opt;
+                    btn.appendChild(textEl);
+                    
+                    optionsContainer.appendChild(btn);
+                });
+            }
+            
+            const explContainer = document.getElementById('passage-explanation-container');
+            const submitBtn = document.getElementById('passage-submit-btn');
+            const nextBtn = document.getElementById('passage-next-btn');
+            
+            if (isSubmitted) {
+                explContainer.classList.remove('hidden');
+                
+                const isCorrect = passageState.correctness[question.id];
+                const badge = document.getElementById('passage-feedback-badge');
+                
+                if (isCorrect) {
+                    badge.innerText = "Correct";
+                    badge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 border border-emerald-250 dark:border-emerald-900/50";
+                    explContainer.className = "mt-6 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/20 dark:bg-emerald-950/10";
+                } else {
+                    badge.innerText = "Incorrect";
+                    badge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-100 dark:bg-rose-900/40 text-rose-800 dark:text-rose-300 border border-rose-250 dark:border-rose-900/50";
+                    explContainer.className = "mt-6 p-4 rounded-xl border border-rose-200 dark:border-rose-900/40 bg-rose-50/20 dark:bg-rose-950/10";
+                }
+                
+                document.getElementById('passage-explanation-text').innerText = question.explanation;
+                submitBtn.classList.add('hidden');
+            } else {
+                explContainer.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+                
+                let hasSelection = false;
+                if (question.type === 'sentence') {
+                    hasSelection = !!savedAnswer;
+                } else if (question.type === 'single') {
+                    hasSelection = savedAnswer !== undefined;
+                } else if (question.type === 'two_blank' || question.type === 'three_blank') {
+                    const numBlanks = question.blanks.length;
+                    hasSelection = Array.isArray(savedAnswer) && savedAnswer.length === numBlanks && savedAnswer.every(v => v !== undefined);
+                } else if (question.type === 'sentence_equiv') {
+                    hasSelection = Array.isArray(savedAnswer) && savedAnswer.length === 2;
+                } else {
+                    hasSelection = Array.isArray(savedAnswer) && savedAnswer.length > 0;
+                }
+                submitBtn.disabled = !hasSelection;
+            }
+            
+            // Next Button Setup (Always Visible)
+            if (index < passageData.questions.length - 1) {
+                nextBtn.innerText = "Next";
+                nextBtn.onclick = passageNextQuestion;
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.innerText = "Finish Quiz";
+                nextBtn.onclick = showPassageScoreScreen;
+                nextBtn.disabled = !isPassageQuizComplete();
+            }
+            
+            document.getElementById('passage-prev-btn').disabled = index === 0;
+            
+            renderPassageProgressDots();
+        }
+
+        function renderPassageTextContent(interactive = false) {
+            const container = document.getElementById('passage-scroll-container');
+            container.innerHTML = '';
+            
+            const question = passageData.questions[passageState.currentIdx];
+            const isSubmitted = passageState.submitted[question.id];
+            const savedAnswer = passageState.answers[question.id];
+            
+            passageData.passageParagraphs.forEach((paragraph, pIdx) => {
+                const pEl = document.createElement('p');
+                pEl.className = "mb-4 text-justify leading-relaxed";
+                
+                paragraph.forEach((sentence, sIdx) => {
+                    const span = document.createElement('span');
+                    span.innerText = sentence + " ";
+                    span.className = "passage-sentence transition-all duration-200 rounded px-1 -mx-1 py-0.5 inline";
+                    span.dataset.paragraph = pIdx;
+                    span.dataset.sentence = sIdx;
+                    
+                    const isSelected = savedAnswer === sentence;
+                    
+                    if (isSubmitted) {
+                        const isCorrectSentence = sentence === question.answer;
+                        if (isCorrectSentence) {
+                            span.className += " bg-emerald-100 dark:bg-emerald-950/60 ring-2 ring-emerald-500 text-emerald-950 dark:text-emerald-100 font-medium";
+                        } else if (isSelected) {
+                            span.className += " bg-rose-100 dark:bg-rose-950/60 ring-2 ring-rose-500 text-rose-950 dark:text-rose-100";
+                        }
+                    } else if (interactive) {
+                        span.className += " cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-950/20 hover:text-black dark:hover:text-white";
+                        
+                        if (isSelected) {
+                            span.className += " bg-primary-50 dark:bg-primary-950/30 ring-2 ring-amber-500 text-black dark:text-white font-medium";
+                        }
+                        
+                        span.onclick = () => {
+                            selectSentence(span);
+                        };
+                    }
+                    
+                    pEl.appendChild(span);
+                });
+                
+                container.appendChild(pEl);
+            });
+        }
+ 
+        function selectSentence(span) {
+            const question = passageData.questions[passageState.currentIdx];
+            
+            document.querySelectorAll('.passage-sentence').forEach(el => {
+                el.classList.remove('bg-primary-50', 'dark:bg-primary-950/30', 'ring-2', 'ring-amber-500', 'text-black', 'dark:text-white', 'font-medium');
+            });
+            
+            span.className += " bg-primary-50 dark:bg-primary-950/30 ring-2 ring-amber-500 text-black dark:text-white font-medium";
+            
+            const sentenceText = span.innerText.trim();
+            passageState.answers[question.id] = sentenceText;
+            savePassageState();
+            
+            renderPassageQuestion(passageState.currentIdx);
+        }
+
+        function submitPassageAnswer() {
+            haptic();
+            const question = passageData.questions[passageState.currentIdx];
+            const answer = passageState.answers[question.id];
+            
+            let isCorrect = false;
+            
+            if (question.type === 'single') {
+                isCorrect = answer === question.answer;
+            } else if (question.type === 'multiple' || question.type === 'sentence_equiv') {
+                if (Array.isArray(answer) && Array.isArray(question.answer)) {
+                    isCorrect = answer.length === question.answer.length &&
+                                answer.every(x => question.answer.includes(x)) &&
+                                question.answer.every(x => answer.includes(x));
+                }
+            } else if (question.type === 'sentence') {
+                isCorrect = answer === question.answer;
+            } else if (question.type === 'two_blank' || question.type === 'three_blank') {
+                if (Array.isArray(answer) && Array.isArray(question.answer)) {
+                    isCorrect = answer.length === question.answer.length &&
+                                answer.every((v, i) => v === question.answer[i]);
+                }
+            }
+            
+            passageState.submitted[question.id] = true;
+            passageState.correctness[question.id] = isCorrect;
+            savePassageState();
+            
+            renderPassageQuestion(passageState.currentIdx);
+        }
+
+        function passageNextQuestion() {
+            haptic();
+            if (passageState.currentIdx < passageData.questions.length - 1) {
+                renderPassageQuestion(passageState.currentIdx + 1);
+            }
+        }
+
+        function passagePrevQuestion() {
+            haptic();
+            if (passageState.currentIdx > 0) {
+                renderPassageQuestion(passageState.currentIdx - 1);
+            }
+        }
+
+        function renderPassageProgressDots() {
+            const container = document.getElementById('passage-progress-dots');
+            container.innerHTML = '';
+            
+            passageData.questions.forEach((q, idx) => {
+                const dot = document.createElement('button');
+                
+                const isCurrent = idx === passageState.currentIdx;
+                const isSubmitted = passageState.submitted[q.id];
+                const isCorrect = passageState.correctness[q.id];
+                
+                dot.className = "w-7 h-7 rounded-lg text-xs font-bold transition-all flex items-center justify-center border ";
+                
+                if (isCurrent) {
+                    dot.className += "border-primary-600 bg-primary-50 dark:bg-primary-950/40 text-primary-700 dark:text-primary-400 ring-2 ring-primary-500/25";
+                } else if (isSubmitted) {
+                    if (isCorrect) {
+                        dot.className += "border-emerald-500 bg-emerald-500 text-white dark:bg-emerald-950/40 dark:text-emerald-400";
+                    } else {
+                        dot.className += "border-rose-500 bg-rose-500 text-white dark:bg-rose-950/40 dark:text-rose-400";
+                    }
+                } else {
+                    dot.className += "border-slate-200 dark:border-neutral-800 bg-slate-100 dark:bg-neutral-900 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-neutral-800";
+                }
+                
+                dot.innerText = idx + 1;
+                
+                dot.onclick = () => {
+                    haptic();
+                    document.getElementById('passage-quiz-container').classList.remove('hidden');
+                    document.getElementById('passage-quiz-container').classList.add('flex');
+                    document.getElementById('passage-results-container').classList.add('hidden');
+                    renderPassageQuestion(idx);
+                };
+                
+                container.appendChild(dot);
+            });
+        }
+
+        function showPassageScoreScreen() {
+            document.getElementById('passage-quiz-container').classList.add('hidden');
+            document.getElementById('passage-quiz-container').classList.remove('flex');
+            document.getElementById('passage-results-container').classList.remove('hidden');
+            
+            let score = 0;
+            passageData.questions.forEach(q => {
+                if (passageState.correctness[q.id]) score++;
+            });
+            
+            const total = passageData.questions.length;
+            const pct = Math.round((score / total) * 100);
+            
+            document.getElementById('passage-results-score').innerText = `${score} / ${total}`;
+            document.getElementById('passage-results-pct').innerText = `${pct}%`;
+            
+            const reviewList = document.getElementById('passage-review-list');
+            reviewList.innerHTML = '';
+            
+            passageData.questions.forEach((q, idx) => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between p-3 rounded-xl border border-slate-200/60 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900/50 hover:bg-slate-100 dark:hover:bg-neutral-800/50 cursor-pointer transition-all duration-150 gap-3";
+                
+                const isCorrect = passageState.correctness[q.id];
+                
+                item.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold ${
+                            isCorrect 
+                                ? 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-250 dark:border-emerald-900/50' 
+                                : 'bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-250 dark:border-rose-900/50'
+                        }">
+                            ${idx + 1}
+                        </span>
+                        <div class="text-xs sm:text-sm font-semibold truncate max-w-[280px] sm:max-w-md text-slate-700 dark:text-slate-300">
+                            ${q.question}
+                        </div>
+                    </div>
+                    <span class="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${
+                        isCorrect
+                            ? 'bg-emerald-100 dark:bg-emerald-950/45 text-emerald-700 dark:text-emerald-400'
+                            : 'bg-rose-100 dark:bg-rose-950/45 text-rose-700 dark:text-rose-400'
+                    }">
+                        ${isCorrect ? 'Correct' : 'Incorrect'}
+                    </span>
+                `;
+                
+                item.onclick = () => {
+                    haptic();
+                    document.getElementById('passage-quiz-container').classList.remove('hidden');
+                    document.getElementById('passage-quiz-container').classList.add('flex');
+                    document.getElementById('passage-results-container').classList.add('hidden');
+                    renderPassageQuestion(idx);
+                };
+                
+                reviewList.appendChild(item);
+            });
+        }
+
+        function resetPassageProgress() {
+            haptic();
+            if (confirm("Are you sure you want to reset your quiz progress and start over?")) {
+                resetPassageStateNoConfirm();
+                document.getElementById('passage-quiz-container').classList.remove('hidden');
+                document.getElementById('passage-quiz-container').classList.add('flex');
+                document.getElementById('passage-results-container').classList.add('hidden');
+                renderPassageQuestion(0);
+            }
+        }
+
+        // URL Parameter Routing on Page Load
+        function checkUrlRouting() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const screen = urlParams.get('screen');
+            if (screen === 'library') {
+                goToLibrary();
+            } else if (screen === 'passage') {
+                goToPassageMode();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initHapticOverlays();
+            checkUrlRouting();
+        });
+        if (document.readyState !== 'loading') {
+            initHapticOverlays();
+            checkUrlRouting();
+        }
     </script>
 </body>
 </html>

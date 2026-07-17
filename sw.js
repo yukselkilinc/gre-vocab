@@ -2,9 +2,11 @@ const CACHE_NAME = 'gre-vocab';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './memory_palace.html',
   './database.js',
   './manifest.json',
   './icon.svg',
+  './palace_icon.svg',
   'https://cdn.tailwindcss.com'
 ];
 
