@@ -39,7 +39,7 @@ const coreDatabase = {
             {
                 "word": "conundrum",
                 "type": "noun",
-                "def": "A confusing or difficult problem or question.",
+                "def": "A confusing or difficult problem or question",
                 "example": "Fixing the budget deficit is a highly difficult conundrum.",
                 "long_example": "The sudden and steep drop in tax revenues while public demand for infrastructure projects continued to rise presented a major financial conundrum for the newly elected municipal administration."
             },
