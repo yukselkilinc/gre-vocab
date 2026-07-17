@@ -791,9 +791,10 @@
             
             actionsContainer.innerHTML = `
                 <div class="flex items-center gap-2">
-                    <button onclick="handleSyncMasteredClick()" class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isEnabled ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-neutral-800'}" aria-label="Toggle sync mastered to learned" style="-webkit-tap-highlight-color: transparent;">
-                        <span class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isEnabled ? 'translate-x-4' : 'translate-x-0'}"></span>
-                    </button>
+                    <label class="relative inline-flex items-center cursor-pointer flex-shrink-0" style="-webkit-tap-highlight-color: transparent;">
+                        <input type="checkbox" id="setting-sync-mastered" onchange="handleSyncMasteredClick(this.checked)" class="sr-only peer" ${isEnabled ? 'checked' : ''}>
+                        <div class="w-11 h-6 bg-slate-200 dark:bg-neutral-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-slate-300 dark:after:border-slate-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                    </label>
                     
                     <div class="relative inline-block">
                         <button id="sync-help-btn"
@@ -810,19 +811,23 @@
             `;
         }
 
-        function handleSyncMasteredClick() {
+        function handleSyncMasteredClick(checked) {
             haptic();
             const isEnabled = localStorage.getItem('greSyncMasteredToLearned') === 'true';
-            if (!isEnabled) {
+            if (checked) {
                 const count = getUnsyncedMasteredCount();
                 if (confirm(`Mark past and future mastered words in any game mode as learned? This will mark ${count} words as learned.`)) {
                     toggleSyncMasteredToLearned(true);
                     renderLibrarySubActions();
+                } else {
+                    document.getElementById('setting-sync-mastered').checked = false;
                 }
             } else {
                 if (confirm("Stop marking future mastered words as learned?")) {
                     toggleSyncMasteredToLearned(false);
                     renderLibrarySubActions();
+                } else {
+                    document.getElementById('setting-sync-mastered').checked = true;
                 }
             }
         }

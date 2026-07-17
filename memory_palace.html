@@ -81,12 +81,24 @@ button{ cursor:pointer; }
 
 /* ============ HEADER / MASTHEAD ============ */
 .masthead{
-  position:sticky; top:0; z-index:40;
+  position:fixed; top:0; left:0; right:0; z-index:40;
   background:linear-gradient(180deg, var(--ink) 0%, rgba(17,20,27,0.97) 80%, rgba(17,20,27,0.88) 100%);
   border-bottom:1px solid var(--line);
   backdrop-filter:blur(6px);
   padding-top: env(safe-area-inset-top, 0px);
   transition: background-color 0.2s ease;
+}
+.floor-wrap, .room-view {
+  margin-top: 80px;
+}
+@media (max-width:640px) {
+  .floor-wrap, .room-view {
+    margin-top: 56px !important;
+  }
+}
+html.pwa-standalone .floor-wrap,
+html.pwa-standalone .room-view {
+  margin-top: 120px !important;
 }
 .masthead-inner{
   max-width:1200px; margin:0 auto; padding:14px 24px;
