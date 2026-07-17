@@ -5224,8 +5224,18 @@
             passageState.submitted[question.id] = true;
             passageState.correctness[question.id] = isCorrect;
             savePassageState();
-            
             renderPassageQuestion(passageState.currentIdx);
+            
+            setTimeout(() => {
+                const mainEl = document.querySelector('main');
+                if (mainEl) {
+                    mainEl.scrollTo({ top: mainEl.scrollHeight, behavior: 'smooth' });
+                }
+                const questionContainer = document.getElementById('passage-question-card')?.parentElement;
+                if (questionContainer) {
+                    questionContainer.scrollTo({ top: questionContainer.scrollHeight, behavior: 'smooth' });
+                }
+            }, 60);
         }
 
         function passageNextQuestion() {
