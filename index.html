@@ -508,38 +508,38 @@
             </div>
 
             <!-- Quiz Results Screen (Visible when completed) -->
-            <div id="passage-results-container" class="hidden flex-grow flex flex-col items-center justify-center p-4 max-w-2xl mx-auto space-y-6 w-full">
-                <div class="text-center space-y-2">
-                    <div class="inline-flex p-4 rounded-full bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 mb-2">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div id="passage-results-container" class="hidden flex-grow flex flex-col items-center justify-start overflow-y-auto p-4 max-w-2xl mx-auto space-y-3.5 w-full">
+                <div class="text-center space-y-1.5 shrink-0">
+                    <div class="inline-flex p-3 rounded-full bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 mb-1">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white font-serif">Quiz Completed!</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">You have finished the Verbal Reasoning quiz.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white font-serif">Quiz Completed!</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs">You have finished the Verbal Reasoning quiz.</p>
                 </div>
 
                 <!-- Score Card -->
-                <div class="w-full bg-slate-50 dark:bg-neutral-800/40 border border-slate-200/60 dark:border-neutral-800 rounded-2xl p-6 grid grid-cols-2 gap-4 text-center">
+                <div class="w-full bg-slate-50 dark:bg-neutral-800/40 border border-slate-200/60 dark:border-neutral-800 rounded-2xl p-4 grid grid-cols-2 gap-4 text-center shrink-0">
                     <div class="border-r border-slate-200 dark:border-neutral-700">
-                        <span class="text-2xl sm:text-4xl font-black text-primary-600 dark:text-primary-400" id="passage-results-score">10/12</span>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">Score</p>
+                        <span class="text-xl sm:text-3xl font-black text-primary-600 dark:text-primary-400" id="passage-results-score">10/12</span>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">Score</p>
                     </div>
                     <div>
-                        <span class="text-2xl sm:text-4xl font-black text-primary-600 dark:text-primary-400" id="passage-results-pct">83%</span>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">Accuracy</p>
+                        <span class="text-xl sm:text-3xl font-black text-primary-600 dark:text-primary-400" id="passage-results-pct">83%</span>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">Accuracy</p>
                     </div>
                 </div>
 
                 <!-- Question Review List -->
-                <div class="w-full space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
-                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Question Review</h4>
-                    <div id="passage-review-list" class="space-y-2">
+                <div class="w-full space-y-2 max-h-[180px] sm:max-h-[220px] overflow-y-auto pr-1 flex-grow min-h-[120px]">
+                    <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Question Review</h4>
+                    <div id="passage-review-list" class="space-y-1.5">
                         <!-- Questions 1-12 list injected here -->
                     </div>
                 </div>
 
-                <button onclick="resetPassageProgress()" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md text-sm">
+                <button onclick="resetPassageProgress()" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md text-sm shrink-0">
                     Retry Quiz
                 </button>
             </div>
