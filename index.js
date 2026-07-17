@@ -5226,33 +5226,27 @@
             savePassageState();
             renderPassageQuestion(passageState.currentIdx);
             
-            // Custom smooth scroll animation that dynamically adjusts to growing content
+            // Custom smooth scroll animation that is lightweight (no layout thrashing) and fast
             function smoothScrollToBottom(element) {
                 if (!element) return;
                 const start = element.scrollTop;
-                const duration = 500; // ms
+                const target = element.scrollHeight - element.clientHeight;
+                if (target <= start) return;
+                
+                const duration = 250; // ms (snappy transition)
                 const startTime = performance.now();
                 
                 function animate(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
                     
-                    // Ease-in-out quadratic
-                    const ease = progress < 0.5 
-                        ? 2 * progress * progress 
-                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    // Ease-out quad for snappy initial acceleration
+                    const ease = progress * (2 - progress);
                     
-                    const target = element.scrollHeight - element.clientHeight;
-                    if (target > 0) {
-                        element.scrollTop = start + (target - start) * ease;
-                    }
+                    element.scrollTop = start + (target - start) * ease;
                     
                     if (progress < 1) {
                         requestAnimationFrame(animate);
-                    } else {
-                        if (target > 0) {
-                            element.scrollTop = element.scrollHeight;
-                        }
                     }
                 }
                 requestAnimationFrame(animate);
