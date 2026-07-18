@@ -4224,7 +4224,7 @@
         }, { passive: false });
 
         // =========================================================================
-        // READING COMPREHENSION & CRITICAL REASONING QUIZ MODULE
+        // READING COMPREHENSION QUIZ MODULE
         // =========================================================================
 
         let activeQuizId = localStorage.getItem('greActiveQuizId') || 'quiz1';
@@ -4232,17 +4232,24 @@
         const passageQuizzes = {
             quiz1: {
                 id: 'quiz1',
-                title: 'Quiz 1 — Reading & Critical Reasoning',
-                subtitle: 'Maya Civilization Passage + Critical Reasoning',
+                title: 'Quiz 1 — Reading Comprehension only',
+                subtitle: 'Long Passage & Paragraph Argument (Weaken/Strengthen, Evaluate Argument, Paradox, Assumption)',
                 icon: '📖',
                 storageKey: 'grePassageProgress'
             },
             quiz2: {
                 id: 'quiz2',
-                title: 'Quiz 2 — Full Verbal Reasoning',
-                subtitle: 'Text Completion, Sentence Equivalence, RC & CR',
+                title: 'Quiz 3 — Full Verbal Reasoning',
+                subtitle: 'Text Completion, Sentence Equivalence, Reading Comprehension',
                 icon: '✍️',
                 storageKey: 'grePassageProgress2'
+            },
+            quiz3: {
+                id: 'quiz3',
+                title: 'Quiz 2 — Sentence Completion & Equivalence',
+                subtitle: 'Text Completion (1, 2, 3 Blanks) & Sentence Equivalence',
+                icon: '⚡',
+                storageKey: 'grePassageProgress3'
             }
         };
 
@@ -4336,6 +4343,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "A major technology corporation has observed a surge in employee complaints regarding digital eye strain. In an effort to curb these symptoms and improve workplace wellness, the company has replaced traditional backlit LCD monitors with reflective e-ink displays across its primary corporate offices. The company's executive board predicts that the number of eye strain complaints will significantly decrease over the next quarter following this installation.",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 STRENGTHEN",
                     question: "Which of the following, if true, most strengthens the validity of the conclusion?",
                     options: [
                         "Most employees at the company use their workstations for greater than six hours per day.",
@@ -4352,6 +4360,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "Organic produce at Meadowbrook Farms grocery store costs roughly 30 percent more than conventional produce of the exact same variety. A consumer advocacy group claims that the grocery franchise is simply taking advantage of its reputation for health-conscious options to reap artificially higher profit margins on those organic items.",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 EVALUATE",
                     question: "In evaluating the argument, it would be most useful to compare",
                     options: [
                         "the nutritional and vitamin content of the organic produce with that of the conventional produce at Meadowbrook Farms.",
@@ -4368,6 +4377,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "Economist: To revitalize the manufacturing sector in the province of Oakhaven, the regional government should provide tax credits exclusively to firms that construct automated robotics factories. While this policy targets a highly specific sub-sector, the resulting industrial ecosystem will make Oakhaven more economically resilient than any other province. This is not to say that tax credits should be distributed to all technology firms. Rather, only to those directly manufacturing industrial robotics.",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 ASSUMPTION",
                     question: "The conclusion drawn above depends on which of the following assumptions?",
                     options: [
                         "Traditional manufacturing sub-sectors, such as textiles and steel, are completely incapable of experiencing job growth.",
@@ -4384,6 +4394,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "In a certain territory, over 75 percent of households own a personal vehicle, but historically, premium comprehensive vehicle insurance policies have sold poorly in this region. The percentage of land and population devoted to car ownership is not expected to change, and the average traffic accident rate has slowly risen over the past decade. Despite this trend, a new international insurance firm is building a large headquarters in the territory, and its business plan for success depends on strong local sales of its premium insurance plans. Both the firm's executives and industry analysts expect this venture to be highly profitable over the next few years.",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 PARADOX",
                     question: "Which of the following, if true, most helps to provide a justification for the firm's and the analysts' optimistic expectations?",
                     options: [
                         "The average cost of medical care and vehicle replacement parts has spiked drastically, making basic legal-minimum liability coverage insufficient to protect drivers from catastrophic financial ruin.",
@@ -4400,6 +4411,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "A municipal transit authority observed that city bus ridership declined by 15 percent immediately after they implemented a 50-cent fare increase. In an effort to restore ridership to its previous historical levels, the authority plans to lower fares back to their original rate next month, concluding that this price reduction will bring back all the lost passengers.",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 WEAKEN",
                     question: "Which of the following, if true, most seriously weakens the validity of the conclusion?",
                     options: [
                         "The temporary fare increase successfully allowed the transit authority to balance its structural budget deficit for the fiscal year.",
@@ -4482,7 +4494,7 @@
                         { label: "Blank (iii)", options: ["egalitarian", "hierarchical", "mercantilist"] }
                     ],
                     answer: [0, 1, 0],
-                    explanation: "Blank (i): A \"decentralized\" landscape would avoid \"traditional gatekeepers\" \u2192 bypass.\n\nBlank (ii): \"However\" contrasts with \"unprecedented consolidation of power.\" Critics view this negatively \u2192 alarming.\n\nBlank (iii): The \"original ethos\" of a decentralized, distributed system \u2192 egalitarian."
+                    explanation: "Blank (i): A \"decentralized\" landscape would avoid \"traditional gatekeepers\" \u2192 bypass.\n\nBlank (ii): \"However\" contrasts with \"unprecedented consolidation of power.\" Critics view this negatively \u2192 alarming.\n\nBlank (iii): The \"original ethos\" of a decentralized, distributed system \u2192 egalitarian (the belief that all people are equally important, possess equal fundamental worth, and should have the same rights, privileges, and opportunities in life)."
                 },
                 {
                     id: "v2_q4",
@@ -4547,7 +4559,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "A marine biology institute observed a sharp decline in the health of coral reefs near a coastal tourist town. The researchers hypothesized that the primary culprit was the chemical oxybenzone, a common ingredient in commercial sunscreens used by tourists. To test this, the local town council banned all sunscreens containing oxybenzone starting exactly one year ago. Over the past twelve months, the rate of coral bleaching in the area decreased by 40 percent. The council concluded that the ban on oxybenzone sunscreens was directly responsible for the recovery of the coral reef.",
-                    promptLabel: "CRITICAL REASONING \u2014 STRENGTHEN",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 STRENGTHEN",
                     question: "Which of the following, if true, most strengthens the validity of the council\u2019s conclusion?",
                     options: [
                         "The total number of tourists visiting the coastal town\u2019s beaches increased by 15 percent over the past year.",
@@ -4564,7 +4576,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "A city manager noticed that traffic congestion at a major downtown intersection dropped significantly after a new synchronized smart-light system was installed. Seeking to reduce congestion across the entire city, the manager plans to install the identical smart-light system at all remaining intersections next month, concluding that this citywide rollout will replicate the initial reduction in traffic delays.",
-                    promptLabel: "CRITICAL REASONING \u2014 WEAKEN",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 WEAKEN",
                     question: "Which of the following, if true, most seriously weakens the city manager\u2019s conclusion?",
                     options: [
                         "The smart-light system costs twice as much to maintain annually as traditional timed traffic signals.",
@@ -4581,7 +4593,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "Agricultural analysts observe that switching from traditional soil-based farming to vertical hydroponic indoor farming reduces water usage by 90 percent per acre of crops produced. Therefore, the analysts conclude that if the nation\u2019s agricultural sector transitions entirely to vertical indoor farming, the total amount of water consumed by the nation annually will decrease significantly.",
-                    promptLabel: "CRITICAL REASONING \u2014 ASSUMPTION",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 ASSUMPTION",
                     question: "The conclusion drawn by the analysts depends on which of the following assumptions?",
                     options: [
                         "Vertical indoor farming produces crops that are nutritionally superior to traditionally grown crops.",
@@ -4598,7 +4610,7 @@
                     type: "single",
                     passageBased: false,
                     prompt: "A premium subscription-based streaming service recently increased its monthly fee by 25 percent. Historically, price hikes of this magnitude within the digital media industry have led to an immediate, sharp wave of subscription cancellations. However, three months after this price increase went into effect, the streaming service reported not only a record-high total number of active subscribers but also its lowest cancellation rate in five years, despite releasing no new high-profile exclusive content during this period.",
-                    promptLabel: "CRITICAL REASONING \u2014 PARADOX",
+                    promptLabel: "PARAGRAPH ARGUMENT \u2014 PARADOX",
                     question: "Which of the following, if true, most helps to resolve the apparent discrepancy described above?",
                     options: [
                         "The streaming service spent less money on marketing and advertising during the quarter in which the price hike occurred.",
@@ -4613,12 +4625,165 @@
             ]
         };
 
-        let passageData = activeQuizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+        const passageDataQuiz3 = {
+            passageTitle: "Sentence Completion & Equivalence",
+            passageParagraphs: [],
+            questions: [
+                {
+                    id: "v3_q1",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "The author's latest novel was criticized for its _______ structure; events did not follow a chronological sequence, instead jumping erratically between different centuries and characters with no apparent transition.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select the word that best completes the sentence.",
+                    options: ["linear", "convoluted", "digressive", "fragmented", "uniform"],
+                    answer: 3,
+                    explanation: "The clue is 'did not follow a chronological sequence, instead jumping erratically...'. This suggests a structure that is broken up or disjointed. 'Fragmented' is the best choice. 'Convoluted' means extremely complex, but 'fragmented' directly matches the jumping/broken nature of the timeline. 'Linear' is the opposite, 'digressive' means departing from the main subject, and 'uniform' means identical or homogeneous."
+                },
+                {
+                    id: "v3_q2",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Despite his reputation for being exceptionally _______ in public debates, the politician was surprisingly reticent and reserved when speaking in private circles.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select the word that best completes the sentence.",
+                    options: ["taciturn", "garrulous", "imperious", "diffident", "laconic"],
+                    answer: 1,
+                    explanation: "The word 'Despite' indicates a contrast between the politician's public behavior and his private behavior ('reticent and reserved'). Reticent and reserved means quiet and disinclined to speak. The opposite of this is talkative or wordy. 'Garrulous' means excessively talkative, which perfectly fits the contrast. 'Taciturn' and 'laconic' are synonyms for reticent, 'diffident' means shy/lacking self-confidence, and 'imperious' means domineering."
+                },
+                {
+                    id: "v3_q3",
+                    type: "two_blank",
+                    passageBased: false,
+                    prompt: "Because the initial results of the clinical trial were highly (i)_______, the researchers cautioned that it would be (ii)_______ to draw any definitive conclusions about the drug's efficacy until larger cohorts had been tested.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["equivocal", "irrefutable", "salutary"] },
+                        { label: "Blank (ii)", options: ["premature", "judicious", "superfluous"] }
+                    ],
+                    answer: [0, 0],
+                    explanation: "The first blank must reflect a quality that leads the researchers to caution against drawing definitive conclusions. 'Equivocal' (open to more than one interpretation; ambiguous or undecided) fits well. Since the results are equivocal, drawing definitive conclusions before testing larger groups would be too early or unwise, making 'premature' the correct fit for the second blank. 'Salutary' means beneficial, 'irrefutable' means impossible to deny, and 'judicious' means wise."
+                },
+                {
+                    id: "v3_q4",
+                    type: "two_blank",
+                    passageBased: false,
+                    prompt: "While some art historians argue that the painter's early works were merely (i)_______ imitations of Renaissance masters, others detect a subtle subversion of classical conventions that foreshadowed the artist's later, highly (ii)_______ style.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["slavish", "idiosyncratic", "novice"] },
+                        { label: "Blank (ii)", options: ["derivative", "monotonous", "revolutionary"] }
+                    ],
+                    answer: [0, 2],
+                    explanation: "The first blank describes 'imitations of Renaissance masters'. The contrast is signaled by 'others detect a subtle subversion... that foreshadowed the artist's later...' which means the first group saw them as unoriginal or blindly copying. 'Slavish' means showing no originality or blindly copying. For the second blank, the later style is contrasted with these early imitative works and characterized by 'subversion of classical conventions', indicating it is highly original or 'revolutionary'."
+                },
+                {
+                    id: "v3_q5",
+                    type: "three_blank",
+                    passageBased: false,
+                    prompt: "Though science journalists often portray scientific breakthroughs as (i)_______ events arising from sudden flashes of genius, the reality of academic research is far more (ii)_______, requiring decades of incremental progress, trial and error, and (iii)_______ collaboration.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["gradual", "fortuitous", "monolithic"] },
+                        { label: "Blank (ii)", options: ["unremarkable", "laborious", "capricious"] },
+                        { label: "Blank (iii)", options: ["intermittent", "sustained", "peripheral"] }
+                    ],
+                    answer: [1, 1, 1],
+                    explanation: "Blank (i): The prompt contrasts the portrayal of breakthroughs ('sudden flashes of genius') with the actual reality. 'Fortuitous' (happening by chance/accident rather than design, i.e., luck/inspiration) fits best. Blank (ii): The reality is described as requiring 'decades of incremental progress'. This means it is highly demanding and hard work, making 'laborious' the correct choice. Blank (iii): The collaboration needed over decades must be continuous and ongoing, which is described as 'sustained'."
+                },
+                {
+                    id: "v3_q6",
+                    type: "three_blank",
+                    passageBased: false,
+                    prompt: "A society that (i)_______ intellectual dissent and demands absolute conformity eventually suffers from cultural (ii)_______, as the lack of novel ideas prevents the social adaptation necessary to survive in a (iii)_______ global landscape.",
+                    promptLabel: "TEXT COMPLETION",
+                    question: "Select one entry for each blank from the corresponding column of choices.",
+                    blanks: [
+                        { label: "Blank (i)", options: ["fosters", "stifles", "tolerates"] },
+                        { label: "Blank (ii)", options: ["stagnation", "vitality", "exuberance"] },
+                        { label: "Blank (iii)", options: ["static", "homogeneous", "fluid"] }
+                    ],
+                    answer: [1, 0, 2],
+                    explanation: "Blank (i): Demanding absolute conformity means the society suppresses or cracks down on dissent, so it 'stifles' it. Blank (ii): Stifling dissent and having a 'lack of novel ideas' leads to a state of inactive decay or 'stagnation'. Blank (iii): To survive, the society must adapt. This adaptation is needed because the global landscape is constantly changing, dynamic, or 'fluid'."
+                },
+                {
+                    id: "v3_q7",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "The research team’s conclusions were initially met with skepticism, but they were eventually vindicated by a series of _______ experiments conducted by independent laboratories.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["corroborative", "flawed", "dubious", "supporting", "speculative", "innovative"],
+                    answer: [0, 3],
+                    explanation: "The sentence says the team's conclusions were 'eventually vindicated' (proven correct or justified). This means the experiments conducted by other labs must have confirmed their results. Both 'corroborative' and 'supporting' mean to confirm or give support to a statement or theory. 'Flawed' and 'dubious' are negative, 'speculative' means theoretical, and 'innovative' means introducing new ideas."
+                },
+                {
+                    id: "v3_q8",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "Despite the company's public assurances that the reorganization would be painless, many employees remain _______ about their future job security.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["sanguine", "aphetic", "apprehensive", "indifferent", "fearful", "complacent"],
+                    answer: [2, 4],
+                    explanation: "The word 'Despite' indicates a contrast between the company's positive assurances ('painless') and the employees' actual feelings about job security. They would be worried or anxious. 'Apprehensive' and 'fearful' both mean anxious or fearful about the future. 'Sanguine' means optimistic (the opposite), 'indifferent' means unconcerned, and 'complacent' means self-satisfied."
+                },
+                {
+                    id: "v3_q9",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "The diplomat's speeches were renowned for their _______ nature, often leaving foreign ministers struggling to determine his country's true policy positions.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["lucid", "equivocal", "forthright", "candid", "ambiguous", "turgid"],
+                    answer: [1, 4],
+                    explanation: "The clue is 'leaving foreign ministers struggling to determine his country's true policy positions'. This indicates that his speeches were unclear, vague, or had double meanings. Both 'equivocal' and 'ambiguous' mean open to more than one interpretation or vague. 'Lucid', 'forthright', and 'candid' all imply clarity or honesty, which is the opposite of the clue."
+                },
+                {
+                    id: "v3_q10",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "Because the ecosystem is highly fragile, even a _______ disruption in the food chain can trigger a cascading ecological collapse across the entire region.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["catastrophic", "minor", "trivial", "substantial", "profound", "systemic"],
+                    answer: [1, 2],
+                    explanation: "The sentence uses the logic of 'highly fragile', which means that it doesn't take much to disrupt it. Even a small or insignificant disruption can cause a massive ('cascading') collapse. Both 'minor' and 'trivial' mean small or insignificant. 'Catastrophic', 'substantial', and 'profound' would describe a large disruption, which doesn't emphasize the fragility of the ecosystem as effectively."
+                },
+                {
+                    id: "v3_q11",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "For decades, the professor’s monographs were considered the _______ authority on early Byzantine art, cited by nearly every major scholar in the field.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["definitive", "tenuous", "peripheral", "classical", "canonical", "negligible"],
+                    answer: [0, 4],
+                    explanation: "The clue is 'cited by nearly every major scholar in the field'. This means the monographs were seen as the standard, authoritative, or accepted works. Both 'definitive' and 'canonical' mean authoritative, standard, or accepted as rule/fact in a field of study. 'Tenuous' means weak, 'peripheral' means marginal/outer, and 'negligible' means insignificant."
+                },
+                {
+                    id: "v3_q12",
+                    type: "sentence_equiv",
+                    passageBased: false,
+                    prompt: "The modern software developer must avoid the trap of writing _______ code, which may function correctly under ideal circumstances but breaks down when faced with unexpected inputs or network latency.",
+                    promptLabel: "SENTENCE EQUIVALENCE",
+                    question: "Select the TWO answer choices that produce sentences most alike in meaning.",
+                    options: ["robust", "brittle", "fragile", "efficient", "redundant", "obfuscated"],
+                    answer: [1, 2],
+                    explanation: "The clue describes code that 'breaks down when faced with unexpected inputs or network latency'. This means the code is easily broken or delicate. Both 'brittle' and 'fragile' describe something that is easily broken, damaged, or fails under stress. 'Robust' means strong and resilient (the opposite), 'efficient' means performing well, and 'redundant' means superfluous."
+                }
+            ]
+        };
+
+        let passageData = activeQuizId === 'quiz3' ? passageDataQuiz3 : (activeQuizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1);
 
         function switchActiveQuiz(quizId) {
             activeQuizId = quizId;
             localStorage.setItem('greActiveQuizId', quizId);
-            passageData = quizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+            passageData = quizId === 'quiz3' ? passageDataQuiz3 : (quizId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1);
         }
 
         let passageState = {
@@ -4685,9 +4850,9 @@
             document.getElementById('passage-quiz-selector').classList.remove('hidden');
             document.getElementById('passage-reset-btn').classList.add('hidden');
             
-            ['quiz1', 'quiz2'].forEach(qId => {
+            ['quiz1', 'quiz2', 'quiz3'].forEach(qId => {
                 const meta = passageQuizzes[qId];
-                const data = qId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1;
+                const data = qId === 'quiz3' ? passageDataQuiz3 : (qId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1);
                 const saved = localStorage.getItem(meta.storageKey);
                 let progress = 0, correct = 0, total = data.questions.length;
                 if (saved) {
@@ -4764,7 +4929,7 @@
                 document.getElementById('passage-pane-title').innerText = "Reading Passage";
                 renderPassageTextContent(question.type === 'sentence');
             } else {
-                document.getElementById('passage-pane-title').innerText = question.promptLabel || "CRITICAL REASONING";
+                document.getElementById('passage-pane-title').innerText = question.promptLabel || "PARAGRAPH ARGUMENT";
                 document.getElementById('passage-scroll-container').innerHTML = `
                     <p class="mb-4 text-justify leading-relaxed font-sans text-slate-700 dark:text-slate-300 text-base sm:text-[17px] select-text">
                         ${question.prompt}
