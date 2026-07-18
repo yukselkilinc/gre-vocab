@@ -2720,6 +2720,59 @@
                     progressDB[progressKey] = startIdx;
                 }
                 
+                // Sync progress for this word to all other sets/categories
+                if (appData[idx] && appData[idx].word) {
+                    const cleanWord = appData[idx].word.trim().toLowerCase();
+                    const targetType = appData[idx].type ? appData[idx].type.trim().toLowerCase() : '';
+                    
+                    Object.keys(vocabularyDB).forEach(otherCat => {
+                        Object.keys(vocabularyDB[otherCat]).forEach(otherSet => {
+                            if (otherCat === catSelect.value && otherSet === setSelect.value) return;
+                            
+                            const otherWords = vocabularyDB[otherCat][otherSet];
+                            otherWords.forEach((w, otherIdx) => {
+                                // Match both word spelling and part of speech (crucial for steep adj. vs steep verb)
+                                const otherWordClean = w.word.trim().toLowerCase();
+                                const otherTypeClean = w.type ? w.type.trim().toLowerCase() : '';
+                                
+                                if (otherWordClean === cleanWord && otherTypeClean === targetType) {
+                                    const otherProgressKey = `${otherCat}|${otherSet}`;
+                                    
+                                    // Expand existing matched list or create new
+                                    let otherMatched = progressDB[otherProgressKey + '_matched'];
+                                    if (!Array.isArray(otherMatched)) {
+                                        const currentVal = progressDB[otherProgressKey];
+                                        otherMatched = [];
+                                        if (currentVal === 'COMPLETED') {
+                                            for (let i = 0; i < otherWords.length; i++) otherMatched.push(i);
+                                        } else {
+                                            const limit = parseInt(currentVal) || 0;
+                                            for (let i = 0; i < limit; i++) otherMatched.push(i);
+                                        }
+                                    }
+                                    
+                                    if (!otherMatched.includes(otherIdx)) {
+                                        otherMatched.push(otherIdx);
+                                        progressDB[otherProgressKey + '_matched'] = otherMatched;
+                                        
+                                        // Re-calculate
+                                        let sIdx = 0;
+                                        while (sIdx < otherWords.length && otherMatched.includes(sIdx)) {
+                                            sIdx++;
+                                        }
+                                        if (sIdx >= otherWords.length) {
+                                            progressDB[otherProgressKey] = 'COMPLETED';
+                                            delete progressDB[otherProgressKey + '_matched'];
+                                        } else {
+                                            progressDB[otherProgressKey] = sIdx;
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    });
+                }
+                
                 localStorage.setItem('greProgressDB', JSON.stringify(progressDB));
                 hasUnsavedChanges = true;
             }
@@ -4827,11 +4880,10 @@
         }
 
         function goToPassageMode() {
-            // Toggle off and return to main menu if already in passage-screen
+            // If already in passage-screen, open the quiz selector instead of going back to main menu
             const activeScreen = _navStack[_navStack.length - 1];
             if (activeScreen === 'passage-screen') {
-                _navStack = ['setup-screen'];
-                _showScreen('setup-screen');
+                showQuizSelector();
                 return;
             }
 
@@ -4850,6 +4902,11 @@
             document.getElementById('passage-quiz-selector').classList.remove('hidden');
             document.getElementById('passage-reset-btn').classList.add('hidden');
             
+            const titleEl = document.getElementById('passage-main-title');
+            const subtitleEl = document.getElementById('passage-subtitle');
+            if (titleEl) titleEl.innerText = "Reading & Reasoning";
+            if (subtitleEl) subtitleEl.innerText = "GRE Reading Comprehension";
+            
             ['quiz1', 'quiz2', 'quiz3'].forEach(qId => {
                 const meta = passageQuizzes[qId];
                 const data = qId === 'quiz3' ? passageDataQuiz3 : (qId === 'quiz2' ? passageDataQuiz2 : passageDataQuiz1);
@@ -4867,7 +4924,7 @@
                     const pctEl = card.querySelector('.quiz-select-progress');
                     if (pctEl) {
                         if (progress > 0) {
-                            pctEl.innerText = progress === total ? `Completed \u2014 ${correct}/${total} correct` : `${progress}/${total} answered`;
+                            pctEl.innerText = progress === total ? `Completed — ${correct}/${total} correct` : `${progress}/${total} answered`;
                             pctEl.classList.remove('hidden');
                         } else {
                             pctEl.innerText = 'Not started';
@@ -4878,12 +4935,30 @@
             });
         }
 
+        function updatePassageHeader(quizId) {
+            const titleEl = document.getElementById('passage-main-title');
+            const subtitleEl = document.getElementById('passage-subtitle');
+            if (!titleEl || !subtitleEl) return;
+
+            if (quizId === 'quiz1') {
+                titleEl.innerText = "Quiz 1";
+                subtitleEl.innerText = "Reading Comprehension";
+            } else if (quizId === 'quiz3') {
+                titleEl.innerText = "Quiz 2";
+                subtitleEl.innerText = "Sentence Completion & Equivalence";
+            } else if (quizId === 'quiz2') {
+                titleEl.innerText = "Quiz 3";
+                subtitleEl.innerText = "Full Verbal Reasoning";
+            }
+        }
+
         function selectQuiz(quizId) {
             switchActiveQuiz(quizId);
             document.getElementById('passage-quiz-selector').classList.add('hidden');
             document.getElementById('passage-reset-btn').classList.remove('hidden');
             
             loadPassageState();
+            updatePassageHeader(quizId);
             
             if (isPassageQuizComplete()) {
                 showPassageScoreScreen();
@@ -5506,12 +5581,13 @@
             
             passageData.questions.forEach((q, idx) => {
                 const item = document.createElement('div');
-                item.className = "flex items-center justify-between p-3 rounded-xl border border-slate-200/60 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900/50 hover:bg-slate-100 dark:hover:bg-neutral-800/50 cursor-pointer transition-all duration-150 gap-3";
+                item.className = "flex items-center p-3 rounded-xl border border-slate-200/60 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900/50 hover:bg-slate-100 dark:hover:bg-neutral-800/50 cursor-pointer transition-all duration-150 gap-3";
                 
                 const isCorrect = passageState.correctness[q.id];
+                const displayQuestion = q.question.length > 45 ? q.question.substring(0, 42) + '...' : q.question;
                 
                 item.innerHTML = `
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 w-full">
                         <span class="flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold ${
                             isCorrect 
                                 ? 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-250 dark:border-emerald-900/50' 
@@ -5519,17 +5595,10 @@
                         }">
                             ${idx + 1}
                         </span>
-                        <div class="text-xs sm:text-sm font-semibold truncate max-w-[280px] sm:max-w-md text-slate-700 dark:text-slate-300">
-                            ${q.question}
+                        <div class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 truncate">
+                            ${displayQuestion}
                         </div>
                     </div>
-                    <span class="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${
-                        isCorrect
-                            ? 'bg-emerald-100 dark:bg-emerald-950/45 text-emerald-700 dark:text-emerald-400'
-                            : 'bg-rose-100 dark:bg-rose-950/45 text-rose-700 dark:text-rose-400'
-                    }">
-                        ${isCorrect ? 'Correct' : 'Incorrect'}
-                    </span>
                 `;
                 
                 item.onclick = () => {
