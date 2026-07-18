@@ -703,7 +703,7 @@ const coreDatabase = {
             {
                 "word": "caustic",
                 "type": "adj.",
-                "def": "Able to burn or corrode organic tissue",
+                "def": "Able to burn or corrode organic tissue; or sarcastic",
                 "example": "The cleaner contained a highly caustic chemical that could burn skin.",
                 "long_example": "The film critic's review was notoriously caustic, filled with sharp, mocking comparisons that left even the seasoned director feeling deeply embarrassed by the negative public reception."
             }

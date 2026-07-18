@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <script>
+        // Immediately apply saved dark/light theme to prevent screen flash
+        const savedDarkMode = localStorage.getItem('greDarkMode');
+        if (savedDarkMode === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>GRE Vocab Groups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .backdrop-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col pb-12">
+    
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-1 sm:gap-3 shrink-0">
+                <!-- Back Button -->
+                <a href="index.html" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Back to main app">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </a>
+                <!-- Brand Title -->
+                <div class="hidden sm:block">
+                    <h1 class="text-lg font-bold tracking-tight">Vocab Groups</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Thematic synonym families</p>
+                </div>
+            </div>
+            
+            <!-- Realtime Search -->
+            <div class="flex-1 max-w-xl sm:max-w-md mx-1 sm:mx-4 relative">
+                <input type="text" id="search-input" placeholder="Words, group names & descriptions" class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm">
+                <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            
+            <!-- Theme and Status Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle theme">
+                    <svg id="theme-btn-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content Area -->
+    <main class="max-w-7xl w-full mx-auto px-4 mt-6 flex-1">
+        <div id="no-results" class="hidden py-24 text-center">
+            <svg class="w-16 h-16 text-slate-300 dark:text-slate-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold text-slate-600 dark:text-slate-400">No matching groups or words found</h3>
+            <p class="text-sm text-slate-400 mt-1">Try searching for words, group names or theme descriptions.</p>
+        </div>
+        
+        <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated -->
+        </div>
+    </main>
+
+    <!-- Side details drawer panel -->
+    <div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/40 dark:bg-slate-950/60 z-45 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none" onclick="closeDrawer()"></div>
+    
+    <div id="details-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-[85%] sm:w-96 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl transition-transform duration-300 ease-in-out translate-x-full flex flex-col">
+        <!-- Drawer Header -->
+        <div class="h-16 border-b border-slate-200 dark:border-slate-800 px-4 flex items-center gap-3 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur">
+            <button onclick="closeDrawer()" class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors" title="Close details">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </button>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Word Details</span>
+        </div>
+        
+        <!-- Drawer Content -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+            <div class="flex flex-col gap-3 border-b border-slate-100 dark:border-slate-800/60 pb-5">
+                <div class="flex items-start justify-between gap-2">
+                    <h2 id="drawer-word" class="text-3xl font-extrabold tracking-tight text-primary-600 dark:text-primary-400 min-w-0" style="hyphens: auto; overflow-wrap: break-word; word-break: break-word;">Word</h2>
+                    <!-- Learned toggle button -->
+                    <button id="drawer-learned-btn" onclick="toggleLearned()" class="px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-white hover:bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Mark as Learned</span>
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span id="drawer-type" class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 uppercase">part of speech</span>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Definition</h3>
+                <p id="drawer-def" class="text-base text-slate-700 dark:text-slate-200 leading-relaxed font-normal bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">The definition will go here.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Example Sentences</h3>
+                
+                <div class="space-y-3">
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 relative">
+                        <div class="text-xs text-slate-400 mb-1">Standard Example</div>
+                        <p id="drawer-ex1" class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">Example 1</p>
+                    </div>
+                    
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 relative">
+                        <div class="text-xs text-slate-400 mb-1">Detailed Context</div>
+                        <p id="drawer-ex2" class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">Example 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data scripts -->
+    <script src="database.js"></script>
+    <script>
+        // Inject groups data
+        const VOCAB_GROUPS = [
+    {
+        "id": 1,
+        "name": "Praise, Approval & Acclaim",
+        "count": 25,
+        "description": "Words expressing praise, approval, admiration, or positive recognition",
+        "words": [
+            "acclaim",
+            "approbation",
+            "champion",
+            "cherish",
+            "commend",
+            "extol",
+            "laudable",
+            "lionize",
+            "tout",
+            "venerate",
+            "gratify",
+            "relish",
+            "heed",
+            "esteem",
+            "felicitous",
+            "estimable",
+            "meritorious",
+            "exemplary",
+            "benevolent",
+            "magnanimous",
+            "altruistic",
+            "beneficent",
+            "munificent",
+            "largesse",
+            "boon"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Criticize, Condemn & Scold",
+        "count": 32,
+        "description": "Words expressing criticism, condemnation, scolding, or negative judgment",
+        "words": [
+            "admonish",
+            "berate",
+            "castigate",
+            "censure",
+            "chastise",
+            "decry",
+            "denounce",
+            "deride",
+            "disdain",
+            "excoriate",
+            "lambaste",
+            "reproach",
+            "scorn",
+            "upbraid",
+            "vilify",
+            "defame",
+            "malign",
+            "slander",
+            "calumny",
+            "aspersion",
+            "deprecate",
+            "disparage",
+            "belittle",
+            "denigrate",
+            "pejorative",
+            "contempt",
+            "scathing",
+            "caustic",
+            "mordant",
+            "tirade",
+            "harangue",
+            "objurgation"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Calm, Peaceful & Soothe",
+        "count": 23,
+        "description": "Words describing calmness, peace, or actions that calm and soothe",
+        "words": [
+            "appease",
+            "assuage",
+            "alleviate",
+            "ameliorate",
+            "mitigate",
+            "placate",
+            "mollify",
+            "pacify",
+            "tranquil",
+            "serene",
+            "placid",
+            "quiescent",
+            "repose",
+            "torpor",
+            "lull",
+            "subside",
+            "abate",
+            "wane",
+            "ebb",
+            "temper",
+            "moderate",
+            "conciliatory",
+            "sanguine"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Arrogant, Proud & Haughty",
+        "count": 18,
+        "description": "Words describing excessive pride, arrogance, or superiority",
+        "words": [
+            "haughty",
+            "imperious",
+            "arrogant",
+            "presumptuous",
+            "pomposity",
+            "pretentious",
+            "ostentatious",
+            "bombastic",
+            "grandiose",
+            "supercilious",
+            "condescending",
+            "patronize",
+            "disdainful",
+            "sanctimonious",
+            "self-important",
+            "vainglorious",
+            "narcissism",
+            "egotistical"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Stubborn, Inflexible & Unyielding",
+        "count": 22,
+        "description": "Words describing stubbornness, inflexibility, or unwillingness to change",
+        "words": [
+            "intransigent",
+            "obstinate",
+            "obdurate",
+            "pertinacious",
+            "dogged",
+            "tenacious",
+            "resolute",
+            "steadfast",
+            "stalwart",
+            "immutable",
+            "inexorable",
+            "inflexible",
+            "rigid",
+            "adamant",
+            "unyielding",
+            "implacable",
+            "recalcitrant",
+            "refractory",
+            "obstreperous",
+            "headstrong",
+            "willful",
+            "hidebound"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Deceptive, Dishonest & False",
+        "count": 26,
+        "description": "Words describing deception, dishonesty, or falseness",
+        "words": [
+            "duplicitous",
+            "disingenuous",
+            "dissemble",
+            "feign",
+            "fabricate",
+            "prevaricate",
+            "equivocate",
+            "mendacity",
+            "perfidy",
+            "treachery",
+            "betray",
+            "bogus",
+            "spurious",
+            "specious",
+            "fallacious",
+            "counterfeit",
+            "sham",
+            "phony",
+            "artifice",
+            "chicanery",
+            "skullduggery",
+            "malfeasance",
+            "guile",
+            "cunning",
+            "surreptitious",
+            "furtive"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Brief, Short & Temporary",
+        "count": 17,
+        "description": "Words describing brevity, shortness, or temporary nature",
+        "words": [
+            "ephemeral",
+            "evanescent",
+            "transient",
+            "transitory",
+            "fleeting",
+            "momentary",
+            "temporary",
+            "brief",
+            "cursory",
+            "perfunctory",
+            "superficial",
+            "terse",
+            "laconic",
+            "pithy",
+            "succinct",
+            "brevity",
+            "concise"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Eager, Enthusiastic & Zealous",
+        "count": 19,
+        "description": "Words expressing eagerness, enthusiasm, or passionate devotion",
+        "words": [
+            "alacrity",
+            "ardent",
+            "fervent",
+            "fervid",
+            "zealous",
+            "avid",
+            "keen",
+            "arduous",
+            "sedulous",
+            "assiduous",
+            "diligent",
+            "industrious",
+            "indefatigable",
+            "tireless",
+            "fervor",
+            "passion",
+            "ebullient",
+            "exuberant",
+            "buoyant"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Obscure, Unclear & Confusing",
+        "count": 24,
+        "description": "Words describing things that are unclear, hidden, or difficult to understand",
+        "words": [
+            "abstruse",
+            "arcane",
+            "esoteric",
+            "recondite",
+            "enigmatic",
+            "cryptic",
+            "inscrutable",
+            "opaque",
+            "obscure",
+            "abstruse",
+            "convoluted",
+            "labyrinthine",
+            "byzantine",
+            "perplexing",
+            "mystifying",
+            "baffling",
+            "bewildering",
+            "confounding",
+            "obfuscate",
+            "befuddled",
+            "disconcerting",
+            "perplexed",
+            "nonplussed",
+            "flummoxed"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Hostile, Aggressive & Unfriendly",
+        "count": 21,
+        "description": "Words expressing hostility, aggression, or unfriendliness",
+        "words": [
+            "antagonize",
+            "belligerent",
+            "pugnacious",
+            "truculent",
+            "contentious",
+            "combative",
+            "militant",
+            "inimical",
+            "antipathy",
+            "animosity",
+            "animus",
+            "enmity",
+            "acrimonious",
+            "rancorous",
+            "virulent",
+            "venomous",
+            "malevolent",
+            "malicious",
+            "spiteful",
+            "vindictive",
+            "ire"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Talkative, Wordy & Verbose",
+        "count": 16,
+        "description": "Words describing excessive talkativeness or wordiness",
+        "words": [
+            "garrulous",
+            "loquacious",
+            "verbose",
+            "voluble",
+            "vociferous",
+            "prolix",
+            "diffuse",
+            "rambling",
+            "discursive",
+            "circuitous",
+            "redundant",
+            "repetitive",
+            "tautological",
+            "pleonastic",
+            "bombastic",
+            "grandiloquent"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Lazy, Inactive & Sluggish",
+        "count": 14,
+        "description": "Words describing laziness, inactivity, or lack of energy",
+        "words": [
+            "indolent",
+            "lethargic",
+            "sluggish",
+            "languid",
+            "listless",
+            "somnolent",
+            "soporific",
+            "torpid",
+            "dormant",
+            "stagnant",
+            "inert",
+            "supine",
+            "slothful",
+            "idle"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Small, Tiny & Insignificant",
+        "count": 18,
+        "description": "Words describing smallness, insignificance, or triviality",
+        "words": [
+            "diminutive",
+            "minute",
+            "minuscule",
+            "infinitesimal",
+            "negligible",
+            "trivial",
+            "trifling",
+            "paltry",
+            "scant",
+            "meager",
+            "sparse",
+            "paucity",
+            "dearth",
+            "scarcity",
+            "inadequate",
+            "slight",
+            "marginal",
+            "peripheral"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Skillful, Clever & Competent",
+        "count": 22,
+        "description": "Words describing skill, cleverness, or competence",
+        "words": [
+            "adept",
+            "adroit",
+            "deft",
+            "dexterous",
+            "proficient",
+            "skillful",
+            "astute",
+            "shrewd",
+            "canny",
+            "sagacious",
+            "perspicacious",
+            "discerning",
+            "acute",
+            "keen",
+            "sharp",
+            "incisive",
+            "penetrating",
+            "insightful",
+            "perceptive",
+            "judicious",
+            "prudent",
+            "sensible"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Support, Strengthen & Reinforce",
+        "count": 20,
+        "description": "Words describing support, strengthening, or reinforcement",
+        "words": [
+            "bolster",
+            "buttress",
+            "reinforce",
+            "fortify",
+            "corroborate",
+            "substantiate",
+            "validate",
+            "confirm",
+            "endorse",
+            "sanction",
+            "advocate",
+            "champion",
+            "promote",
+            "foster",
+            "nurture",
+            "cultivate",
+            "enhance",
+            "augment",
+            "amplify",
+            "galvanize"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Excessive, Abundant & Overflowing",
+        "count": 19,
+        "description": "Words describing excess, abundance, or overflowing amounts",
+        "words": [
+            "abound",
+            "copious",
+            "profuse",
+            "abundant",
+            "plentiful",
+            "prolific",
+            "proliferate",
+            "burgeon",
+            "flourish",
+            "surfeit",
+            "superfluous",
+            "redundant",
+            "excessive",
+            "extravagant",
+            "lavish",
+            "prodigal",
+            "profligate",
+            "spendthrift",
+            "squander"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Angry, Irritable & Bad-tempered",
+        "count": 16,
+        "description": "Words describing anger, irritability, or bad temper",
+        "words": [
+            "irascible",
+            "choleric",
+            "cantankerous",
+            "curmudgeon",
+            "petulant",
+            "peevish",
+            "querulous",
+            "fractious",
+            "irritable",
+            "testy",
+            "churlish",
+            "surly",
+            "morose",
+            "sullen",
+            "glum",
+            "vexation"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Careful, Cautious & Prudent",
+        "count": 17,
+        "description": "Words describing carefulness, caution, or prudence",
+        "words": [
+            "circumspect",
+            "cautious",
+            "wary",
+            "chary",
+            "prudent",
+            "discreet",
+            "judicious",
+            "scrupulous",
+            "meticulous",
+            "painstaking",
+            "fastidious",
+            "punctilious",
+            "finicky",
+            "particular",
+            "discriminating",
+            "selective",
+            "vigilant"
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Reject, Refuse & Abandon",
+        "count": 21,
+        "description": "Words describing rejection, refusal, or abandonment",
+        "words": [
+            "abjure",
+            "repudiate",
+            "renounce",
+            "recant",
+            "retract",
+            "disavow",
+            "disclaim",
+            "eschew",
+            "abstain",
+            "forbear",
+            "refrain",
+            "desist",
+            "relinquish",
+            "abandon",
+            "forsake",
+            "jettison",
+            "discard",
+            "reject",
+            "spurn",
+            "rebuff",
+            "gainsay"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Flexible, Adaptable & Yielding",
+        "count": 15,
+        "description": "Words describing flexibility, adaptability, or willingness to yield",
+        "words": [
+            "malleable",
+            "pliable",
+            "pliant",
+            "tractable",
+            "amenable",
+            "compliant",
+            "docile",
+            "submissive",
+            "yielding",
+            "accommodating",
+            "adaptable",
+            "versatile",
+            "flexible",
+            "supple",
+            "elastic"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Old, Ancient & Outdated",
+        "count": 13,
+        "description": "Words describing age, antiquity, or being outdated",
+        "words": [
+            "archaic",
+            "anachronistic",
+            "antiquated",
+            "obsolete",
+            "outmoded",
+            "vestigial",
+            "ancient",
+            "antediluvian",
+            "bygone",
+            "erstwhile",
+            "former",
+            "onetime",
+            "temporal"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Secret, Hidden & Concealed",
+        "count": 17,
+        "description": "Words describing secrecy, concealment, or hidden nature",
+        "words": [
+            "clandestine",
+            "covert",
+            "surreptitious",
+            "furtive",
+            "stealthy",
+            "cloak",
+            "veil",
+            "shroud",
+            "mask",
+            "camouflage",
+            "disguise",
+            "occlude",
+            "eclipse",
+            "conceal",
+            "sequester",
+            "seclude",
+            "abscond"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Naive, Innocent & Simple",
+        "count": 16,
+        "description": "Words describing naivety, innocence, or simplicity",
+        "words": [
+            "naive",
+            "ingenuous",
+            "artless",
+            "guileless",
+            "innocent",
+            "unsophisticated",
+            "credulous",
+            "gullible",
+            "trusting",
+            "simple",
+            "candid",
+            "frank",
+            "straightforward",
+            "unadorned",
+            "plain",
+            "unpretentious"
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Greedy, Selfish & Acquisitive",
+        "count": 15,
+        "description": "Words describing greed, selfishness, or excessive desire for possessions",
+        "words": [
+            "avaricious",
+            "covet",
+            "acquisitive",
+            "rapacious",
+            "voracious",
+            "insatiable",
+            "mercenary",
+            "venal",
+            "opportunistic",
+            "exploitative",
+            "grasping",
+            "greedy",
+            "selfish",
+            "miserly",
+            "parsimonious"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Bold, Daring & Fearless",
+        "count": 18,
+        "description": "Words describing boldness, courage, or fearlessness",
+        "words": [
+            "audacious",
+            "brazen",
+            "intrepid",
+            "fearless",
+            "dauntless",
+            "undaunted",
+            "valiant",
+            "valorous",
+            "courageous",
+            "brave",
+            "heroic",
+            "gallant",
+            "daring",
+            "adventurous",
+            "venturesome",
+            "bold",
+            "plucky",
+            "temerity"
+        ]
+    },
+    {
+        "id": 26,
+        "name": "Hesitant, Uncertain & Doubtful",
+        "count": 19,
+        "description": "Words describing hesitation, uncertainty, or doubt",
+        "words": [
+            "vacillate",
+            "waver",
+            "hesitate",
+            "equivocate",
+            "prevaricate",
+            "ambivalent",
+            "irresolute",
+            "indecisive",
+            "tentative",
+            "dubious",
+            "skeptical",
+            "incredulous",
+            "suspicious",
+            "doubtful",
+            "uncertain",
+            "unsure",
+            "qualm",
+            "misgiving",
+            "apprehension"
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Happy, Joyful & Cheerful",
+        "count": 17,
+        "description": "Words describing happiness, joy, or cheerfulness",
+        "words": [
+            "elated",
+            "euphoric",
+            "exhilarating",
+            "jocund",
+            "jovial",
+            "buoyant",
+            "ebullient",
+            "exuberant",
+            "vivacious",
+            "spirited",
+            "animated",
+            "lively",
+            "blithe",
+            "cheerful",
+            "merry",
+            "gleeful",
+            "jubilant"
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Sad, Gloomy & Melancholy",
+        "count": 16,
+        "description": "Words describing sadness, gloom, or melancholy",
+        "words": [
+            "lugubrious",
+            "doleful",
+            "mournful",
+            "plaintive",
+            "melancholy",
+            "somber",
+            "morose",
+            "sullen",
+            "glum",
+            "dejected",
+            "despondent",
+            "crestfallen",
+            "forlorn",
+            "bereft",
+            "disconsolate",
+            "woeful"
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Rude, Crude & Ill-mannered",
+        "count": 18,
+        "description": "Words describing rudeness, crudeness, or bad manners",
+        "words": [
+            "boorish",
+            "churlish",
+            "uncouth",
+            "crass",
+            "crude",
+            "vulgar",
+            "coarse",
+            "base",
+            "ignoble",
+            "impertinent",
+            "impudent",
+            "insolent",
+            "brazen",
+            "presumptuous",
+            "unseemly",
+            "indecorous",
+            "improper",
+            "inappropriate"
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Harsh, Severe & Strict",
+        "count": 16,
+        "description": "Words describing harshness, severity, or strictness",
+        "words": [
+            "austere",
+            "stern",
+            "stringent",
+            "rigorous",
+            "draconian",
+            "harsh",
+            "severe",
+            "strict",
+            "exacting",
+            "demanding",
+            "unforgiving",
+            "ruthless",
+            "merciless",
+            "relentless",
+            "implacable",
+            "inexorable"
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Weak, Feeble & Frail",
+        "count": 17,
+        "description": "Words describing weakness, feebleness, or frailty",
+        "words": [
+            "feeble",
+            "frail",
+            "fragile",
+            "delicate",
+            "weak",
+            "enervate",
+            "debilitate",
+            "enfeeble",
+            "emaciate",
+            "attenuate",
+            "diminish",
+            "wane",
+            "decline",
+            "deteriorate",
+            "degenerate",
+            "languish",
+            "wither"
+        ]
+    },
+    {
+        "id": 32,
+        "name": "Mixed, Varied & Diverse",
+        "count": 15,
+        "description": "Words describing mixture, variety, or diversity",
+        "words": [
+            "heterogeneous",
+            "disparate",
+            "diverse",
+            "varied",
+            "multifaceted",
+            "eclectic",
+            "miscellaneous",
+            "assorted",
+            "mixed",
+            "composite",
+            "hodgepodge",
+            "medley",
+            "potpourri",
+            "amalgamation",
+            "conglomeration"
+        ]
+    },
+    {
+        "id": 33,
+        "name": "Uniform, Similar & Consistent",
+        "count": 14,
+        "description": "Words describing uniformity, similarity, or consistency",
+        "words": [
+            "homogeneous",
+            "uniform",
+            "consistent",
+            "analogous",
+            "similar",
+            "comparable",
+            "parallel",
+            "equivalent",
+            "commensurate",
+            "proportionate",
+            "tantamount",
+            "synonymous",
+            "interchangeable",
+            "identical"
+        ]
+    },
+    {
+        "id": 34,
+        "name": "Boring, Dull & Monotonous",
+        "count": 18,
+        "description": "Words describing boredom, dullness, or monotony",
+        "words": [
+            "banal",
+            "mundane",
+            "humdrum",
+            "prosaic",
+            "pedestrian",
+            "commonplace",
+            "hackneyed",
+            "trite",
+            "clich\u00e9d",
+            "stale",
+            "vapid",
+            "insipid",
+            "bland",
+            "tedious",
+            "monotonous",
+            "wearisome",
+            "tiresome",
+            "dreary"
+        ]
+    },
+    {
+        "id": 35,
+        "name": "Dangerous, Harmful & Destructive",
+        "count": 19,
+        "description": "Words describing danger, harm, or destructiveness",
+        "words": [
+            "deleterious",
+            "detrimental",
+            "pernicious",
+            "noxious",
+            "toxic",
+            "virulent",
+            "malignant",
+            "baneful",
+            "harmful",
+            "injurious",
+            "destructive",
+            "ruinous",
+            "calamitous",
+            "catastrophic",
+            "cataclysmic",
+            "perilous",
+            "hazardous",
+            "precarious",
+            "jeopardize"
+        ]
+    },
+    {
+        "id": 36,
+        "name": "Beneficial, Helpful & Advantageous",
+        "count": 16,
+        "description": "Words describing benefit, help, or advantage",
+        "words": [
+            "salutary",
+            "salubrious",
+            "beneficial",
+            "advantageous",
+            "profitable",
+            "lucrative",
+            "constructive",
+            "productive",
+            "fruitful",
+            "rewarding",
+            "useful",
+            "valuable",
+            "worthwhile",
+            "conducive",
+            "favorable",
+            "auspicious"
+        ]
+    },
+    {
+        "id": 37,
+        "name": "Modest, Humble & Unassuming",
+        "count": 15,
+        "description": "Words describing modesty, humility, or unassuming nature",
+        "words": [
+            "modest",
+            "humble",
+            "unassuming",
+            "unpretentious",
+            "self-effacing",
+            "demure",
+            "reticent",
+            "retiring",
+            "diffident",
+            "timorous",
+            "bashful",
+            "shy",
+            "reserved",
+            "understated",
+            "subdued"
+        ]
+    },
+    {
+        "id": 38,
+        "name": "Loud, Noisy & Clamorous",
+        "count": 14,
+        "description": "Words describing loudness, noise, or clamorous sounds",
+        "words": [
+            "clangor",
+            "clamorous",
+            "cacophonous",
+            "raucous",
+            "boisterous",
+            "obstreperous",
+            "vociferous",
+            "strident",
+            "shrill",
+            "piercing",
+            "deafening",
+            "thunderous",
+            "resounding",
+            "tumultuous"
+        ]
+    },
+    {
+        "id": 39,
+        "name": "Quiet, Silent & Reserved",
+        "count": 12,
+        "description": "Words describing quietness, silence, or reserved nature",
+        "words": [
+            "taciturn",
+            "reticent",
+            "laconic",
+            "terse",
+            "succinct",
+            "concise",
+            "brief",
+            "silent",
+            "mute",
+            "quiet",
+            "reserved",
+            "subdued"
+        ]
+    },
+    {
+        "id": 40,
+        "name": "Impulsive, Rash & Hasty",
+        "count": 15,
+        "description": "Words describing impulsiveness, rashness, or hastiness",
+        "words": [
+            "impetuous",
+            "impulsive",
+            "precipitate",
+            "precipitous",
+            "rash",
+            "hasty",
+            "reckless",
+            "foolhardy",
+            "headstrong",
+            "hotheaded",
+            "hot-tempered",
+            "volatile",
+            "explosive",
+            "unpredictable",
+            "erratic"
+        ]
+    },
+    {
+        "id": 41,
+        "name": "Clear, Obvious & Evident",
+        "count": 17,
+        "description": "Words describing clarity, obviousness, or evidence",
+        "words": [
+            "pellucid",
+            "lucid",
+            "limpid",
+            "transparent",
+            "clear",
+            "obvious",
+            "evident",
+            "manifest",
+            "palpable",
+            "tangible",
+            "conspicuous",
+            "patent",
+            "overt",
+            "explicit",
+            "unambiguous",
+            "unmistakable",
+            "indisputable"
+        ]
+    },
+    {
+        "id": 42,
+        "name": "Rural, Country & Simple",
+        "count": 11,
+        "description": "Words describing rural, country, or simple life",
+        "words": [
+            "bucolic",
+            "pastoral",
+            "rustic",
+            "rural",
+            "agrarian",
+            "provincial",
+            "parochial",
+            "insular",
+            "narrow-minded",
+            "unsophisticated",
+            "simple"
+        ]
+    },
+    {
+        "id": 43,
+        "name": "Sophisticated, Refined & Cultured",
+        "count": 13,
+        "description": "Words describing sophistication, refinement, or culture",
+        "words": [
+            "sophisticated",
+            "urbane",
+            "cosmopolitan",
+            "worldly",
+            "cultured",
+            "refined",
+            "polished",
+            "elegant",
+            "suave",
+            "debonair",
+            "connoisseur",
+            "aesthetic",
+            "tasteful"
+        ]
+    },
+    {
+        "id": 44,
+        "name": "Beginner, New & Inexperienced",
+        "count": 10,
+        "description": "Words describing beginners or inexperienced people",
+        "words": [
+            "neophyte",
+            "novice",
+            "tyro",
+            "fledgling",
+            "nascent",
+            "embryonic",
+            "incipient",
+            "inchoate",
+            "callow",
+            "inexperienced"
+        ]
+    },
+    {
+        "id": 45,
+        "name": "Wandering, Traveling & Roaming",
+        "count": 8,
+        "description": "Words describing wandering, traveling, or roaming",
+        "words": [
+            "itinerant",
+            "peripatetic",
+            "nomadic",
+            "vagrant",
+            "wandering",
+            "roving",
+            "rambling",
+            "meandering"
+        ]
+    },
+    {
+        "id": 46,
+        "name": "Sharp, Cutting & Penetrating",
+        "count": 14,
+        "description": "Words describing sharpness, cutting quality, or penetration",
+        "words": [
+            "trenchant",
+            "mordant",
+            "caustic",
+            "scathing",
+            "keen",
+            "penetrating",
+            "astute",
+            "shrewd",
+            "piquant",
+            "shrill",
+            "acrimonious",
+            "poignant",
+            "acerbic",
+            "incisive"
+        ]
+    }
+];
+    </script>
+    
+    <!-- Application Logic -->
+    <script>
+        // 0. Load learned words from local storage
+        let learnedWords = new Set(JSON.parse(localStorage.getItem('learned-words') || '[]'));
+        let activeWord = '';
+
+        function saveLearnedWords() {
+            localStorage.setItem('learned-words', JSON.stringify(Array.from(learnedWords)));
+        }
+
+        // 1. Build database index
+        const DB_INDEX = {};
+        if (typeof coreDatabase !== 'undefined') {
+            for (const cat in coreDatabase) {
+                for (const set in coreDatabase[cat]) {
+                    coreDatabase[cat][set].forEach(item => {
+                        const key = item.word.toLowerCase().trim();
+                        if (!DB_INDEX[key]) DB_INDEX[key] = [];
+                        DB_INDEX[key].push({
+                            w: item.word,
+                            t: item.type,
+                            d: item.def,
+                            e: item.example,
+                            long_example: item.long_example,
+                            cat: cat,
+                            set: set
+                        });
+                    });
+                }
+            }
+        }
+
+        // 2. Initialize UI theme
+        function updateThemeBtnIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const btn = document.getElementById('theme-btn-icon');
+            if (isDark) {
+                // Sun Icon
+                btn.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>`;
+            } else {
+                // Moon Icon
+                btn.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+            }
+        }
+        
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('greDarkMode', isDark ? 'dark' : 'light');
+            updateThemeBtnIcon();
+        }
+        updateThemeBtnIcon();
+
+        // 3. Render cards list
+        const grid = document.getElementById('groups-grid');
+        
+        function renderGroups(filterQuery = '') {
+            grid.innerHTML = '';
+            let matchCount = 0;
+            const query = filterQuery.toLowerCase().trim();
+            
+            VOCAB_GROUPS.forEach(group => {
+                // Check matching conditions
+                const matchesId = group.id.toString() === query;
+                const matchesName = group.name.toLowerCase().includes(query);
+                const matchesDesc = group.description.toLowerCase().includes(query);
+                const matchesWords = group.words.some(w => w.toLowerCase().includes(query));
+                
+                if (query && !matchesId && !matchesName && !matchesDesc && !matchesWords) {
+                    return; // Skip
+                }
+                
+                matchCount++;
+                
+                // Construct card element
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm hover:shadow-md flex flex-col justify-between';
+                
+                // Separate core words (clickable) and basic words (unclickable)
+                const coreWords = [];
+                const basicWords = [];
+                group.words.forEach(w => {
+                    const cleanW = w.toLowerCase().trim();
+                    if (DB_INDEX[cleanW]) {
+                        coreWords.push(w);
+                    } else {
+                        basicWords.push(w);
+                    }
+                });
+
+                // Head section
+                let titleHtml = `<h3 class="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-start justify-between gap-2">`;
+                titleHtml += `<span>Group ${group.id}: ${group.name}</span>`;
+                titleHtml += `<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs px-2.5 py-0.5 rounded-full shrink-0 font-medium">${group.words.length} words</span>`;
+                titleHtml += `</h3>`;
+                
+                // Desc section
+                const descHtml = `<p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-normal leading-relaxed">${group.description}</p>`;
+                
+                // Words list section
+                let wordsHtml = `<div class="flex flex-wrap gap-2 mt-4 flex-1 items-start content-start">`;
+                
+                // 1. Render core words (clickable)
+                coreWords.forEach(w => {
+                    const cleanW = w.toLowerCase().trim();
+                    const isLearned = learnedWords.has(cleanW);
+                    
+                    let chipClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer border select-none ';
+                    if (isLearned) {
+                        chipClass += 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/50';
+                    } else {
+                        chipClass += 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200 hover:border-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-800 dark:hover:border-slate-700';
+                    }
+                    wordsHtml += `<span class="${chipClass}" onclick="showWordDetails('${w}')">${w}</span>`;
+                });
+                
+                // 2. Render basic words (unclickable, grayed out/subtle)
+                basicWords.forEach(w => {
+                    const badgeClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold border select-none bg-slate-100/50 border-slate-200/50 text-slate-400 dark:bg-slate-800/30 dark:border-slate-800/50 dark:text-slate-500 cursor-default';
+                    wordsHtml += `<span class="${badgeClass}" title="Basic word">${w}</span>`;
+                });
+                
+                wordsHtml += `</div>`;
+                
+                card.innerHTML = `
+                    <div>
+                        ${titleHtml}
+                        ${descHtml}
+                    </div>
+                    ${wordsHtml}
+                `;
+                grid.appendChild(card);
+            });
+            
+            // Show no results if count is 0
+            const noResults = document.getElementById('no-results');
+            if (matchCount === 0) {
+                noResults.classList.remove('hidden');
+                grid.classList.add('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                grid.classList.remove('hidden');
+            }
+        }
+        
+        // Initial render
+        renderGroups();
+
+        // 4. Set up Search handler
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', (e) => {
+            renderGroups(e.target.value);
+        });
+
+        // 5. Drawer display and lookup
+        function updateDrawerLearnedButton() {
+            const btn = document.getElementById('drawer-learned-btn');
+            const isLearned = learnedWords.has(activeWord);
+            
+            if (isLearned) {
+                btn.className = "px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white border-transparent dark:bg-emerald-600 dark:hover:bg-emerald-500";
+                btn.querySelector('span').textContent = "Learned";
+            } else {
+                btn.className = "px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-white hover:bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700";
+                btn.querySelector('span').textContent = "Mark as Learned";
+            }
+        }
+
+        function toggleLearned() {
+            if (!activeWord) return;
+            
+            const isLearned = learnedWords.has(activeWord);
+            if (isLearned) {
+                learnedWords.delete(activeWord);
+            } else {
+                learnedWords.add(activeWord);
+            }
+            saveLearnedWords();
+            updateDrawerLearnedButton();
+            
+            const query = document.getElementById('search-input').value;
+            renderGroups(query);
+        }
+
+        function showWordDetails(word) {
+            const cleanWord = word.toLowerCase().trim();
+            activeWord = cleanWord;
+            
+            let entry = null;
+            let isFallback = false;
+            
+            // 1. Look up in main database
+            if (DB_INDEX[cleanWord]) {
+                entry = DB_INDEX[cleanWord][0];
+            }
+            
+            // 2. Look up in fallback dictionary if not found in main DB
+            if (!entry && typeof FALLBACK_DICT !== 'undefined' && FALLBACK_DICT[cleanWord]) {
+                entry = FALLBACK_DICT[cleanWord];
+                isFallback = true;
+            }
+            
+            const drawerWord = document.getElementById('drawer-word');
+            const drawerType = document.getElementById('drawer-type');
+            const drawerDef = document.getElementById('drawer-def');
+            const drawerEx1 = document.getElementById('drawer-ex1');
+            const drawerEx2 = document.getElementById('drawer-ex2');
+            
+            drawerWord.textContent = word;
+            
+            if (entry) {
+                drawerType.textContent = entry.type || entry.t || 'unknown';
+                drawerType.classList.remove('hidden');
+                
+                // Def and examples lookup
+                const definitionText = entry.def || entry.d || 'No definition available.';
+                drawerDef.textContent = definitionText;
+                
+                const ex1Text = entry.example || entry.e || '';
+                const ex2Text = entry.long_example || entry.le || '';
+                
+                // Format examples to highlight the word
+                drawerEx1.innerHTML = highlightWord(ex1Text, word);
+                drawerEx2.innerHTML = highlightWord(ex2Text, word);
+            } else {
+                // Not found anywhere
+                drawerType.classList.add('hidden');
+                drawerDef.textContent = 'Definition and examples not found in the database.js or fallback dictionary.';
+                drawerEx1.innerHTML = '<span class="text-slate-400">No example available.</span>';
+                drawerEx2.innerHTML = '<span class="text-slate-400">No example available.</span>';
+            }
+            
+            // No synonyms section needed in details drawer (fully handled on the card grid)
+            
+            updateDrawerLearnedButton();
+            
+            // Slide open the drawer
+            const drawer = document.getElementById('details-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            
+            drawer.classList.remove('translate-x-full');
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            backdrop.classList.add('opacity-100', 'pointer-events-auto');
+        }
+        
+        function closeDrawer() {
+            const drawer = document.getElementById('details-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+        }
+        
+        function highlightWord(sentence, word) {
+            if (!sentence) return '<span class="text-slate-400">No example sentence available.</span>';
+            
+            // Clean word from any brackets/suffixes
+            let cleanW = word.toLowerCase().trim();
+            
+            // Build regex with word boundary, matching inflected forms if possible (like plural, past tense)
+            // Example: for "commend", also match "commends", "commended", "commending", "commendation"
+            // For simple replacement, match the word stem
+            let regexStr = '\\b' + cleanW;
+            if (cleanW.endsWith('e')) {
+                // e.g. abate -> abated, abating, abates
+                regexStr = '\\b' + cleanW.slice(0, -1) + '(?:e|ed|ing|es)?\\b';
+            } else if (cleanW.endsWith('y')) {
+                // e.g. vilify -> vilified, vilifies, vilifying
+                regexStr = '\\b' + cleanW.slice(0, -1) + '(?:y|ies|ied|ying)?\\b';
+            } else {
+                regexStr = '\\b' + cleanW + '(?:s|ed|ing)?\\b';
+            }
+            
+            try {
+                const regex = new RegExp(regexStr, 'gi');
+                return sentence.replace(regex, (match) => {
+                    return `<strong class="text-primary-600 dark:text-primary-400 font-bold">${match}</strong>`;
+                });
+            } catch (err) {
+                // Fallback to literal search
+                const idx = sentence.toLowerCase().indexOf(cleanW);
+                if (idx !== -1) {
+                    const originalMatch = sentence.substring(idx, idx + word.length);
+                    return sentence.substring(0, idx) + 
+                           `<strong class="text-primary-600 dark:text-primary-400 font-bold">${originalMatch}</strong>` + 
+                           sentence.substring(idx + word.length);
+                }
+                return sentence;
+            }
+        }
+    </script>
+</body>
+</html>

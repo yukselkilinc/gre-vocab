@@ -305,6 +305,13 @@
             window.location.href = 'memory_palace.html';
         }
 
+        function goToVocabGroups() {
+            if (_navStack.includes('study-screen') && !confirm('Leave your current study session and go to Vocab Groups? Progress will be saved.')) {
+                return;
+            }
+            window.location.href = 'vocab_groups.html';
+        }
+
         // =========================================================
         // LIBRARY MODULE
         // =========================================================
