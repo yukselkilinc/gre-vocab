@@ -4316,14 +4316,6 @@
                     explanation: "Statement (A) is correct because the second paragraph explicitly states that Aimers argues the term collapse masks a \"highly nuanced process of regional adaptation and relocation.\"\n\nStatement (B) is incorrect because the text notes that Aimers suggests \"drought undoubtedly strained resources,\" meaning he does not reject the role of environmental factors entirely.\n\nStatement (C) is correct because the text states that Aimers's critique \"trades the catastrophic for the gradual.\" Therefore, both A and C apply."
                 },
                 {
-                    id: "p_q4",
-                    type: "sentence",
-                    passageBased: true,
-                    question: "Select the sentence that identifies a potential logical flaw in the counterargument made by proponents of the environmental explanation.",
-                    answer: "While Gill’s supporters counter that the escalating warfare itself was a direct consequence of resource scarcity induced by early dry spells, this defense risks circular reasoning.",
-                    explanation: "The third paragraph outlines the debate between David Webster's structural warfare theory and Gill's environmental theory. The selected sentence directly points out that the counterargument offered by Gill's supporters \"risks circular reasoning,\" which is a logical flaw."
-                },
-                {
                     id: "p_q5",
                     type: "single",
                     passageBased: true,
@@ -4339,89 +4331,12 @@
                     explanation: "The third paragraph states that in Webster's view, \"endemic warfare, driven by demographic pressures and elite overproduction, had already hollowed out the institutional stability of the southern lowlands before the severe droughts manifested.\" This directly supports the inference that socio-political pressures compromised stability prior to the climate crisis, making (B) the correct answer."
                 },
                 {
-                    id: "p_q6",
-                    type: "single",
-                    passageBased: false,
-                    prompt: "A major technology corporation has observed a surge in employee complaints regarding digital eye strain. In an effort to curb these symptoms and improve workplace wellness, the company has replaced traditional backlit LCD monitors with reflective e-ink displays across its primary corporate offices. The company's executive board predicts that the number of eye strain complaints will significantly decrease over the next quarter following this installation.",
-                    promptLabel: "PARAGRAPH ARGUMENT \u2014 STRENGTHEN",
-                    question: "Which of the following, if true, most strengthens the validity of the conclusion?",
-                    options: [
-                        "Most employees at the company use their workstations for greater than six hours per day.",
-                        "Reflective e-ink displays emit significantly less high-energy blue light, which clinical studies have directly linked to corporate eye strain complaints.",
-                        "The capital expense required to procure e-ink displays is higher than that of maintaining traditional LCD monitors.",
-                        "Employees who wore corrective prescription lenses reported no changes in visual comfort during a brief pre-installation trial phase.",
-                        "Other corporations that introduced ergonomic keyboard setups saw a minor decrease in repetitive strain injuries."
-                    ],
-                    answer: 1,
-                    explanation: "The argument assumes a causal link between installing e-ink displays and reducing eye strain complaints. (B) strengthens the argument by providing the missing empirical link: it explains why e-ink displays would reduce strain (by eliminating high-energy blue light, a proven cause of the complaints). This validates the board's prediction."
-                },
-                {
-                    id: "p_q7",
-                    type: "single",
-                    passageBased: false,
-                    prompt: "Organic produce at Meadowbrook Farms grocery store costs roughly 30 percent more than conventional produce of the exact same variety. A consumer advocacy group claims that the grocery franchise is simply taking advantage of its reputation for health-conscious options to reap artificially higher profit margins on those organic items.",
-                    promptLabel: "PARAGRAPH ARGUMENT \u2014 EVALUATE",
-                    question: "In evaluating the argument, it would be most useful to compare",
-                    options: [
-                        "the nutritional and vitamin content of the organic produce with that of the conventional produce at Meadowbrook Farms.",
-                        "the wholesale procurement, handling, and farming overhead costs of organic produce with the comparable costs for conventional produce.",
-                        "the average household income of consumers who shop at Meadowbrook Farms with the national average household income.",
-                        "the sales volume of conventional produce at Meadowbrook Farms with the sales volume of conventional produce at competing grocery chains.",
-                        "the percentage of profit derived from organic vegetables versus organic fruits within Meadowbrook Farms stores."
-                    ],
-                    answer: 1,
-                    explanation: "The consumer group claims that the higher price is purely due to price gouging (\"exploiting its reputation\"). To evaluate this claim, we must check if there is an alternative, valid reason for the higher price—such as higher production or operating costs. (B) allows us to make this comparison. If organic items cost 30 percent more to procure and handle, the store isn't necessarily exploiting anyone; if the overhead costs are identical, the group's argument is highly strengthened."
-                },
-                {
-                    id: "p_q8",
-                    type: "single",
-                    passageBased: false,
-                    prompt: "Economist: To revitalize the manufacturing sector in the province of Oakhaven, the regional government should provide tax credits exclusively to firms that construct automated robotics factories. While this policy targets a highly specific sub-sector, the resulting industrial ecosystem will make Oakhaven more economically resilient than any other province. This is not to say that tax credits should be distributed to all technology firms. Rather, only to those directly manufacturing industrial robotics.",
-                    promptLabel: "PARAGRAPH ARGUMENT \u2014 ASSUMPTION",
-                    question: "The conclusion drawn above depends on which of the following assumptions?",
-                    options: [
-                        "Traditional manufacturing sub-sectors, such as textiles and steel, are completely incapable of experiencing job growth.",
-                        "Oakhaven currently possesses a significantly higher unemployment rate than neighboring provinces.",
-                        "Industrial robotics manufacturing capability is the primary indicator and driver of a province's long-term economic resilience.",
-                        "It is impossible for automated robotics factories to operate successfully without relying heavily on imported raw materials.",
-                        "The tax revenue lost from these targeted credits will be instantly offset by corporate property taxes within two fiscal years."
-                    ],
-                    answer: 2,
-                    explanation: "The economist concludes that subsidizing this single, specific sub-sector will make Oakhaven \"more economically resilient than any other province.\" For this to hold true, the economist must assume that industrial robotics is the central, defining factor in economic resilience. If something else matters more, or if robotics doesn't drive resilience, the argument fails. This directly points to (C)."
-                },
-                {
-                    id: "p_q9",
-                    type: "single",
-                    passageBased: false,
-                    prompt: "In a certain territory, over 75 percent of households own a personal vehicle, but historically, premium comprehensive vehicle insurance policies have sold poorly in this region. The percentage of land and population devoted to car ownership is not expected to change, and the average traffic accident rate has slowly risen over the past decade. Despite this trend, a new international insurance firm is building a large headquarters in the territory, and its business plan for success depends on strong local sales of its premium insurance plans. Both the firm's executives and industry analysts expect this venture to be highly profitable over the next few years.",
-                    promptLabel: "PARAGRAPH ARGUMENT \u2014 PARADOX",
-                    question: "Which of the following, if true, most helps to provide a justification for the firm's and the analysts' optimistic expectations?",
-                    options: [
-                        "The average cost of medical care and vehicle replacement parts has spiked drastically, making basic legal-minimum liability coverage insufficient to protect drivers from catastrophic financial ruin.",
-                        "The new insurance firm plans to launch an aggressive marketing campaign focused on sponsoring major professional sporting events in the capital.",
-                        "The regional government recently voted to decrease the mandatory minimum liability coverage required for registered drivers.",
-                        "Premium insurance policies offer a wider variety of digital customer service hotlines than standard or basic insurance policies do.",
-                        "Many citizens prefer to use public transit networks during peak weekend traffic hours rather than driving their personal vehicles."
-                    ],
-                    answer: 0,
-                    explanation: "The paradox is that premium insurance historically sells poorly and accident rates are rising, yet analysts expect a new premium insurance company to thrive on local sales. (A) resolves the paradox by explaining why consumer behavior is about to change: basic insurance is no longer sufficient due to skyrocketing medical and repair costs, forcing drivers to upgrade to premium plans to avoid financial ruin."
-                },
-                {
-                    id: "p_q10",
-                    type: "single",
-                    passageBased: false,
-                    prompt: "A municipal transit authority observed that city bus ridership declined by 15 percent immediately after they implemented a 50-cent fare increase. In an effort to restore ridership to its previous historical levels, the authority plans to lower fares back to their original rate next month, concluding that this price reduction will bring back all the lost passengers.",
-                    promptLabel: "PARAGRAPH ARGUMENT \u2014 WEAKEN",
-                    question: "Which of the following, if true, most seriously weakens the validity of the conclusion?",
-                    options: [
-                        "The temporary fare increase successfully allowed the transit authority to balance its structural budget deficit for the fiscal year.",
-                        "During the period of the fare increase, a new subterranean light rail network opened along identical transit routes, permanently drawing commuter habits away from the bus system.",
-                        "A small percentage of city residents rely on the bus system daily regardless of fluctuations in the fare price.",
-                        "The transit authority did not aggressively publicize the initial fare increase before it went into effect last year.",
-                        "Neighboring municipalities charge higher average transit fares than this city does."
-                    ],
-                    answer: 1,
-                    explanation: "The transit authority assumes that price was the only reason ridership dropped and that reversing the price change will reverse the effect. (B) introduces an alternative, permanent cause for the drop in ridership: the opening of a competing light rail network. If commuters have permanently switched to the light rail, simply lowering bus fares will not bring them back, severely weakening the authority's conclusion."
+                    id: "p_q4",
+                    type: "sentence",
+                    passageBased: true,
+                    question: "Select the sentence that identifies a potential logical flaw in the counterargument made by proponents of the environmental explanation.",
+                    answer: "While Gill’s supporters counter that the escalating warfare itself was a direct consequence of resource scarcity induced by early dry spells, this defense risks circular reasoning.",
+                    explanation: "The third paragraph outlines the debate between David Webster's structural warfare theory and Gill's environmental theory. The selected sentence directly points out that the counterargument offered by Gill's supporters \"risks circular reasoning,\" which is a logical flaw."
                 },
                 {
                     id: "p_q11",
@@ -4438,6 +4353,91 @@
                     question: "Select the sentence that provides specific historical evidence to challenge the idea of a uniform, civilization-wide decline.",
                     answer: "In the northern lowlands, for instance, cities like Chichen Itza actually flourished during the very period the southern centers were being abandoned.",
                     explanation: "This sentence offers a concrete historical example (Chichen Itza flourishing while the south was abandoned) to prove that the collapse was not uniform or \"monolithic.\""
+                },
+                {
+                    id: "p_q6",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A major technology corporation has observed a surge in employee complaints regarding digital eye strain. In an effort to curb these symptoms and improve workplace wellness, the company has replaced traditional backlit LCD monitors with reflective e-ink displays across its primary corporate offices. The company's executive board predicts that the number of eye strain complaints will significantly decrease over the next quarter following this installation.",
+                    promptLabel: "PARAGRAPH ARGUMENT — STRENGTHEN",
+                    question: "Which of the following, if true, most strengthens the validity of the conclusion?",
+                    options: [
+                        "Most employees at the company use their workstations for greater than six hours per day.",
+                        "Reflective e-ink displays emit significantly less high-energy blue light, which clinical studies have directly linked to corporate eye strain complaints.",
+                        "The capital expense required to procure e-ink displays is higher than that of maintaining traditional LCD monitors.",
+                        "Employees who wore corrective prescription lenses reported no changes in visual comfort during a brief pre-installation trial phase.",
+                        "Other corporations that introduced ergonomic keyboard setups saw a minor decrease in repetitive strain injuries."
+                    ],
+                    answer: 1,
+                    explanation: "The argument assumes a causal link between installing e-ink displays and reducing eye strain complaints. (B) strengthens the argument by providing the missing empirical link: it explains why e-ink displays would reduce strain (by eliminating high-energy blue light, a proven cause of the complaints). This validates the board's prediction."
+                },
+                {
+                    id: "p_q7",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Organic produce at Meadowbrook Farms grocery store costs roughly 30 percent more than conventional produce of the exact same variety. A consumer advocacy group claims that the grocery franchise is simply taking advantage of its reputation for health-conscious options to reap artificially higher profit margins on those organic items.",
+                    promptLabel: "PARAGRAPH ARGUMENT — EVALUATE",
+                    question: "In evaluating the argument, it would be most useful to compare",
+                    options: [
+                        "the nutritional and vitamin content of the organic produce with that of the conventional produce at Meadowbrook Farms.",
+                        "the wholesale procurement, handling, and farming overhead costs of organic produce with the comparable costs for conventional produce.",
+                        "the average household income of consumers who shop at Meadowbrook Farms with the national average household income.",
+                        "the sales volume of conventional produce at Meadowbrook Farms with the sales volume of conventional produce at competing grocery chains.",
+                        "the percentage of profit derived from organic vegetables versus organic fruits within Meadowbrook Farms stores."
+                    ],
+                    answer: 1,
+                    explanation: "The consumer group claims that the higher price is purely due to price gouging (\"exploiting its reputation\"). To evaluate this claim, we must check if there is an alternative, valid reason for the higher price—such as higher production or operating costs. (B) allows us to make this comparison. If organic items cost 30 percent more to procure and handle, the store isn't necessarily exploiting anyone; if the overhead costs are identical, the group's argument is highly strengthened."
+                },
+                {
+                    id: "p_q8",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "Economist: To revitalize the manufacturing sector in the province of Oakhaven, the regional government should provide tax credits exclusively to firms that construct automated robotics factories. While this policy targets a highly specific sub-sector, the resulting industrial ecosystem will make Oakhaven more economically resilient than any other province. This is not to say that tax credits should be distributed to all technology firms. Rather, only to those directly manufacturing industrial robotics.",
+                    promptLabel: "PARAGRAPH ARGUMENT — ASSUMPTION",
+                    question: "The conclusion drawn above depends on which of the following assumptions?",
+                    options: [
+                        "Traditional manufacturing sub-sectors, such as textiles and steel, are completely incapable of experiencing job growth.",
+                        "Oakhaven currently possesses a significantly higher unemployment rate than neighboring provinces.",
+                        "Industrial robotics manufacturing capability is the primary indicator and driver of a province's long-term economic resilience.",
+                        "It is impossible for automated robotics factories to operate successfully without relying heavily on imported raw materials.",
+                        "The tax revenue lost from these targeted credits will be instantly offset by corporate property taxes within two fiscal years."
+                    ],
+                    answer: 2,
+                    explanation: "The economist concludes that subsidizing this single, specific sub-sector will make Oakhaven \"more economically resilient than any other province.\" For this to hold true, the economist must assume that industrial robotics is the central, defining factor in economic resilience. If something else matters more, or if robotics doesn't drive resilience, the argument fails. This directly points to (C)."
+                },
+                {
+                    id: "p_q9",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "In a certain territory, over 75 percent of households own a personal vehicle, but historically, premium comprehensive vehicle insurance policies have sold poorly in this region. The percentage of land and population devoted to car ownership is not expected to change, and the average traffic accident rate has slowly risen over the past decade. Despite this trend, a new international insurance firm is building a large headquarters in the territory, and its business plan for success depends on strong local sales of its premium insurance plans. Both the firm's executives and industry analysts expect this venture to be highly profitable over the next few years.",
+                    promptLabel: "PARAGRAPH ARGUMENT — PARADOX",
+                    question: "Which of the following, if true, most helps to provide a justification for the firm's and the analysts' optimistic expectations?",
+                    options: [
+                        "The average cost of medical care and vehicle replacement parts has spiked drastically, making basic legal-minimum liability coverage insufficient to protect drivers from catastrophic financial ruin.",
+                        "The new insurance firm plans to launch an aggressive marketing campaign focused on sponsoring major professional sporting events in the capital.",
+                        "The regional government recently voted to decrease the mandatory minimum liability coverage required for registered drivers.",
+                        "Premium insurance policies offer a wider variety of digital customer service hotlines than standard or basic insurance policies do.",
+                        "Many citizens prefer to use public transit networks during peak weekend traffic hours rather than driving their personal vehicles."
+                    ],
+                    answer: 0,
+                    explanation: "The paradox is that premium insurance historically sells poorly and accident rates are rising, yet analysts expect a new premium insurance company to thrive on local sales. (A) resolves the paradox by explaining why consumer behavior is about to change: basic insurance is no longer sufficient due to skyrocketing medical and repair costs, forcing drivers to upgrade to premium plans to avoid financial ruin."
+                },
+                {
+                    id: "p_q10",
+                    type: "single",
+                    passageBased: false,
+                    prompt: "A municipal transit authority observed that city bus ridership declined by 15 percent immediately after they implemented a 50-cent fare increase. In an effort to restore ridership to its previous historical levels, the authority plans to lower fares back to their original rate next month, concluding that this price reduction will bring back all the lost passengers.",
+                    promptLabel: "PARAGRAPH ARGUMENT — WEAKEN",
+                    question: "Which of the following, if true, most seriously weakens the validity of the conclusion?",
+                    options: [
+                        "The temporary fare increase successfully allowed the transit authority to balance its structural budget deficit for the fiscal year.",
+                        "During the period of the fare increase, a new subterranean light rail network opened along identical transit routes, permanently drawing commuter habits away from the bus system.",
+                        "A small percentage of city residents rely on the bus system daily regardless of fluctuations in the fare price.",
+                        "The transit authority did not aggressively publicize the initial fare increase before it went into effect last year.",
+                        "Neighboring municipalities charge higher average transit fares than this city does."
+                    ],
+                    answer: 1,
+                    explanation: "The transit authority assumes that price was the only reason ridership dropped and that reversing the price change will reverse the effect. (B) introduces an alternative, permanent cause for the drop in ridership: the opening of a competing light rail network. If commuters have permanently switched to the light rail, simply lowering bus fares will not bring them back, severely weakening the authority's conclusion."
                 }
             ]
         };
@@ -4471,30 +4471,30 @@
                     id: "v2_q2",
                     type: "two_blank",
                     passageBased: false,
-                    prompt: "Although the professor\u2019s lectures were initially criticized for being excessively (i)_______, careful review of his course syllabus revealed a surprisingly (ii)_______ underlying structure that unified the seemingly disparate topics.",
+                    prompt: "Although the professor’s lectures were initially criticized for being excessively (i)_______, careful review of his course syllabus revealed a surprisingly (ii)_______ underlying structure that unified the seemingly disparate topics.",
                     promptLabel: "TEXT COMPLETION",
                     question: "Select one entry for each blank from the corresponding column of choices.",
                     blanks: [
-                        { label: "Blank (i)", options: ["rigorous", "disjointed", "pedantic"] },
+                        { label: "Blank (i)", options: ["disjointed", "rigorous", "pedantic"] },
                         { label: "Blank (ii)", options: ["convoluted", "coherent", "redundant"] }
                     ],
-                    answer: [1, 1],
-                    explanation: "\"Although\" signals contrast between the two blanks. The second half mentions the structure \"unified\" topics that were \"seemingly disparate.\" The initial criticism (Blank i) must mean scattered \u2192 disjointed. The contrast backed by \"unified\" means the structure was well-organized \u2192 coherent."
+                    answer: [0, 1],
+                    explanation: "\"Although\" signals contrast between the two blanks. The second half mentions the structure \"unified\" topics that were \"seemingly disparate.\" The initial criticism (Blank i) must mean scattered → disjointed. The contrast backed by \"unified\" means the structure was well-organized → coherent."
                 },
                 {
                     id: "v2_q3",
                     type: "three_blank",
                     passageBased: false,
-                    prompt: "Early internet pioneers envisioned a decentralized digital landscape that would (i)_______ traditional institutional gatekeepers; however, the contemporary reality features an unprecedented consolidation of power by a handful of tech conglomerates, a development that many critics find profoundly (ii)_______ and completely at odds with the network\u2019s original (iii)_______ ethos.",
+                    prompt: "Early internet pioneers envisioned a decentralized digital landscape that would (i)_______ traditional institutional gatekeepers; however, the contemporary reality features an unprecedented consolidation of power by a handful of tech conglomerates, a development that many critics find profoundly (ii)_______ and completely at odds with the network’s original (iii)_______ ethos.",
                     promptLabel: "TEXT COMPLETION",
                     question: "Select one entry for each blank from the corresponding column of choices.",
                     blanks: [
                         { label: "Blank (i)", options: ["bypass", "entrench", "scrutinize"] },
                         { label: "Blank (ii)", options: ["encouraging", "alarming", "predictable"] },
-                        { label: "Blank (iii)", options: ["egalitarian", "hierarchical", "mercantilist"] }
+                        { label: "Blank (iii)", options: ["hierarchical", "mercantilist", "egalitarian"] }
                     ],
-                    answer: [0, 1, 0],
-                    explanation: "Blank (i): A \"decentralized\" landscape would avoid \"traditional gatekeepers\" \u2192 bypass.\n\nBlank (ii): \"However\" contrasts with \"unprecedented consolidation of power.\" Critics view this negatively \u2192 alarming.\n\nBlank (iii): The \"original ethos\" of a decentralized, distributed system \u2192 egalitarian (the belief that all people are equally important, possess equal fundamental worth, and should have the same rights, privileges, and opportunities in life)."
+                    answer: [0, 1, 2],
+                    explanation: "Blank (i): A \"decentralized\" landscape would avoid \"traditional gatekeepers\" → bypass.\n\nBlank (ii): \"However\" contrasts with \"unprecedented consolidation of power.\" Critics view this negatively → alarming.\n\nBlank (iii): The \"original ethos\" of a decentralized, distributed system → egalitarian (the belief that all people are equally important, possess equal fundamental worth, and should have the same rights, privileges, and opportunities in life)."
                 },
                 {
                     id: "v2_q4",
@@ -4659,10 +4659,10 @@
                     promptLabel: "TEXT COMPLETION",
                     question: "Select one entry for each blank from the corresponding column of choices.",
                     blanks: [
-                        { label: "Blank (i)", options: ["equivocal", "irrefutable", "salutary"] },
+                        { label: "Blank (i)", options: ["irrefutable", "salutary", "equivocal"] },
                         { label: "Blank (ii)", options: ["premature", "judicious", "superfluous"] }
                     ],
-                    answer: [0, 0],
+                    answer: [2, 0],
                     explanation: "The first blank must reflect a quality that leads the researchers to caution against drawing definitive conclusions. 'Equivocal' (open to more than one interpretation; ambiguous or undecided) fits well. Since the results are equivocal, drawing definitive conclusions before testing larger groups would be too early or unwise, making 'premature' the correct fit for the second blank. 'Salutary' means beneficial, 'irrefutable' means impossible to deny, and 'judicious' means wise."
                 },
                 {
@@ -4673,10 +4673,10 @@
                     promptLabel: "TEXT COMPLETION",
                     question: "Select one entry for each blank from the corresponding column of choices.",
                     blanks: [
-                        { label: "Blank (i)", options: ["slavish", "idiosyncratic", "novice"] },
+                        { label: "Blank (i)", options: ["idiosyncratic", "slavish", "novice"] },
                         { label: "Blank (ii)", options: ["derivative", "monotonous", "revolutionary"] }
                     ],
-                    answer: [0, 2],
+                    answer: [1, 2],
                     explanation: "The first blank describes 'imitations of Renaissance masters'. The contrast is signaled by 'others detect a subtle subversion... that foreshadowed the artist's later...' which means the first group saw them as unoriginal or blindly copying. 'Slavish' means showing no originality or blindly copying. For the second blank, the later style is contrasted with these early imitative works and characterized by 'subversion of classical conventions', indicating it is highly original or 'revolutionary'."
                 },
                 {
@@ -4687,11 +4687,11 @@
                     promptLabel: "TEXT COMPLETION",
                     question: "Select one entry for each blank from the corresponding column of choices.",
                     blanks: [
-                        { label: "Blank (i)", options: ["gradual", "fortuitous", "monolithic"] },
-                        { label: "Blank (ii)", options: ["unremarkable", "laborious", "capricious"] },
+                        { label: "Blank (i)", options: ["fortuitous", "gradual", "monolithic"] },
+                        { label: "Blank (ii)", options: ["unremarkable", "capricious", "laborious"] },
                         { label: "Blank (iii)", options: ["intermittent", "sustained", "peripheral"] }
                     ],
-                    answer: [1, 1, 1],
+                    answer: [0, 2, 1],
                     explanation: "Blank (i): The prompt contrasts the portrayal of breakthroughs ('sudden flashes of genius') with the actual reality. 'Fortuitous' (happening by chance/accident rather than design, i.e., luck/inspiration) fits best. Blank (ii): The reality is described as requiring 'decades of incremental progress'. This means it is highly demanding and hard work, making 'laborious' the correct choice. Blank (iii): The collaboration needed over decades must be continuous and ongoing, which is described as 'sustained'."
                 },
                 {
