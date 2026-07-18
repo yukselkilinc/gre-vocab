@@ -50,8 +50,11 @@
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col pb-12" style="touch-action: manipulation; -webkit-text-size-adjust: 100%;">
     
+    <!-- Fixed safe-area cover strip for dynamic island -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); z-index: 9999; pointer-events: none;" class="bg-white dark:bg-slate-900"></div>
+
     <!-- Sticky Header -->
-    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur" style="padding-top: env(safe-area-inset-top);">
+    <header class="sticky z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur" style="top: env(safe-area-inset-top, 0px);">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
             
             <div class="flex items-center gap-1 sm:gap-3 shrink-0">
@@ -70,7 +73,7 @@
             
             <!-- Realtime Search -->
             <div class="flex-1 max-w-xl sm:max-w-md mx-1 sm:mx-4 relative">
-                <input type="text" id="search-input" placeholder="Search words, group names, meanings..." class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm">
+                <input type="text" id="search-input" placeholder="Words, group names & descriptions" class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm">
                 <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
@@ -93,7 +96,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <h3 class="text-lg font-semibold text-slate-600 dark:text-slate-400">No matching groups or words found</h3>
-            <p class="text-sm text-slate-400 mt-1">Try searching for synonyms, definitions, or group numbers.</p>
+            <p class="text-sm text-slate-400 mt-1">Try searching for words, group names or descriptions.</p>
         </div>
         
         <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
