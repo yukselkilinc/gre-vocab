@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Dark theme background to match your app -->
+  <rect width="100%" height="100%" rx="128" fill="#0f172a"/>
+  
+  <!-- Overlapping semantic circles in Teal and Indigo (matching app color themes) -->
+  <svg x="106" y="106" width="300" height="300" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8.5" cy="12" r="5" stroke="#14b8a6" fill="rgba(20, 184, 166, 0.15)"/>
+    <circle cx="15.5" cy="12" r="5" stroke="#6366f1" fill="rgba(99, 102, 241, 0.15)"/>
+  </svg>
+</svg>
