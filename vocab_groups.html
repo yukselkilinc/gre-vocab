@@ -38,6 +38,9 @@
         }
     </script>
     <style>
+        html, body {
+            overscroll-behavior-y: none;
+        }
         body {
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
@@ -54,7 +57,7 @@
     <div style="position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); z-index: 9999; pointer-events: none;" class="bg-white dark:bg-slate-900"></div>
 
     <!-- Sticky Header -->
-    <header class="sticky z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur" style="top: env(safe-area-inset-top, 0px);">
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur" style="padding-top: env(safe-area-inset-top, 0px);">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
             
             <div class="flex items-center gap-1 sm:gap-3 shrink-0">
