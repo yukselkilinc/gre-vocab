@@ -226,6 +226,8 @@
                 document.getElementById('end-session-btn').classList.remove('hidden');
                 document.getElementById('nav-branding').classList.add('hidden');
                 document.querySelector('main').style.paddingTop = '0.5rem';
+                document.getElementById('game-header').classList.remove('hidden');
+                document.getElementById('game-header').classList.add('flex');
                 document.body.classList.add('overflow-hidden');
                 document.body.style.touchAction = 'none';
             } else if (id === 'library-screen') {
@@ -2077,27 +2079,8 @@
                     radio.checked = true;
                 }
             }
-            if (typeof onStudyModeChange === 'function') {
-                onStudyModeChange();
-            }
             updateMissedUI();
         }
-
-        // Global function to toggle Category and Set selector visibility on study mode changes
-        window.onStudyModeChange = function() {
-            const selectedModeEl = document.querySelector('input[name="mode"]:checked');
-            const selectedMode = selectedModeEl ? selectedModeEl.value : 'mcq';
-            const catContainer = document.getElementById('category-container');
-            const setProgressContainer = document.getElementById('set-progress-container');
-            const launchBtn = document.getElementById('launch-btn');
-            
-            if (catContainer) catContainer.classList.remove('hidden');
-            if (setProgressContainer) setProgressContainer.classList.remove('hidden');
-            updateSetOptions();
-            if (launchBtn) {
-                launchBtn.innerText = "Begin";
-            }
-        };
 
         function updateSetOptions(isCategoryChange = false) {
             const cat = catSelect.value;
@@ -2536,8 +2519,6 @@
         // 5. SESSION LAUNCH & LOGIC
         // =========================================================
         function startStandardSession() {
-            const selectedStudyMode = document.querySelector('input[name="mode"]:checked').value;
-
             const cat = catSelect.value;
             const set = setSelect.value;
             if(!cat || !set) return;
@@ -2588,6 +2569,7 @@
             // Fill in the Blanks: build a shuffled presentation order so words
             // are shown in random sequence but appData indices stay stable for
             // progress tracking (sessionMatchedIndices).
+            const selectedStudyMode = document.querySelector('input[name="mode"]:checked').value;
             if (selectedStudyMode === 'fillblanks') {
                 fillBlanksOrder = Array.from({length: appData.length}, (_, i) => i).sort(() => 0.5 - Math.random());
             } else {
@@ -2680,6 +2662,8 @@
             document.body.classList.add('overflow-hidden');
             document.body.style.touchAction = 'none';
             document.querySelector('main').style.paddingTop = '0.5rem';
+            document.getElementById('game-header').classList.remove('hidden');
+            document.getElementById('game-header').classList.add('flex');
             
             document.getElementById('card-container').classList.add('cursor-pointer');
             renderCard();
@@ -2689,16 +2673,9 @@
             if (sessionEndTimeout) { clearTimeout(sessionEndTimeout); sessionEndTimeout = null; }
             if (document.getElementById('study-screen').classList.contains('hidden')) return;
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-
             if(isSessionComplete || confirm("Exit the current study session? Progress is saved locally.")) {
-                // Restore page scroll and key handler
-                const mainEl = document.querySelector('main');
-                if (mainEl) { mainEl.style.overflow = ''; mainEl.style.overflowY = ''; }
-                document.body.style.overflow = '';
-
                 updateDashboard();
                 document.getElementById('matching-container').classList.add('hidden');
-
                 toggleCategory(true);
                 showSetup();
                 pushToCloud();
@@ -2716,7 +2693,6 @@
                 progressText.innerText = `Completed ${completed} of ${appData.length} words`;
                 const pct = appData.length > 0 ? (completed / appData.length) * 100 : 0;
                 progressBar.style.width = `${pct}%`;
-
             } else if (isReviewMode) {
                 const wordNum = Math.min(reviewCorrectCount + 1, appData.length);
                 progressText.innerText = `Word ${wordNum} of ${appData.length}`;
@@ -2810,7 +2786,6 @@
         }
 
         function renderCard() {
-
             isFlipped = false;
             isAnswered = false;
             hasAutoPronouncedThisCard = false;
@@ -5655,8 +5630,6 @@
                 renderPassageQuestion(0);
             }
         }
-
-
 
         // URL Parameter Routing on Page Load
         function checkUrlRouting() {
