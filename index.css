@@ -178,10 +178,10 @@ input, textarea, [contenteditable="true"] {
     user-select: text !important;
 }
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.dark ::-webkit-scrollbar-thumb { background: #475569; }
+::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+::-webkit-scrollbar-track { background: transparent !important; }
+::-webkit-scrollbar-thumb { background: transparent !important; border-radius: 0 !important; }
+.dark ::-webkit-scrollbar-thumb { background: transparent !important; }
 
 /* Disable pull-to-refresh bounce and zoom on mobile */
 body { 
@@ -782,3 +782,4 @@ body {
     transform: scaleX(1) translateX(0);
     gap: 0.25rem;
 }
+

@@ -151,7 +151,7 @@ const coreDatabase = {
             {
                 "word": "alacrity",
                 "type": "noun",
-                "def": "Brisk and cheerful readiness",
+                "def": "Brisk and cheerful readiness, willingness to do something",
                 "example": "She accepted the job offer with great alacrity and cheer.",
                 "long_example": "New recruits were expected to complete every assigned task with genuine alacrity, and the drill sergeant made it abundantly clear that hesitation would not be tolerated during training."
             },
@@ -230,7 +230,7 @@ const coreDatabase = {
             {
                 "word": "anodyne",
                 "type": "adj.",
-                "def": "Not likely to provoke offense or disagreement; inoffensive",
+                "def": "Not likely to provoke offense or disagreement; inoffensive [noun: painkiller or source of comfort]",
                 "example": "The speech was safe, dull, and full of anodyne comments.",
                 "long_example": "Hoping to avoid political division before the upcoming election, the candidate delivered an exceptionally anodyne speech that focused on vague generalities rather than addressing the controversial economic reforms facing the nation."
             },
@@ -279,7 +279,7 @@ const coreDatabase = {
             {
                 "word": "apprehension",
                 "type": "noun",
-                "def": "Anxiety or fear about something bad",
+                "def": "Anxiety or fear about something bad; or the physical arrest or capture of someone suspected of a crime; or the mental capacity for understanding or grasping a concept",
                 "example": "She felt a sudden apprehension about walking in the dark.",
                 "long_example": "Despite her thorough preparation, she could not shake the feeling of apprehension that gripped her as she walked onto the stage for the live national broadcast watched by millions of viewers."
             },
@@ -335,15 +335,15 @@ const coreDatabase = {
             {
                 "word": "articulate",
                 "type": "adj.",
-                "def": "Able to express thoughts clearly and effectively",
+                "def": "Able to express thoughts clearly and effectively [verb: articulate]",
                 "example": "The candidate gave a highly articulate and clear speech.",
                 "long_example": "The defense attorney presented an articulate summary of the case, systematically refuting the prosecution's arguments and convincing the jury of his client's innocence in the matter."
             },
             {
                 "word": "artifice",
                 "type": "noun",
-                "def": "Clever or cunning devices used to trick or deceive others",
-                "example": "The magician used clever artifice to make the rabbit vanish.",
+                "def": "A clever, cunning, or deceptive trick, stratagem, or devices",
+                "example": "She spoke honestly and without artifice.",
                 "long_example": "The master illusionist relied on mechanical artifice and misdirection to make the large cabinet appear to vanish from the stage before the eyes of the amazed audience."
             },
             {
@@ -583,10 +583,9 @@ const coreDatabase = {
             },
             {
                 "word": "brook",
-                "type": "noun",
-                "def": "A small stream",
-                "example": "A small brook flowed quietly through the green meadow.",
-                "long_example": "A cold, clear brook flowed gently through the middle of the valley, providing a peaceful drinking spot for the deer and other wildlife that inhabited the surrounding forest."
+                "type": "verb",
+                "def": "To tolerate or allow",
+		"example": "The commanding officer made it clear he would brook no disobedience from his troops.",		"long_example": "The proud chef refused to brook any alterations to his signature recipe, insisting that every ingredient must remain exactly as he had originally intended for the dish."
             },
             {
                 "word": "bucolic",
@@ -611,15 +610,15 @@ const coreDatabase = {
             },
             {
                 "word": "buttress",
-                "type": "noun",
-                "def": "A support built against a wall for reinforcement",
-                "example": "The engineers built a heavy wall to buttress the old bridge.",
-                "long_example": "Architectural restorers realized that the medieval cathedral needed a new stone buttress to stabilize the crumbling southern wall before the heavy winter snows caused further structural damage."
+                "type": "verb",
+                "def": "To support, reinforce, or strengthen [noun: A support built against a wall for reinforcement]",
+		"example": "Workers added temporary steel columns to buttress the tunnel roof during the excavation.",
+		"long_example": "The research team gathered extensive statistical data from over a dozen independent clinical trials to buttress their hypothesis before submitting the manuscript to a peer-reviewed journal."
             },
             {
                 "word": "cacophony",
                 "type": "noun",
-                "def": "A harsh, discordant mixture of sounds",
+                "def": "A harsh, discordant mixture of sounds [opposite: euphony]",
                 "example": "The busy market was filled with a loud cacophony of voices.",
                 "long_example": "The tourists found it difficult to sleep in their downtown hotel room because of the constant cacophony of blaring car horns and shouting crowds from the nightclub below."
             },
@@ -689,9 +688,9 @@ const coreDatabase = {
             {
                 "word": "catalyst",
                 "type": "noun",
-                "def": "A substance that increases the rate of a chemical reaction without itself undergoing any permanent chemical change.",
-                "example": "The digital campaign acted as a catalyst for social reform.",
-                "long_example": "The chemistry student added a small amount of manganese dioxide to the hydrogen peroxide solution, serving as a catalyst that rapidly accelerated the release of oxygen gas."
+		"def": "A person, event, or thing that precipitates a significant change or action.",
+		"example": "The digital campaign acted as a catalyst for social reform.",
+		"long_example": "The unexpected entry of a well-funded competitor served as the catalyst that forced the tech startup to completely overhaul its product roadmap and accelerate its development timeline."
             },
             {
                 "word": "catholic",
@@ -796,7 +795,7 @@ const coreDatabase = {
             {
                 "word": "complacent",
                 "type": "adj.",
-                "def": "Self-satisfied and unaware of potential dangers or deficiencies",
+                "def": "Self-satisfied and unaware of potential dangers or deficiencies; someone overly content with themselves, their achievements, or their current situation",
                 "example": "Do not be complacent about safety rules in the lab.",
                 "long_example": "Although the tech giant currently dominates the global mobile market, its executives cannot afford to become complacent, as innovative rival startups are constantly developing cheaper and faster alternatives."
             },
@@ -1157,7 +1156,7 @@ const coreDatabase = {
             {
                 "word": "disinterested",
                 "type": "adj.",
-                "def": "Impartial or unbiased",
+                "def": "Impartial, unbiased ; or not interested",
                 "example": "A disinterested third party was called to arbitrate the dispute.",
                 "long_example": "To resolve the long-standing boundary dispute between the two farmers, the court appointed a disinterested land surveyor who had no personal or financial ties to either family."
             },
@@ -1185,8 +1184,8 @@ const coreDatabase = {
             {
                 "word": "dispatch",
                 "type": "verb",
-                "def": "To send off to a destination or for a purpose",
-                "example": "The company decided to dispatch the packages via express mail.",
+                "def": "To send off a person, vehicle, or message to a specific destination for a particular purpose, or to deal with a task quickly and efficiently",
+		"example": "The company decided to dispatch the packages via express mail.",
                 "long_example": "Upon receiving the urgent distress call from the remote weather station, the emergency coordinator prepared to dispatch a rescue helicopter equipped with medical supplies and survival gear."
             },
             {
@@ -1327,7 +1326,7 @@ const coreDatabase = {
             {
                 "word": "eloquent",
                 "type": "adj.",
-                "def": "Having or showing the ability to use language clearly and effectively",
+                "def": "Having or showing the ability to expresses ideas, opinions, or feelings clearly and effectively",
                 "example": "The president delivered an eloquent speech that inspired the nation.",
                 "long_example": "The defense attorney delivered an eloquent closing argument that highlighted the lack of physical evidence, successfully persuading the jury to acquit his client of all charges."
             },
@@ -1369,7 +1368,7 @@ const coreDatabase = {
             {
                 "word": "emulate",
                 "type": "verb",
-                "def": "To try to be like someone or something admired",
+                "def": "To try to be like someone or something admired; or to equal or approach equality with",
                 "example": "The young artist tried to emulate the style of the master.",
                 "long_example": "The young apprentice spent countless hours watching the master carpenter work, hoping to emulate the precise cutting techniques and patient craftsmanship that made the elder's furniture famous."
             },
@@ -1511,7 +1510,7 @@ const coreDatabase = {
             {
                 "word": "euphony",
                 "type": "noun",
-                "def": "Pleasant sound",
+                "def": "Pleasant sound [opposite: cacophony]",
                 "example": "The poet selected words for their euphony and rhythm.",
                 "long_example": "The meticulous composer spent several months revising the woodwind section's harmonies to achieve a perfect euphony that would soothe the listeners and elevate the entire symphonic performance to a new emotional height."
             },
@@ -1680,10 +1679,10 @@ const coreDatabase = {
             },
             {
                 "word": "flag",
-                "type": "noun",
-                "def": "A piece of cloth with a distinctive design used as a symbol of a country or institution",
-                "example": "The ship displayed a red flag to signal an emergency.",
-                "long_example": "The mountaineers proudly planted their national flag at the highest peak of the summit to mark their successful and historic ascent under extremely challenging winter conditions."
+                "type": "verb",
+                "def": "To mark, identify, or draw attention to something; or to lose energy, weaken, or become tired",
+                "example": "By the final mile of the marathon, the runner's pace began to flag from exhaustion.",
+                "long_example": "The compliance officer quickly decided to flag the suspicious transactions for senior management to review after noticing a series of large, unexplained international wire transfers."
             },
             {
                 "word": "fledgling",
@@ -1709,7 +1708,7 @@ const coreDatabase = {
             {
                 "word": "ford",
                 "type": "noun",
-                "def": "A shallow place in a river or stream allowing one to walk or drive across.",
+                "def": "A shallow place in a river or stream allowing one to walk or drive across [verb: to cross a shallow part of a body of water]",
                 "example": "They rode their horses across the shallow ford to get to the other side of the river.",
                 "long_example": "The weary travelers were relieved to discover a shallow ford across the turbulent mountain river, allowing their heavily loaded wagons to cross safely without risk of sinking."
             },
@@ -1730,7 +1729,7 @@ const coreDatabase = {
             {
                 "word": "fractious",
                 "type": "adj.",
-                "def": "Irritable and quarrelsome",
+                "def": "someone or something that is irritable, easily annoyed, and hard to control. It often refers to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
                 "example": "The fractious children began to argue over the wooden toys.",
                 "long_example": "The exhausted tour guide struggled to manage the fractious group of travelers, who had been complaining about the bus schedule, hotel accommodations, and food quality all day."
             },
@@ -1809,7 +1808,7 @@ const coreDatabase = {
             {
                 "word": "glib",
                 "type": "adj.",
-                "def": "Speaking in a smooth, easy way that may not be sincere",
+                "def": "Speaking in a smooth, easy way but without careful thought, sincerity or honesty",
                 "example": "The salesman gave a glib response that sounded insincere.",
                 "long_example": "The politician's glib explanations regarding the massive budget deficit failed to reassure the skeptical voters, who demanded concrete plans and transparent financial audits instead of empty campaign promises."
             },
@@ -1865,7 +1864,7 @@ const coreDatabase = {
             {
                 "word": "hapless",
                 "type": "adj.",
-                "def": "Unfortunate or having bad luck",
+                "def": "Exceptionally unlucky, unfortunate, or deserving of pity",
                 "example": "The hapless tourists got lost in the middle of the desert.",
                 "long_example": "The hapless driver had barely pulled out of the dealership when a sudden hailstorm severely damaged the hood of his brand-new sports car, leaving him absolutely devastated."
             },
@@ -2000,9 +1999,9 @@ const coreDatabase = {
             {
                 "word": "impervious",
                 "type": "adj.",
-                "def": "Not allowing fluid to pass through",
-                "example": "The plastic boots were impervious to water, keeping feet dry.",
-                "long_example": "The heavy canvas tent was treated with a specialized chemical sealant that made the fabric completely impervious to the torrential rain that fell continuously during the long storm."
+                "def": "Unable to be penetrated, influenced, or affected. Something that resists physical forces (like water or heat) or someone who is completely unaffected by abstract forces (like criticism or reason)",
+		"example": "The treated leather boots were completely impervious to the damp marsh mud.",
+		"long_example": "Despite facing relentless criticism and intense public scrutiny, the director remained entirely impervious to the backlash, refusing to alter a single scene of the controversial documentary."
             },
             {
                 "word": "impetuous",
@@ -2128,7 +2127,7 @@ const coreDatabase = {
             {
                 "word": "ingenuous",
                 "type": "adj.",
-                "def": "Showing innocence and simplicity",
+                "def": "Honest and direct, unsuspecting, trusting (unable to hide feelings or disguise true intentions)",
                 "example": "The child gave an ingenuous smile and admitted he took the cookie.",
                 "long_example": "Her ingenuous nature made her believe the elaborate stories told by the smooth-talking salesman, resulting in her purchasing a completely useless warranty for an exorbitant price."
             },
@@ -2170,9 +2169,9 @@ const coreDatabase = {
             {
                 "word": "insipid",
                 "type": "adj.",
-                "def": "Lacking flavor or taste",
-                "example": "The soup was insipid, completely lacking salt and flavor.",
-                "long_example": "The broth served at the hospital was watery and insipid, lacking the basic herbs and spices that would make it appetizing to the recovering patients in the ward."
+		"def": "Lacking flavor, vigor, or interest; dull, flat, or completely devoid of life and character",
+		"example": "The lukewarm coffee was watery and insipid, lacking any rich flavor.",
+		"long_example": "Critics dismissed the television series as an insipid corporate drama that relied entirely on predictable plotlines and uninspiring dialogue rather than genuine suspense."
             },
             {
                 "word": "interregnum",
@@ -2396,7 +2395,7 @@ const coreDatabase = {
             {
                 "word": "lavish",
                 "type": "adj.",
-                "def": "Luxuriously rich, elaborate, or generous",
+                "def": "Luxuriously rich, elaborate, or generous [verb: spending, giving, or producing something in great abundance, often to the point of being extravagant or luxurious]",
                 "example": "The hosts organized a lavish dinner party for the guests.",
                 "long_example": "The wealthy couple hosted a lavish wedding reception in the grand ballroom of the historic hotel, offering their guests expensive champagne and a five-course gourmet dinner."
             },
@@ -2473,8 +2472,8 @@ const coreDatabase = {
             {
                 "word": "lucid",
                 "type": "adj.",
-                "def": "Clear and easy to understand",
-                "example": "The explanation was highly clear, simple, and lucid.",
+                "def": "Clear and easy to understand; or thinking rationally, especially after a period of confusion, or a highly vivid state",
+                "example": "A few hours later, he was not only awake, he was lucid.",
                 "long_example": "The professor gave a remarkably lucid explanation of the complex thermodynamic principles, enabling even the novice students to comprehend the difficult material with relative ease."
             }
         ],
@@ -2496,16 +2495,16 @@ const coreDatabase = {
             {
                 "word": "luminous",
                 "type": "adj.",
-                "def": "Emitting or reflecting light",
-                "example": "The watch had luminous hands that glowed in the dark.",
+                "def": "Emitting or reflecting light; or very beautiful (for a person)",
+                "example": "She was bold and luminous.",
                 "long_example": "The deep-sea divers were amazed to discover a species of jellyfish that produced a luminous glow, lighting up the pitch-black waters of the ocean floor with eerie beauty."
             },
             {
                 "word": "maelstrom",
                 "type": "noun",
-                "def": "A powerful whirlpool",
+                "def": "A powerful whirlpool; or figuratively, a chaotic or turbulent state of affairs, such as intense emotional turmoil or a deeply confused situation",
                 "example": "The ship was caught in a violent maelstrom off the rocky coast.",
-                "long_example": "The small fishing vessel was suddenly caught in a violent maelstrom near the rocky coast, and the crew had to work frantically to navigate their ship back to calmer waters."
+		"long_example": "The sudden resignation of the prime minister plunged the country into a political maelstrom, sparking nationwide protests and triggering an emergency election."
             },
             {
                 "word": "magnanimous",
@@ -2601,7 +2600,7 @@ const coreDatabase = {
             {
                 "word": "mendicant",
                 "type": "noun",
-                "def": "A person who lives by begging",
+                "def": "A person who lives by begging [adj. mendicant]",
                 "example": "The mendicant sat on the church steps, asking for spare change.",
                 "long_example": "Every morning, the elderly mendicant sat patiently near the entrance of the cathedral, hoping that the wealthy churchgoers would offer him enough charity to purchase a hot meal."
             },
@@ -2680,8 +2679,8 @@ const coreDatabase = {
             {
                 "word": "morose",
                 "type": "adj.",
-                "def": "Sullen and ill-tempered",
-                "example": "The morose old clerk rarely spoke and never smiled.",
+                "def": "Sullen, ill-tempered and gloomily silent",
+                "example": "After losing the championship game, the team sat in morose silence.",
                 "long_example": "Following the sudden cancellation of his research grant, the usually cheerful professor became increasingly morose, spending his afternoons staring blankly out the window and refusing to speak with any of his colleagues."
             },
             {
@@ -2708,7 +2707,7 @@ const coreDatabase = {
             {
                 "word": "myriad",
                 "type": "noun",
-                "def": "A very large number of things",
+                "def": "A very large number of things [adj. myriad]",
                 "example": "The night sky was filled with a myriad of sparkling stars.",
                 "long_example": "As she looked up at the clear night sky far away from the city lights, a myriad of stars stretched across the dark canopy, leaving her in absolute awe of the vast universe."
             },
@@ -2755,11 +2754,11 @@ const coreDatabase = {
                 "long_example": "The trading seminar was specifically designed to guide the complete financial neophyte through the complexities of the stock market, explaining basic terms without using confusing industry jargon."
             },
             {
-                "word": "nettle",
-                "type": "noun",
-                "def": "A plant with stinging hairs",
-                "example": "The politician's rude comments seemed to nettle the interviewer.",
-                "long_example": "While hiking off the designated trail through the overgrown forest, the children accidentally brushed against a patch of stinging nettle, which immediately caused a red, painful rash on their bare ankles."
+    		"word": "nettle",
+    		"type": "verb",
+    		"def": "To irritate, annoy, or provoke someone",
+    		"example": "His constant interruptions began to nettle the committee members during the meeting.",
+    		"long_example": "The manager's passive-aggressive feedback during the review served only to nettle the software developer, who felt that his recent technical contributions were being deliberately undervalued."
             },
             {
                 "word": "noisome",
@@ -2836,7 +2835,7 @@ const coreDatabase = {
             {
                 "word": "obtuse",
                 "type": "adj.",
-                "def": "Slow to understand or perceive",
+                "def": "Slow to understand or perceive; failing to grasp simple concepts or failing to pick up on obvious hints",
                 "example": "The assistant was obtuse, failing to understand simple rules.",
                 "long_example": "The auditor found it hard to believe that the accountant was genuinely obtuse about the obvious discrepancies, suspecting instead that he was deliberately hiding the truth."
             },
@@ -2878,9 +2877,9 @@ const coreDatabase = {
             {
                 "word": "opaque",
                 "type": "adj.",
-                "def": "Not allowing light to pass through",
-                "example": "The bathroom window was made of thick, opaque glass.",
-                "long_example": "To protect the fragile, centuries-old historical manuscripts from the damaging effects of direct sunlight, the museum curator installed thick, opaque black curtains over all the tall windows in the primary exhibition hall."
+                "def": "Convoluted or intentionally hidden (information, language, or reasoning)",
+		"example": "The politician gave an opaque answer to a straightforward question about tax reform.",
+		"long_example": "The legal contract was filled with such opaque jargon and dense clauses that even the experienced attorneys struggled to determine who held the liability in the event of a breach."
             },
             {
                 "word": "opprobrium",
@@ -2899,9 +2898,9 @@ const coreDatabase = {
             {
                 "word": "ossify",
                 "type": "verb",
-                "def": "To turn into bone or bony tissue",
-                "example": "The cartilage in the body will slowly ossify into bone with age.",
-                "long_example": "As the young bird matures, the soft cartilage in its skeletal structure will gradually ossify into strong bone, enabling it to support its own body weight during flight."
+		"def": "To turn into bone or bony tissue; or figuratively, to become rigidly fixed, inflexible, and resistant to change",
+		"example": "Over time, the soft cartilage in an infant's skeleton will gradually ossify into solid bone.",
+		"long_example": "Decades of unchallenged market dominance caused the company's organizational structure to ossify, making it highly resistant to modernization and vulnerable to nimbler competitors."
             },
             {
                 "word": "ostensible",
@@ -2927,9 +2926,9 @@ const coreDatabase = {
             {
                 "word": "overwrought",
                 "type": "adj.",
-                "def": "Extremely agitated or upset",
-                "example": "She became overwrought with anxiety as she waited for the test results.",
-                "long_example": "After working ninety hours in a single week to meet the tight project deadline, the overwrought developer broke down in tears during a minor disagreement with his supervisor."
+		"def": "Deeply agitated, nervous, or emotionally distressed; or excessively elaborate, ornate, and overdone in style or design",
+		"example": "The movie's plot was overwrought with unnecessary subplots and exaggerated melodrama.",
+		"long_example": "After working ninety hours in a single week to meet the tight production deadline, the overwrought software engineer broke down in tears during a minor disagreement with the team lead."
             },
             {
                 "word": "palliate",
@@ -2983,8 +2982,8 @@ const coreDatabase = {
             {
                 "word": "parry",
                 "type": "verb",
-                "def": "To ward off a weapon or attack, especially with a countermove",
-                "example": "The fencer was able to parry his opponent's attack and score the winning point.",
+                "def": "To ward off a weapon or (verbal) attack, especially with a countermove",
+                "example": "During the grueling debate, the seasoned politician was able to parry her opponent's aggressive questions with clever, evasive answers.",
                 "long_example": "The agile duelist was able to parry his opponent's sudden thrust with his rapier, swiftly deflecting the blade to the side before launching a decisive counterattack of his own."
             },
             {
@@ -3004,8 +3003,8 @@ const coreDatabase = {
             {
                 "word": "patronize",
                 "type": "verb",
-                "def": "To treat someone with an apparent kindness that betrays a feeling of superiority",
-                "example": "Do not patronize me by talking down like I am a child.",
+                "def": "1. To speak or behave toward someone with an air of superiority, treating them as if they are less intelligent or capable 2. To be a regular customer of a business 3. To financially support a person, art, or organization",
+		"example": "Do not patronize me by talking down like I am a child.",
                 "long_example": "The senior software engineer did not mean to patronize the new intern, but his slow, deliberate explanations of basic concepts made her feel underestimated and frustrated."
             }
         ],
@@ -3034,7 +3033,7 @@ const coreDatabase = {
             {
                 "word": "pedant",
                 "type": "noun",
-                "def": "A person who is excessively concerned with minor details or rules",
+                "def": "A person who is excessively concerned with minor details or rules; nitpicker",
                 "example": "The grammar pedant constantly corrected everyone's minor mistakes during normal conversations.",
                 "long_example": "Although everyone respected the chief editor's vast knowledge, they grew weary of the pedant who would halt entire meetings just to debate the proper placement of a single semicolon in the footnotes."
             },
@@ -3055,7 +3054,7 @@ const coreDatabase = {
             {
                 "word": "pejorative",
                 "type": "adj.",
-                "def": "Expressing disapproval or belittlement",
+                "def": "Expressing disapproval or belittlement (esp. a word)",
                 "example": "He used a pejorative term to mock his rival's work.",
                 "long_example": "The political commentator's critique was criticized for its pejorative tone, as he chose to mock the senator's physical mannerisms rather than engage with the complex policy proposals."
             },
@@ -3180,10 +3179,10 @@ const coreDatabase = {
             },
             {
                 "word": "pine",
-                "type": "noun",
-                "def": "A type of evergreen tree with needles and cones",
-                "example": "The cabin stood next to a tall pine tree in the woods.",
-                "long_example": "The rugged log cabin was nestled deep within a dense forest of ancient pine, where the sweet, resinous scent of evergreen needles filled the crisp morning air."
+                "type": "verb",
+                "def": "To intensely yearn for someone or something unattainable; or to suffer a mental and physical decline due to deep grief or prolonged sadness",
+                "example": "He spent months pining for his hometown after moving abroad.",
+                "long_example": "After his lifelong companion passed away, the old man began to pine away, losing his appetite and refusing to leave the quiet house they had shared for decades."
             }
         ],
         "Set 19": [
@@ -3218,7 +3217,7 @@ const coreDatabase = {
             {
                 "word": "placate",
                 "type": "verb",
-                "def": "To calm someone down or make them less angry",
+                "def": "To calm someone down or make them less angry; often by soothing their feelings or making concessions",
                 "example": "The manager tried to placate the angry customer with a refund.",
                 "long_example": "Seeking to placate the growing crowd of protesters gathered outside the municipal office, the mayor stepped onto the balcony and promised a thorough, independent investigation into the department's controversial spending."
             },
@@ -3230,11 +3229,11 @@ const coreDatabase = {
                 "long_example": "Early in the morning, the surface of the mountain lake was so placid and undisturbed that it perfectly mirrored the surrounding evergreen forest and the distant snow-capped peaks."
             },
             {
-                "word": "plastic",
-                "type": "noun",
-                "def": "A synthetic material made from polymers that can be molded.",
-                "example": "The toys were made of durable and colorful plastic material.",
-                "long_example": "Environmental advocates are urging governments to restrict the production of single-use plastic, which frequently ends up in oceans and poses a severe threat to diverse marine ecosystems."
+    		"word": "plastic",
+    		"type": "adj.",
+    		"def": "Malleable, impressionable (easily influenced), or capable of being shaped and molded",
+    		"example": "Young children have highly plastic minds that easily absorb new languages and behaviors.",
+    		"long_example": "Neuroscientists have demonstrated that the human brain remains remarkably plastic throughout life, allowing individuals to form new neural connections and adapt to structural changes well into old age."
             },
             {
                 "word": "platitude",
@@ -3288,9 +3287,9 @@ const coreDatabase = {
             {
                 "word": "ponderous",
                 "type": "adj.",
-                "def": "Slow and clumsy because of great weight",
-                "example": "Carrying the large, heavy package was a ponderous task.",
-                "long_example": "The ancient oak wardrobe was so ponderous that it required four strong men to move it down the narrow stairs, and they still managed to scratch the walls."
+                "def": "1. Slow and clumsy because of great weight; 2. Boring referring to a book, speech, or style of writing or speaking because they're too slow, long, or serious:",
+                "example": "The professor's ponderous lecture sent half the class to sleep.",
+                "long_example": "Although the historical biography was meticulously researched, its ponderous prose and endless lists of minor dates made it an incredibly exhausting read for the undergraduate students."
             },
             {
                 "word": "posit",
@@ -3309,7 +3308,7 @@ const coreDatabase = {
             {
                 "word": "pragmatic",
                 "type": "adj.",
-                "def": "Dealing with things sensibly and realistically",
+                "def": "Dealing with things sensibly and realistically in a way that is based on practical rather than theoretical considerations",
                 "example": "The manager took a pragmatic step to resolve the minor crisis.",
                 "long_example": "The diplomat took a pragmatic approach to the border dispute, focusing on small, mutually beneficial trade agreements rather than trying to resolve centuries of deep-seated political hostility."
             },
@@ -3395,8 +3394,8 @@ const coreDatabase = {
             {
                 "word": "probity",
                 "type": "noun",
-                "def": "Adherence to the highest principles and ideals",
-                "example": "Nobody could question the financial probity of the clerk.",
+                "def": "Adherence to the highest principles and ideals; complete honesty",
+                "example": "Nobody could question the financial probity and integrity of the clerk.",
                 "long_example": "Throughout his thirty-year career in public service, the commissioner maintained a reputation for absolute probity, never once accepting gifts or political favors from special interest groups."
             },
             {
@@ -3551,7 +3550,7 @@ const coreDatabase = {
             {
                 "word": "pusillanimous",
                 "type": "adj.",
-                "def": "Lacking courage or determination",
+                "def": "Timid, fearful, or lacking in courage and resolution, typically referring to a person who shrinks from taking risks or standing up for themselves, often in a way that feels weak or contemptible",
                 "example": "The pusillanimous commander refused to lead his troops into battle.",
                 "long_example": "Instead of standing up to defend his colleagues during the board meeting, the manager made a pusillanimous decision to remain silent and avoid any personal confrontation."
             },
@@ -3721,7 +3720,7 @@ const coreDatabase = {
             {
                 "word": "restive",
                 "type": "adj.",
-                "def": "Unable to keep still or silent, becoming difficult to control",
+                "def": "Unable to keep still or silent, becoming difficult to control; impatient",
                 "example": "The crowd grew restive as they waited for the show to start.",
                 "long_example": "As the flight delay dragged on for a third hour without any announcement from the airline staff, the passengers in the terminal grew increasingly restive, muttering and pacing near the gate."
             },
@@ -3854,7 +3853,7 @@ const coreDatabase = {
             {
                 "word": "scurvy",
                 "type": "noun",
-                "def": "A disease caused by a deficiency of vitamin C, leading to symptoms such as anemia, gum disease, and skin problems.",
+                "def": "A disease caused by a deficiency of vitamin C, leading to symptoms such as anemia, gum disease, and skin problems. [adj. scurvy = arousing disgust or scorn: a scurvy trick]",
                 "example": "The sailors suffered from scurvy due to a lack of fresh fruit.",
                 "long_example": "During long sea voyages in the eighteenth century, many sailors tragically perished from scurvy due to the complete lack of fresh fruits and vegetables on board."
             },
@@ -3875,9 +3874,9 @@ const coreDatabase = {
             {
                 "word": "similar",
                 "type": "adj.",
-                "def": "Insipid -- lacking the qualities that interest, stimulate, or challenge (insipid also means lacking flavor)",
-                "example": "The two books had such similar plots that the second one felt insipid.",
-                "long_example": "Because the director's last three films featured almost identical plots and similar character archetypes, critics dismissed his latest cinematic release as an insipid and uninspired attempt to repeat his past successes."
+		"def": "Having a resemblance in appearance, character, or quantity, without being identical",
+    		"example": "I once worked a case in Miami that was eerily similar.",
+    		"long_example": "Although the two software architectures were developed by entirely distinct engineering teams, they utilized remarkably similar design patterns to solve the problem of high-throughput data ingestion."
             },
             {
                 "word": "sinecure",
@@ -3982,14 +3981,14 @@ const coreDatabase = {
             {
                 "word": "stigma",
                 "type": "noun",
-                "def": "A mark of disgrace or infamy",
+                "def": "A set of negative and unfair beliefs that a society or group of people have about something ; or a scar",
                 "example": "The ex-convict struggled to overcome the social stigma of jail.",
                 "long_example": "For many years, a significant social stigma was attached to bankruptcy, causing many bankrupt business owners to hide their financial failures from their families and close friends."
             },
             {
                 "word": "stipulate",
                 "type": "verb",
-                "def": "To specify a condition or requirement",
+                "def": "To specify a condition or requirement (exactly how something must be done or to demand a requirement as part of a formal agreement, contract, or rule)",
                 "example": "The contract rules stipulate that the work must finish soon.",
                 "long_example": "The terms of the peace treaty explicitly stipulate that both countries must immediately withdraw their armed forces from the disputed border zone to prevent any further military escalations."
             },
@@ -4024,7 +4023,7 @@ const coreDatabase = {
             {
                 "word": "subpoena",
                 "type": "noun",
-                "def": "A legal document ordering someone to attend a court proceeding",
+                "def": "A legal document ordering someone to attend a court proceeding [verb: to legally order someone to attend a court proceeding]",
                 "example": "The witness received a subpoena ordering him to attend court.",
                 "long_example": "The corporate accountant was shocked when he received a formal subpoena ordering him to testify before the federal grand jury regarding the company's suspicious financial transactions."
             },
@@ -4066,7 +4065,7 @@ const coreDatabase = {
             {
                 "word": "surfeit",
                 "type": "noun",
-                "def": "An excessive amount of something",
+                "def": "An excessive amount of something; or overindulging to the point of sickness or disgust",
                 "example": "The holiday feast offered a surfeit of delicious food.",
                 "long_example": "After the autumn harvest, the small agricultural village enjoyed a surfeit of grain and vegetables, ensuring that no family would go hungry during the cold winter months ahead."
             }
@@ -4102,10 +4101,10 @@ const coreDatabase = {
             },
             {
                 "word": "table",
-                "type": "noun",
-                "def": "A piece of furniture with a flat top supported by one or more legs.",
-                "example": "The dining table was made of polished cherry wood.",
-                "long_example": "The elegant dining room featured a massive mahogany table that was large enough to comfortably seat twelve guests during formal family gatherings and holiday banquets."
+                "type": "verb",
+                "def": "To delay the formal discussion of a subject until later",
+		"example": "The committee decided to table the proposal until the next monthly meeting.",
+    		"long_example": "Due to the sudden lack of consensus and missing financial figures, the city council voted to table the discussion on the new public infrastructure project until next month's legislative session."
             },
             {
                 "word": "tacit",
@@ -4187,7 +4186,7 @@ const coreDatabase = {
             {
                 "word": "toady",
                 "type": "noun",
-                "def": "A person who flatters or acts submissively to someone important to gain favor",
+                "def": "A person who flatters or acts submissively to someone important to gain favor [verb: toady]",
                 "example": "The manager was surrounded by toadies who agreed with everything he said.",
                 "long_example": "The arrogant director was always surrounded by a groveling toady who constantly praised his mediocre ideas in hopes of securing a promotion within the media company."
             },
@@ -4236,7 +4235,7 @@ const coreDatabase = {
             {
                 "word": "travesty",
                 "type": "noun",
-                "def": "A distorted or grossly inferior imitation",
+                "def": "A distorted or grossly inferior imitation of something that makes a mockery of what it is supposed to be",
                 "example": "The trial was a travesty of justice, with no fair review.",
                 "long_example": "Legal experts argued that the judge's biased ruling was a complete travesty of the justice system, setting a highly dangerous precedent that threatened the constitutional rights of all ordinary citizens."
             },
@@ -4385,9 +4384,9 @@ const coreDatabase = {
             {
                 "word": "veneer",
                 "type": "noun",
-                "def": "A thin decorative covering of fine wood applied to a coarser wood or other material.",
-                "example": "The table was covered in a thin veneer of polished oak wood.",
-                "long_example": "The master carpenter applied a thin veneer of cherry wood to the exterior of the cabinet, giving the simple pine structure a luxurious and highly polished appearance."
+                "def": "A superficial facade or appearance that hides something unpleasant, unwanted, or true feelings",
+                "example": "Beneath his veneer of calm confidence, he was incredibly nervous about the presentation.",
+                "long_example": "The upscale restaurant maintained a sophisticated veneer of flawless service, completely masking the chaotic, stressful arguments taking place among the kitchen staff just behind the closed doors."
             },
             {
                 "word": "venerate",
@@ -4450,7 +4449,7 @@ const coreDatabase = {
             {
                 "word": "vitiate",
                 "type": "verb",
-                "def": "To impair or spoil the quality or efficiency of something",
+                "def": "To impair or spoil the quality or efficiency of something; or to make it legally invalid",
                 "example": "The technical error will completely vitiate the results of the test.",
                 "long_example": "The legal expert warned that failing to document the chain of custody for the evidence would completely vitiate the prosecution's case, potentially allowing the guilty defendant to go free."
             },
@@ -4506,7 +4505,7 @@ const coreDatabase = {
             {
                 "word": "wanton",
                 "type": "adj.",
-                "def": "Deliberate and unprovoked",
+                "def": "Describing an action, feeling, or behavior that is deliberate, unprovoked, and completely lacking in care, restraint, or justification. It often describes senseless acts of cruelty, destruction, or extravagant and unrestrained indulgence",
                 "example": "The vandals committed acts of wanton destruction in the park.",
                 "long_example": "The community was deeply outraged by the wanton destruction of the historic library, which had served as a peaceful sanctuary for local residents for over a century."
             },
@@ -4527,9 +4526,9 @@ const coreDatabase = {
             {
                 "word": "whet",
                 "type": "verb",
-                "def": "To sharpen a tool or blade",
+                "def": "To stimulate, sharpen, or make keen or eager (e.g., to \"whet your appetite\" or \"whet your curiosity\" for something)",
                 "example": "The delicious smell served to whet our appetite for dinner.",
-                "long_example": "Before beginning the delicate restoration of the antique wooden cabinet, the master craftsman used a fine-grained oilstone to whet the dull edge of his favorite carving chisel."
+		"long_example": "The brief movie trailer was intentionally designed to whet the audience's curiosity, showing just enough gripping plot twists to make them incredibly eager to purchase tickets for the upcoming premiere."
             },
             {
                 "word": "whimsical",
@@ -5125,7 +5124,7 @@ const coreDatabase = {
             {
                 "word": "cacophony",
                 "type": "noun",
-                "def": "A harsh, discordant mixture of sounds",
+                "def": "A harsh, discordant mixture of sounds [opposite: euphony]",
                 "example": "The busy market was filled with a loud cacophony of voices.",
                 "long_example": "The tourists found it difficult to sleep in their downtown hotel room because of the constant cacophony of blaring car horns and shouting crowds from the nightclub below."
             },
@@ -5733,8 +5732,8 @@ const coreDatabase = {
             {
                 "word": "lavish",
                 "type": "adj.",
-                "def": "Luxuriously rich, elaborate, or generous",
-                "example": "The hosts organized a lavish dinner party for the guests.",
+                "def": "Luxuriously rich, elaborate, or generous [verb: spending, giving, or producing something in great abundance, often to the point of being extravagant or luxurious]",
+		"example": "The hosts organized a lavish dinner party for the guests.",
                 "long_example": "The wealthy couple hosted a lavish wedding reception in the grand ballroom of the historic hotel, offering their guests expensive champagne and a five-course gourmet dinner."
             },
             {
@@ -5903,9 +5902,9 @@ const coreDatabase = {
             {
                 "word": "insipid",
                 "type": "adj.",
-                "def": "Lacking flavor or taste",
-                "example": "The soup was insipid, completely lacking salt and flavor.",
-                "long_example": "The broth served at the hospital was watery and insipid, lacking the basic herbs and spices that would make it appetizing to the recovering patients in the ward."
+		"def": "Lacking flavor, vigor, or interest; dull, flat, or completely devoid of life and character",
+		"example": "The lukewarm coffee was watery and insipid, lacking any rich flavor.",
+		"long_example": "Critics dismissed the television series as an insipid corporate drama that relied entirely on predictable plotlines and uninspiring dialogue rather than genuine suspense."
             },
             {
                 "word": "lax",
@@ -6045,7 +6044,7 @@ const coreDatabase = {
             {
                 "word": "emulate",
                 "type": "verb",
-                "def": "To try to be like someone or something admired",
+                "def": "To try to be like someone or something admired; or to equal or approach equality with",
                 "example": "The young artist tried to emulate the style of the master.",
                 "long_example": "The young apprentice spent countless hours watching the master carpenter work, hoping to emulate the precise cutting techniques and patient craftsmanship that made the elder's furniture famous."
             },
@@ -6427,9 +6426,9 @@ const coreDatabase = {
             {
                 "word": "impervious",
                 "type": "adj.",
-                "def": "Not allowing fluid to pass through",
-                "example": "The plastic boots were impervious to water, keeping feet dry.",
-                "long_example": "The heavy canvas tent was treated with a specialized chemical sealant that made the fabric completely impervious to the torrential rain that fell continuously during the long storm."
+                "def": "Unable to be penetrated, influenced, or affected. Something that resists physical forces (like water or heat) or someone who is completely unaffected by abstract forces (like criticism or reason)",
+		"example": "The treated leather boots were completely impervious to the damp marsh mud.",
+		"long_example": "Despite facing relentless criticism and intense public scrutiny, the director remained entirely impervious to the backlash, refusing to alter a single scene of the controversial documentary."
             },
             {
                 "word": "inspire",
@@ -7340,9 +7339,9 @@ const coreDatabase = {
             {
                 "word": "opaque",
                 "type": "adj.",
-                "def": "Not allowing light to pass through",
-                "example": "The bathroom window was made of thick, opaque glass.",
-                "long_example": "To protect the fragile, centuries-old historical manuscripts from the damaging effects of direct sunlight, the museum curator installed thick, opaque black curtains over all the tall windows in the primary exhibition hall."
+                "def": "Convoluted or intentionally hidden (information, language, or reasoning)",
+		"example": "The politician gave an opaque answer to a straightforward question about tax reform.",
+		"long_example": "The legal contract was filled with such opaque jargon and dense clauses that even the experienced attorneys struggled to determine who held the liability in the event of a breach."
             },
             {
                 "word": "perpetuate",
@@ -7687,8 +7686,8 @@ const coreDatabase = {
             {
                 "word": "morose",
                 "type": "adj.",
-                "def": "Sullen and ill-tempered",
-                "example": "The morose old clerk rarely spoke and never smiled.",
+                "def": "Sullen, ill-tempered and gloomily silent",
+                "example": "After losing the championship game, the team sat in morose silence.",
                 "long_example": "Following the sudden cancellation of his research grant, the usually cheerful professor became increasingly morose, spending his afternoons staring blankly out the window and refusing to speak with any of his colleagues."
             },
             {
@@ -7722,7 +7721,7 @@ const coreDatabase = {
             {
                 "word": "restive",
                 "type": "adj.",
-                "def": "Unable to keep still or silent, becoming difficult to control",
+                "def": "Unable to keep still or silent, becoming difficult to control; impatient",
                 "example": "The crowd grew restive as they waited for the show to start.",
                 "long_example": "As the flight delay dragged on for a third hour without any announcement from the airline staff, the passengers in the terminal grew increasingly restive, muttering and pacing near the gate."
             },
@@ -8141,7 +8140,7 @@ const coreDatabase = {
             {
                 "word": "complacent",
                 "type": "adj.",
-                "def": "Self-satisfied and unaware of potential dangers or deficiencies",
+                "def": "Self-satisfied and unaware of potential dangers or deficiencies; someone overly content with themselves, their achievements, or their current situation",
                 "example": "Do not be complacent about safety rules in the lab.",
                 "long_example": "Although the tech giant currently dominates the global mobile market, its executives cannot afford to become complacent, as innovative rival startups are constantly developing cheaper and faster alternatives."
             },
@@ -8544,7 +8543,7 @@ const coreDatabase = {
             {
                 "word": "hapless",
                 "type": "adj.",
-                "def": "Unfortunate or having bad luck",
+                "def": "Exceptionally unlucky, unfortunate, or deserving of pity",
                 "example": "The hapless tourists got lost in the middle of the desert.",
                 "long_example": "The hapless driver had barely pulled out of the dealership when a sudden hailstorm severely damaged the hood of his brand-new sports car, leaving him absolutely devastated."
             },
@@ -8933,9 +8932,9 @@ const coreDatabase = {
             {
                 "word": "ossify",
                 "type": "verb",
-                "def": "To turn into bone or bony tissue",
-                "example": "The cartilage in the body will slowly ossify into bone with age.",
-                "long_example": "As the young bird matures, the soft cartilage in its skeletal structure will gradually ossify into strong bone, enabling it to support its own body weight during flight."
+		"def": "To turn into bone or bony tissue; or figuratively, to become rigidly fixed, inflexible, and resistant to change",
+		"example": "Over time, the soft cartilage in an infant's skeleton will gradually ossify into solid bone.",
+		"long_example": "Decades of unchallenged market dominance caused the company's organizational structure to ossify, making it highly resistant to modernization and vulnerable to nimbler competitors."
             },
             {
                 "word": "pervasive",
@@ -9005,7 +9004,7 @@ const coreDatabase = {
             {
                 "word": "apprehension",
                 "type": "noun",
-                "def": "Anxiety or fear about something bad",
+                "def": "Anxiety or fear about something bad; or the physical arrest or capture of someone suspected of a crime; or the mental capacity for understanding or grasping a concept",
                 "example": "She felt a sudden apprehension about walking in the dark.",
                 "long_example": "Despite her thorough preparation, she could not shake the feeling of apprehension that gripped her as she walked onto the stage for the live national broadcast watched by millions of viewers."
             },
@@ -9068,7 +9067,7 @@ const coreDatabase = {
             {
                 "word": "fractious",
                 "type": "adj.",
-                "def": "Irritable and quarrelsome",
+                "def": "someone or something that is irritable, easily annoyed, and hard to control. It often refers to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
                 "example": "The fractious children began to argue over the wooden toys.",
                 "long_example": "The exhausted tour guide struggled to manage the fractious group of travelers, who had been complaining about the bus schedule, hotel accommodations, and food quality all day."
             },
@@ -9450,8 +9449,8 @@ const coreDatabase = {
             {
                 "word": "lucid",
                 "type": "adj.",
-                "def": "Clear and easy to understand",
-                "example": "The explanation was highly clear, simple, and lucid.",
+                "def": "Clear and easy to understand; or thinking rationally, especially after a period of confusion, or a highly vivid state",
+                "example": "A few hours later, he was not only awake, he was lucid.",
                 "long_example": "The professor gave a remarkably lucid explanation of the complex thermodynamic principles, enabling even the novice students to comprehend the difficult material with relative ease."
             },
             {
@@ -9832,8 +9831,8 @@ const coreDatabase = {
             {
                 "word": "probity",
                 "type": "noun",
-                "def": "Adherence to the highest principles and ideals",
-                "example": "Nobody could question the financial probity of the clerk.",
+                "def": "Adherence to the highest principles and ideals; complete honesty",
+                "example": "Nobody could question the financial probity and integrity of the clerk.",
                 "long_example": "Throughout his thirty-year career in public service, the commissioner maintained a reputation for absolute probity, never once accepting gifts or political favors from special interest groups."
             },
             {
@@ -10258,7 +10257,7 @@ const coreDatabase = {
             {
                 "word": "caustic",
                 "type": "adj.",
-                "def": "Able to burn or corrode organic tissue",
+                "def": "Able to burn or corrode organic tissue; or sarcastic",
                 "example": "The cleaner contained a highly caustic chemical that could burn skin.",
                 "long_example": "The film critic's review was notoriously caustic, filled with sharp, mocking comparisons that left even the seasoned director feeling deeply embarrassed by the negative public reception."
             },
@@ -10335,8 +10334,8 @@ const coreDatabase = {
             {
                 "word": "luminous",
                 "type": "adj.",
-                "def": "Emitting or reflecting light",
-                "example": "The watch had luminous hands that glowed in the dark.",
+                "def": "Emitting or reflecting light; or very beautiful (for a person)",
+                "example": "She was bold and luminous.",
                 "long_example": "The deep-sea divers were amazed to discover a species of jellyfish that produced a luminous glow, lighting up the pitch-black waters of the ocean floor with eerie beauty."
             },
             {
@@ -10582,7 +10581,7 @@ const coreDatabase = {
             {
                 "word": "vitiate",
                 "type": "verb",
-                "def": "To impair or spoil the quality or efficiency of something",
+                "def": "To impair or spoil the quality or efficiency of something; or to make it legally invalid",
                 "example": "The technical error will completely vitiate the results of the test.",
                 "long_example": "The legal expert warned that failing to document the chain of custody for the evidence would completely vitiate the prosecution's case, potentially allowing the guilty defendant to go free."
             }
@@ -10922,7 +10921,7 @@ const coreDatabase = {
             {
                 "word": "surfeit",
                 "type": "noun",
-                "def": "An excessive amount of something",
+                "def": "An excessive amount of something; or overindulging to the point of sickness or disgust",
                 "example": "The holiday feast offered a surfeit of delicious food.",
                 "long_example": "After the autumn harvest, the small agricultural village enjoyed a surfeit of grain and vegetables, ensuring that no family would go hungry during the cold winter months ahead."
             },
@@ -11772,7 +11771,7 @@ const coreDatabase = {
             {
                 "word": "placate",
                 "type": "verb",
-                "def": "To calm someone down or make them less angry",
+                "def": "To calm someone down or make them less angry; often by soothing their feelings or making concessions",
                 "example": "The manager tried to placate the angry customer with a refund.",
                 "long_example": "Seeking to placate the growing crowd of protesters gathered outside the municipal office, the mayor stepped onto the balcony and promised a thorough, independent investigation into the department's controversial spending."
             },
@@ -12301,11 +12300,11 @@ const coreDatabase = {
                 "long_example": "Her swift and decisive response to the sudden corporate crisis is considered a paradigmatic example of effective leadership, often studied by business students in universities around the country."
             },
             {
-                "word": "plastic",
-                "type": "noun",
-                "def": "A synthetic material made from polymers that can be molded.",
-                "example": "The toys were made of durable and colorful plastic material.",
-                "long_example": "Environmental advocates are urging governments to restrict the production of single-use plastic, which frequently ends up in oceans and poses a severe threat to diverse marine ecosystems."
+    		"word": "plastic",
+    		"type": "adj.",
+    		"def": "Malleable, impressionable (easily influenced), or capable of being shaped and molded",
+    		"example": "Young children have highly plastic minds that easily absorb new languages and behaviors.",
+    		"long_example": "Neuroscientists have demonstrated that the human brain remains remarkably plastic throughout life, allowing individuals to form new neural connections and adapt to structural changes well into old age."
             },
             {
                 "word": "projection",
@@ -12722,7 +12721,7 @@ const coreDatabase = {
             {
                 "word": "articulate",
                 "type": "adj.",
-                "def": "Able to express thoughts clearly and effectively",
+                "def": "Able to express thoughts clearly and effectively [verb: articulate]",
                 "example": "The candidate gave a highly articulate and clear speech.",
                 "long_example": "The defense attorney presented an articulate summary of the case, systematically refuting the prosecution's arguments and convincing the jury of his client's innocence in the matter."
             },
@@ -14131,7 +14130,7 @@ const coreDatabase = {
             {
                 "word": "alacrity",
                 "type": "noun",
-                "def": "Brisk and cheerful readiness",
+                "def": "Brisk and cheerful readiness, willingness to do something",
                 "example": "She accepted the job offer with great alacrity and cheer.",
                 "long_example": "New recruits were expected to complete every assigned task with genuine alacrity, and the drill sergeant made it abundantly clear that hesitation would not be tolerated during training."
             },
@@ -14257,7 +14256,7 @@ const coreDatabase = {
             {
                 "word": "prosaic",
                 "type": "adj.",
-                "def": "Lacking in imagination or originality",
+                "def": "Lacking in imagination or originality; ordinary, dull, mundane",
                 "example": "The report was written in a highly prosaic and dry style.",
                 "long_example": "Instead of the lyrical masterpiece the critics had anticipated, the celebrated poet delivered a surprisingly prosaic collection of verses that focused on mundane everyday chores."
             },
@@ -15482,7 +15481,7 @@ const coreDatabase = {
             {
                 "word": "patronize",
                 "type": "verb",
-                "def": "To treat someone with an apparent kindness that betrays a feeling of superiority",
+                "def": "1. To speak or behave toward someone with an air of superiority, treating them as if they are less intelligent or capable 2. To be a regular customer of a business 3. To financially support a person, art, or organization",
                 "example": "Do not patronize me by talking down like I am a child.",
                 "long_example": "The senior software engineer did not mean to patronize the new intern, but his slow, deliberate explanations of basic concepts made her feel underestimated and frustrated."
             },
@@ -15914,10 +15913,9 @@ const coreDatabase = {
             },
             {
                 "word": "brook",
-                "type": "noun",
-                "def": "A small stream",
-                "example": "A small brook flowed quietly through the green meadow.",
-                "long_example": "A cold, clear brook flowed gently through the middle of the valley, providing a peaceful drinking spot for the deer and other wildlife that inhabited the surrounding forest."
+                "type": "verb",
+                "def": "To tolerate or allow",
+		"example": "The commanding officer made it clear he would brook no disobedience from his troops.",		"long_example": "The proud chef refused to brook any alterations to his signature recipe, insisting that every ingredient must remain exactly as he had originally intended for the dish."
             },
             {
                 "word": "cluster",
@@ -15971,7 +15969,7 @@ const coreDatabase = {
             {
                 "word": "glib",
                 "type": "adj.",
-                "def": "Speaking in a smooth, easy way that may not be sincere",
+                "def": "Speaking in a smooth, easy way but without careful thought, sincerity or honesty",
                 "example": "The salesman gave a glib response that sounded insincere.",
                 "long_example": "The politician's glib explanations regarding the massive budget deficit failed to reassure the skeptical voters, who demanded concrete plans and transparent financial audits instead of empty campaign promises."
             },
@@ -16048,7 +16046,7 @@ const coreDatabase = {
             {
                 "word": "stigma",
                 "type": "noun",
-                "def": "A mark of disgrace or infamy",
+                "def": "A set of negative and unfair beliefs that a society or group of people have about something ; or a scar",
                 "example": "The ex-convict struggled to overcome the social stigma of jail.",
                 "long_example": "For many years, a significant social stigma was attached to bankruptcy, causing many bankrupt business owners to hide their financial failures from their families and close friends."
             },
@@ -16120,7 +16118,7 @@ const coreDatabase = {
             {
                 "word": "disinterested",
                 "type": "adj.",
-                "def": "Impartial or unbiased",
+                "def": "Impartial, unbiased ; or not interested",
                 "example": "A disinterested third party was called to arbitrate the dispute.",
                 "long_example": "To resolve the long-standing boundary dispute between the two farmers, the court appointed a disinterested land surveyor who had no personal or financial ties to either family."
             },
@@ -16516,7 +16514,7 @@ const coreDatabase = {
             {
                 "word": "ingenuous",
                 "type": "adj.",
-                "def": "Showing innocence and simplicity",
+                "def": "Honest and direct, unsuspecting, trusting (unable to hide feelings or disguise true intentions)",
                 "example": "The child gave an ingenuous smile and admitted he took the cookie.",
                 "long_example": "Her ingenuous nature made her believe the elaborate stories told by the smooth-talking salesman, resulting in her purchasing a completely useless warranty for an exorbitant price."
             },
@@ -16544,16 +16542,16 @@ const coreDatabase = {
             {
                 "word": "pejorative",
                 "type": "adj.",
-                "def": "Expressing disapproval or belittlement",
+                "def": "Expressing disapproval or belittlement (esp. a word)",
                 "example": "He used a pejorative term to mock his rival's work.",
                 "long_example": "The political commentator's critique was criticized for its pejorative tone, as he chose to mock the senator's physical mannerisms rather than engage with the complex policy proposals."
             },
             {
                 "word": "ponderous",
                 "type": "adj.",
-                "def": "Slow and clumsy because of great weight",
-                "example": "Carrying the large, heavy package was a ponderous task.",
-                "long_example": "The ancient oak wardrobe was so ponderous that it required four strong men to move it down the narrow stairs, and they still managed to scratch the walls."
+                "def": "1. Slow and clumsy because of great weight; 2. Boring referring to a book, speech, or style of writing or speaking because they're too slow, long, or serious:",
+                "example": "The professor's ponderous lecture sent half the class to sleep.",
+                "long_example": "Although the historical biography was meticulously researched, its ponderous prose and endless lists of minor dates made it an incredibly exhausting read for the undergraduate students."
             },
             {
                 "word": "puerile",
@@ -16658,7 +16656,7 @@ const coreDatabase = {
             {
                 "word": "eloquent",
                 "type": "adj.",
-                "def": "Having or showing the ability to use language clearly and effectively",
+                "def": "Having or showing the ability to expresses ideas, opinions, or feelings clearly and effectively",
                 "example": "The president delivered an eloquent speech that inspired the nation.",
                 "long_example": "The defense attorney delivered an eloquent closing argument that highlighted the lack of physical evidence, successfully persuading the jury to acquit his client of all charges."
             },
@@ -17160,10 +17158,10 @@ const coreDatabase = {
             },
             {
                 "word": "buttress",
-                "type": "noun",
-                "def": "A support built against a wall for reinforcement",
-                "example": "The engineers built a heavy wall to buttress the old bridge.",
-                "long_example": "Architectural restorers realized that the medieval cathedral needed a new stone buttress to stabilize the crumbling southern wall before the heavy winter snows caused further structural damage."
+                "type": "verb",
+                "def": "To support, reinforce, or strengthen [noun: A support built against a wall for reinforcement]",
+		"example": "Workers added temporary steel columns to buttress the tunnel roof during the excavation.",
+		"long_example": "The research team gathered extensive statistical data from over a dozen independent clinical trials to buttress their hypothesis before submitting the manuscript to a peer-reviewed journal."
             },
             {
                 "word": "coercion",
@@ -17678,7 +17676,7 @@ const coreDatabase = {
             {
                 "word": "stipulate",
                 "type": "verb",
-                "def": "To specify a condition or requirement",
+                "def": "To specify a condition or requirement (exactly how something must be done or to demand a requirement as part of a formal agreement, contract, or rule)",
                 "example": "The contract rules stipulate that the work must finish soon.",
                 "long_example": "The terms of the peace treaty explicitly stipulate that both countries must immediately withdraw their armed forces from the disputed border zone to prevent any further military escalations."
             },
@@ -17861,10 +17859,10 @@ const coreDatabase = {
             },
             {
                 "word": "table",
-                "type": "noun",
-                "def": "A piece of furniture with a flat top supported by one or more legs.",
-                "example": "The dining table was made of polished cherry wood.",
-                "long_example": "The elegant dining room featured a massive mahogany table that was large enough to comfortably seat twelve guests during formal family gatherings and holiday banquets."
+                "type": "verb",
+                "def": "To delay the formal discussion of a subject until later",
+		"example": "The committee decided to table the proposal until the next monthly meeting.",
+    		"long_example": "Due to the sudden lack of consensus and missing financial figures, the city council voted to table the discussion on the new public infrastructure project until next month's legislative session."
             },
             {
                 "word": "vanguard",
@@ -18053,9 +18051,9 @@ const coreDatabase = {
             {
                 "word": "whet",
                 "type": "verb",
-                "def": "To sharpen a tool or blade",
+                "def": "To stimulate, sharpen, or make keen or eager (e.g., to \"whet your appetite\" or \"whet your curiosity\" for something)",
                 "example": "The delicious smell served to whet our appetite for dinner.",
-                "long_example": "Before beginning the delicate restoration of the antique wooden cabinet, the master craftsman used a fine-grained oilstone to whet the dull edge of his favorite carving chisel."
+		"long_example": "The brief movie trailer was intentionally designed to whet the audience's curiosity, showing just enough gripping plot twists to make them incredibly eager to purchase tickets for the upcoming premiere."
             }
         ],
         "Set 5": [
@@ -18195,8 +18193,8 @@ const coreDatabase = {
             {
                 "word": "scurvy",
                 "type": "noun",
-                "def": "A disease caused by a deficiency of vitamin C, leading to symptoms such as anemia, gum disease, and skin problems.",
-                "example": "The sailors suffered from scurvy due to a lack of fresh fruit.",
+                "def": "A disease caused by a deficiency of vitamin C, leading to symptoms such as anemia, gum disease, and skin problems. [adj. scurvy = arousing disgust or scorn: a scurvy trick]",
+		"example": "The sailors suffered from scurvy due to a lack of fresh fruit.",
                 "long_example": "During long sea voyages in the eighteenth century, many sailors tragically perished from scurvy due to the complete lack of fresh fruits and vegetables on board."
             },
             {
@@ -19047,7 +19045,7 @@ const coreDatabase = {
             {
                 "word": "pragmatic",
                 "type": "adj.",
-                "def": "Dealing with things sensibly and realistically",
+                "def": "Dealing with things sensibly and realistically in a way that is based on practical rather than theoretical considerations",
                 "example": "The manager took a pragmatic step to resolve the minor crisis.",
                 "long_example": "The diplomat took a pragmatic approach to the border dispute, focusing on small, mutually beneficial trade agreements rather than trying to resolve centuries of deep-seated political hostility."
             },
@@ -19387,7 +19385,7 @@ const coreDatabase = {
             {
                 "word": "myriad",
                 "type": "noun",
-                "def": "A very large number of things",
+                "def": "A very large number of things [adj. myriad]",
                 "example": "The night sky was filled with a myriad of sparkling stars.",
                 "long_example": "As she looked up at the clear night sky far away from the city lights, a myriad of stars stretched across the dark canopy, leaving her in absolute awe of the vast universe."
             },
@@ -19797,7 +19795,7 @@ const coreDatabase = {
             {
                 "word": "travesty",
                 "type": "noun",
-                "def": "A distorted or grossly inferior imitation",
+                "def": "A distorted or grossly inferior imitation of something that makes a mockery of what it is supposed to be",
                 "example": "The trial was a travesty of justice, with no fair review.",
                 "long_example": "Legal experts argued that the judge's biased ruling was a complete travesty of the justice system, setting a highly dangerous precedent that threatened the constitutional rights of all ordinary citizens."
             },
@@ -19976,7 +19974,7 @@ const coreDatabase = {
             {
                 "word": "subpoena",
                 "type": "noun",
-                "def": "A legal document ordering someone to attend a court proceeding",
+                "def": "A legal document ordering someone to attend a court proceeding [verb: to legally order someone to attend a court proceeding]",
                 "example": "The witness received a subpoena ordering him to attend court.",
                 "long_example": "The corporate accountant was shocked when he received a formal subpoena ordering him to testify before the federal grand jury regarding the company's suspicious financial transactions."
             },
@@ -20167,9 +20165,9 @@ const coreDatabase = {
             {
                 "word": "veneer",
                 "type": "noun",
-                "def": "A thin decorative covering of fine wood applied to a coarser wood or other material.",
-                "example": "The table was covered in a thin veneer of polished oak wood.",
-                "long_example": "The master carpenter applied a thin veneer of cherry wood to the exterior of the cabinet, giving the simple pine structure a luxurious and highly polished appearance."
+                "def": "A superficial facade or appearance that hides something unpleasant, unwanted, or true feelings",
+                "example": "Beneath his veneer of calm confidence, he was incredibly nervous about the presentation.",
+                "long_example": "The upscale restaurant maintained a sophisticated veneer of flawless service, completely masking the chaotic, stressful arguments taking place among the kitchen staff just behind the closed doors."
             }
         ],
         "Set 3": [
@@ -20471,10 +20469,10 @@ const coreDatabase = {
             },
             {
                 "word": "pine",
-                "type": "noun",
-                "def": "A type of evergreen tree with needles and cones",
-                "example": "The cabin stood next to a tall pine tree in the woods.",
-                "long_example": "The rugged log cabin was nestled deep within a dense forest of ancient pine, where the sweet, resinous scent of evergreen needles filled the crisp morning air."
+                "type": "verb",
+                "def": "To intensely yearn for someone or something unattainable; or to suffer a mental and physical decline due to deep grief or prolonged sadness",
+                "example": "He spent months pining for his hometown after moving abroad.",
+                "long_example": "After his lifelong companion passed away, the old man began to pine away, losing his appetite and refusing to leave the quiet house they had shared for decades."
             },
             {
                 "word": "provisional",
@@ -21117,7 +21115,7 @@ const coreDatabase = {
             {
                 "word": "dispatch",
                 "type": "verb",
-                "def": "To send off to a destination or for a purpose",
+                "def": "To send off a person, vehicle, or message to a specific destination for a particular purpose, or to deal with a task quickly and efficiently",
                 "example": "The company decided to dispatch the packages via express mail.",
                 "long_example": "Upon receiving the urgent distress call from the remote weather station, the emergency coordinator prepared to dispatch a rescue helicopter equipped with medical supplies and survival gear."
             },
@@ -21937,7 +21935,7 @@ const coreDatabase = {
             {
                 "word": "wanton",
                 "type": "adj.",
-                "def": "Deliberate and unprovoked",
+                "def": "Describing an action, feeling, or behavior that is deliberate, unprovoked, and completely lacking in care, restraint, or justification. It often describes senseless acts of cruelty, destruction, or extravagant and unrestrained indulgence",
                 "example": "The vandals committed acts of wanton destruction in the park.",
                 "long_example": "The community was deeply outraged by the wanton destruction of the historic library, which had served as a peaceful sanctuary for local residents for over a century."
             }
@@ -22491,9 +22489,9 @@ const coreDatabase = {
             {
                 "word": "catalyst",
                 "type": "noun",
-                "def": "A substance that increases the rate of a chemical reaction without itself undergoing any permanent chemical change.",
-                "example": "The digital campaign acted as a catalyst for social reform.",
-                "long_example": "The chemistry student added a small amount of manganese dioxide to the hydrogen peroxide solution, serving as a catalyst that rapidly accelerated the release of oxygen gas."
+		"def": "A person, event, or thing that precipitates a significant change or action.",
+		"example": "The digital campaign acted as a catalyst for social reform.",
+		"long_example": "The unexpected entry of a well-funded competitor served as the catalyst that forced the tech startup to completely overhaul its product roadmap and accelerate its development timeline."
             },
             {
                 "word": "condolence",
@@ -22903,7 +22901,7 @@ const coreDatabase = {
             {
                 "word": "pusillanimous",
                 "type": "adj.",
-                "def": "Lacking courage or determination",
+		"def": "Timid, fearful, or lacking in courage and resolution, typically referring to a person who shrinks from taking risks or standing up for themselves, often in a way that feels weak or contemptible",
                 "example": "The pusillanimous commander refused to lead his troops into battle.",
                 "long_example": "Instead of standing up to defend his colleagues during the board meeting, the manager made a pusillanimous decision to remain silent and avoid any personal confrontation."
             },
@@ -22931,7 +22929,7 @@ const coreDatabase = {
             {
                 "word": "toady",
                 "type": "noun",
-                "def": "A person who flatters or acts submissively to someone important to gain favor",
+                "def": "A person who flatters or acts submissively to someone important to gain favor [verb: toady]",
                 "example": "The manager was surrounded by toadies who agreed with everything he said.",
                 "long_example": "The arrogant director was always surrounded by a groveling toady who constantly praised his mediocre ideas in hopes of securing a promotion within the media company."
             },
@@ -23031,9 +23029,9 @@ const coreDatabase = {
             {
                 "word": "maelstrom",
                 "type": "noun",
-                "def": "A powerful whirlpool",
+                "def": "A powerful whirlpool; or figuratively, a chaotic or turbulent state of affairs, such as intense emotional turmoil or a deeply confused situation",
                 "example": "The ship was caught in a violent maelstrom off the rocky coast.",
-                "long_example": "The small fishing vessel was suddenly caught in a violent maelstrom near the rocky coast, and the crew had to work frantically to navigate their ship back to calmer waters."
+		"long_example": "The sudden resignation of the prime minister plunged the country into a political maelstrom, sparking nationwide protests and triggering an emergency election."
             },
             {
                 "word": "meritocracy",
@@ -23520,7 +23518,7 @@ const coreDatabase = {
             {
                 "word": "euphony",
                 "type": "noun",
-                "def": "Pleasant sound",
+                "def": "Pleasant sound [opposite: cacophony]",
                 "example": "The poet selected words for their euphony and rhythm.",
                 "long_example": "The meticulous composer spent several months revising the woodwind section's harmonies to achieve a perfect euphony that would soothe the listeners and elevate the entire symphonic performance to a new emotional height."
             },
@@ -23928,11 +23926,11 @@ const coreDatabase = {
                 "long_example": "Seeking escape from the noisy distractions of modern society, the writer adopted a monastic lifestyle in a remote cabin, dedicating his days to silent contemplation and writing."
             },
             {
-                "word": "nettle",
-                "type": "noun",
-                "def": "A plant with stinging hairs",
-                "example": "The politician's rude comments seemed to nettle the interviewer.",
-                "long_example": "While hiking off the designated trail through the overgrown forest, the children accidentally brushed against a patch of stinging nettle, which immediately caused a red, painful rash on their bare ankles."
+    		"word": "nettle",
+    		"type": "verb",
+    		"def": "To irritate, annoy, or provoke someone",
+    		"example": "His constant interruptions began to nettle the committee members during the meeting.",
+    		"long_example": "The manager's passive-aggressive feedback during the review served only to nettle the software developer, who felt that his recent technical contributions were being deliberately undervalued."
             },
             {
                 "word": "ostensible",
@@ -23944,8 +23942,8 @@ const coreDatabase = {
             {
                 "word": "parry",
                 "type": "verb",
-                "def": "To ward off a weapon or attack, especially with a countermove",
-                "example": "The fencer was able to parry his opponent's attack and score the winning point.",
+                "def": "To ward off a weapon or (verbal) attack, especially with a countermove",
+                "example": "During the grueling debate, the seasoned politician was able to parry her opponent's aggressive questions with clever, evasive answers.",
                 "long_example": "The agile duelist was able to parry his opponent's sudden thrust with his rapier, swiftly deflecting the blade to the side before launching a decisive counterattack of his own."
             },
             {
@@ -24058,7 +24056,7 @@ const coreDatabase = {
             {
                 "word": "ford",
                 "type": "noun",
-                "def": "A shallow place in a river or stream allowing one to walk or drive across.",
+                "def": "A shallow place in a river or stream allowing one to walk or drive across [verb: to cross a shallow part of a body of water]",
                 "example": "They rode their horses across the shallow ford to get to the other side of the river.",
                 "long_example": "The weary travelers were relieved to discover a shallow ford across the turbulent mountain river, allowing their heavily loaded wagons to cross safely without risk of sinking."
             },
@@ -24107,9 +24105,9 @@ const coreDatabase = {
             {
                 "word": "overwrought",
                 "type": "adj.",
-                "def": "Extremely agitated or upset",
-                "example": "She became overwrought with anxiety as she waited for the test results.",
-                "long_example": "After working ninety hours in a single week to meet the tight project deadline, the overwrought developer broke down in tears during a minor disagreement with his supervisor."
+		"def": "Deeply agitated, nervous, or emotionally distressed; or excessively elaborate, ornate, and overdone in style or design",
+		"example": "The movie's plot was overwrought with unnecessary subplots and exaggerated melodrama.",
+		"long_example": "After working ninety hours in a single week to meet the tight production deadline, the overwrought software engineer broke down in tears during a minor disagreement with the team lead."
             },
             {
                 "word": "patriarch",
@@ -24420,10 +24418,10 @@ const coreDatabase = {
             },
             {
                 "word": "flag",
-                "type": "noun",
-                "def": "A piece of cloth with a distinctive design used as a symbol of a country or institution",
-                "example": "The ship displayed a red flag to signal an emergency.",
-                "long_example": "The mountaineers proudly planted their national flag at the highest peak of the summit to mark their successful and historic ascent under extremely challenging winter conditions."
+                "type": "verb",
+                "def": "To mark, identify, or draw attention to something; or to lose energy, weaken, or become tired",
+                "example": "By the final mile of the marathon, the runner's pace began to flag from exhaustion.",
+                "long_example": "The compliance officer quickly decided to flag the suspicious transactions for senior management to review after noticing a series of large, unexplained international wire transfers."
             },
             {
                 "word": "halcyon",
@@ -25059,7 +25057,7 @@ const coreDatabase = {
             {
                 "word": "anodyne",
                 "type": "adj.",
-                "def": "Not likely to provoke offense or disagreement; inoffensive",
+                "def": "Not likely to provoke offense or disagreement; inoffensive [noun: painkiller or source of comfort]",
                 "example": "The speech was safe, dull, and full of anodyne comments.",
                 "long_example": "Hoping to avoid political division before the upcoming election, the candidate delivered an exceptionally anodyne speech that focused on vague generalities rather than addressing the controversial economic reforms facing the nation."
             },
@@ -25243,8 +25241,8 @@ const coreDatabase = {
             {
                 "word": "artifice",
                 "type": "noun",
-                "def": "Clever or cunning devices used to trick or deceive others",
-                "example": "The magician used clever artifice to make the rabbit vanish.",
+                "def": "A clever, cunning, or deceptive trick, stratagem, or devices",
+                "example": "She spoke honestly and without artifice.",
                 "long_example": "The master illusionist relied on mechanical artifice and misdirection to make the large cabinet appear to vanish from the stage before the eyes of the amazed audience."
             },
             {
@@ -25525,7 +25523,7 @@ const coreDatabase = {
             {
                 "word": "obtuse",
                 "type": "adj.",
-                "def": "Slow to understand or perceive",
+                "def": "Slow to understand or perceive; failing to grasp simple concepts or failing to pick up on obvious hints",
                 "example": "The assistant was obtuse, failing to understand simple rules.",
                 "long_example": "The auditor found it hard to believe that the accountant was genuinely obtuse about the obvious discrepancies, suspecting instead that he was deliberately hiding the truth."
             },
@@ -28338,9 +28336,9 @@ const coreDatabase = {
             {
                 "word": "similar",
                 "type": "adj.",
-                "def": "Insipid -- lacking the qualities that interest, stimulate, or challenge (insipid also means lacking flavor)",
-                "example": "The two books had such similar plots that the second one felt insipid.",
-                "long_example": "Because the director's last three films featured almost identical plots and similar character archetypes, critics dismissed his latest cinematic release as an insipid and uninspired attempt to repeat his past successes."
+		"def": "Having a resemblance in appearance, character, or quantity, without being identical",
+    		"example": "I once worked a case in Miami that was eerily similar.",
+    		"long_example": "Although the two software architectures were developed by entirely distinct engineering teams, they utilized remarkably similar design patterns to solve the problem of high-throughput data ingestion."
             },
             {
                 "word": "supplication",
@@ -40993,7 +40991,7 @@ const coreDatabase = {
             {
                 "word": "pedant",
                 "type": "noun",
-                "def": "A person who is excessively concerned with minor details or rules",
+                "def": "A person who is excessively concerned with minor details or rules; nitpicker",
                 "example": "The grammar pedant constantly corrected everyone's minor mistakes during normal conversations.",
                 "long_example": "Although everyone respected the chief editor's vast knowledge, they grew weary of the pedant who would halt entire meetings just to debate the proper placement of a single semicolon in the footnotes."
             },
@@ -52116,3 +52114,1175 @@ const coreDatabase = {
         ]
     }
 };
+
+// Shared vocab groups data
+const VOCAB_GROUPS = [
+    {
+        "id": 1,
+        "name": "Praise, Approval & Acclaim",
+        "count": 25,
+        "description": "Words expressing praise, approval, admiration, or positive recognition",
+        "words": [
+            "acclaim",
+            "approbation",
+            "champion",
+            "cherish",
+            "commend",
+            "extol",
+            "laudable",
+            "lionize",
+            "tout",
+            "venerate",
+            "gratify",
+            "relish",
+            "heed",
+            "esteem",
+            "felicitous",
+            "estimable",
+            "meritorious",
+            "exemplary",
+            "benevolent",
+            "magnanimous",
+            "altruistic",
+            "beneficent",
+            "munificent",
+            "largesse",
+            "boon"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Criticize, Condemn & Scold",
+        "count": 32,
+        "description": "Words expressing criticism, condemnation, scolding, or negative judgment",
+        "words": [
+            "admonish",
+            "berate",
+            "castigate",
+            "censure",
+            "chastise",
+            "decry",
+            "denounce",
+            "deride",
+            "disdain",
+            "excoriate",
+            "lambaste",
+            "reproach",
+            "scorn",
+            "upbraid",
+            "vilify",
+            "defame",
+            "malign",
+            "slander",
+            "calumny",
+            "aspersion",
+            "deprecate",
+            "disparage",
+            "belittle",
+            "denigrate",
+            "pejorative",
+            "contempt",
+            "scathing",
+            "caustic",
+            "mordant",
+            "tirade",
+            "harangue",
+            "objurgation"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Calm, Peaceful & Soothe",
+        "count": 23,
+        "description": "Words describing calmness, peace, or actions that calm and soothe",
+        "words": [
+            "appease",
+            "assuage",
+            "alleviate",
+            "ameliorate",
+            "mitigate",
+            "placate",
+            "mollify",
+            "pacify",
+            "tranquil",
+            "serene",
+            "placid",
+            "quiescent",
+            "repose",
+            "torpor",
+            "lull",
+            "subside",
+            "abate",
+            "wane",
+            "ebb",
+            "temper",
+            "moderate",
+            "conciliatory",
+            "sanguine"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Arrogant, Proud & Haughty",
+        "count": 18,
+        "description": "Words describing excessive pride, arrogance, or superiority",
+        "words": [
+            "haughty",
+            "imperious",
+            "arrogant",
+            "presumptuous",
+            "pomposity",
+            "pretentious",
+            "ostentatious",
+            "bombastic",
+            "grandiose",
+            "supercilious",
+            "condescending",
+            "patronize",
+            "disdainful",
+            "sanctimonious",
+            "self-important",
+            "vainglorious",
+            "narcissism",
+            "egotistical"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Stubborn, Inflexible & Unyielding",
+        "count": 22,
+        "description": "Words describing stubbornness, inflexibility, or unwillingness to change",
+        "words": [
+            "intransigent",
+            "obstinate",
+            "obdurate",
+            "pertinacious",
+            "dogged",
+            "tenacious",
+            "resolute",
+            "steadfast",
+            "stalwart",
+            "immutable",
+            "inexorable",
+            "inflexible",
+            "rigid",
+            "adamant",
+            "unyielding",
+            "implacable",
+            "recalcitrant",
+            "refractory",
+            "obstreperous",
+            "headstrong",
+            "willful",
+            "hidebound"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Deceptive, Dishonest & False",
+        "count": 26,
+        "description": "Words describing deception, dishonesty, or falseness",
+        "words": [
+            "duplicitous",
+            "disingenuous",
+            "dissemble",
+            "feign",
+            "fabricate",
+            "prevaricate",
+            "equivocate",
+            "mendacity",
+            "perfidy",
+            "treachery",
+            "betray",
+            "bogus",
+            "spurious",
+            "specious",
+            "fallacious",
+            "counterfeit",
+            "sham",
+            "phony",
+            "artifice",
+            "chicanery",
+            "skullduggery",
+            "malfeasance",
+            "guile",
+            "cunning",
+            "surreptitious",
+            "furtive"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Brief, Short & Temporary",
+        "count": 17,
+        "description": "Words describing brevity, shortness, or temporary nature",
+        "words": [
+            "ephemeral",
+            "evanescent",
+            "transient",
+            "transitory",
+            "fleeting",
+            "momentary",
+            "temporary",
+            "brief",
+            "cursory",
+            "perfunctory",
+            "superficial",
+            "terse",
+            "laconic",
+            "pithy",
+            "succinct",
+            "brevity",
+            "concise"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Eager, Enthusiastic & Zealous",
+        "count": 19,
+        "description": "Words expressing eagerness, enthusiasm, or passionate devotion",
+        "words": [
+            "alacrity",
+            "ardent",
+            "fervent",
+            "fervid",
+            "zealous",
+            "avid",
+            "keen",
+            "arduous",
+            "sedulous",
+            "assiduous",
+            "diligent",
+            "industrious",
+            "indefatigable",
+            "tireless",
+            "fervor",
+            "passion",
+            "ebullient",
+            "exuberant",
+            "buoyant"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Obscure, Unclear & Confusing",
+        "count": 24,
+        "description": "Words describing things that are unclear, hidden, or difficult to understand",
+        "words": [
+            "abstruse",
+            "arcane",
+            "esoteric",
+            "recondite",
+            "enigmatic",
+            "cryptic",
+            "inscrutable",
+            "opaque",
+            "obscure",
+            "abstruse",
+            "convoluted",
+            "labyrinthine",
+            "byzantine",
+            "perplexing",
+            "mystifying",
+            "baffling",
+            "bewildering",
+            "confounding",
+            "obfuscate",
+            "befuddled",
+            "disconcerting",
+            "perplexed",
+            "nonplussed",
+            "flummoxed"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Hostile, Aggressive & Unfriendly",
+        "count": 21,
+        "description": "Words expressing hostility, aggression, or unfriendliness",
+        "words": [
+            "antagonize",
+            "belligerent",
+            "pugnacious",
+            "truculent",
+            "contentious",
+            "combative",
+            "militant",
+            "inimical",
+            "antipathy",
+            "animosity",
+            "animus",
+            "enmity",
+            "acrimonious",
+            "rancorous",
+            "virulent",
+            "venomous",
+            "malevolent",
+            "malicious",
+            "spiteful",
+            "vindictive",
+            "ire"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Talkative, Wordy & Verbose",
+        "count": 16,
+        "description": "Words describing excessive talkativeness or wordiness",
+        "words": [
+            "garrulous",
+            "loquacious",
+            "verbose",
+            "voluble",
+            "vociferous",
+            "prolix",
+            "diffuse",
+            "rambling",
+            "discursive",
+            "circuitous",
+            "redundant",
+            "repetitive",
+            "tautological",
+            "pleonastic",
+            "bombastic",
+            "grandiloquent"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Lazy, Inactive & Sluggish",
+        "count": 14,
+        "description": "Words describing laziness, inactivity, or lack of energy",
+        "words": [
+            "indolent",
+            "lethargic",
+            "sluggish",
+            "languid",
+            "listless",
+            "somnolent",
+            "soporific",
+            "torpid",
+            "dormant",
+            "stagnant",
+            "inert",
+            "supine",
+            "slothful",
+            "idle"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Small, Tiny & Insignificant",
+        "count": 18,
+        "description": "Words describing smallness, insignificance, or triviality",
+        "words": [
+            "diminutive",
+            "minute",
+            "minuscule",
+            "infinitesimal",
+            "negligible",
+            "trivial",
+            "trifling",
+            "paltry",
+            "scant",
+            "meager",
+            "sparse",
+            "paucity",
+            "dearth",
+            "scarcity",
+            "inadequate",
+            "slight",
+            "marginal",
+            "peripheral"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Skillful, Clever & Competent",
+        "count": 22,
+        "description": "Words describing skill, cleverness, or competence",
+        "words": [
+            "adept",
+            "adroit",
+            "deft",
+            "dexterous",
+            "proficient",
+            "skillful",
+            "astute",
+            "shrewd",
+            "canny",
+            "sagacious",
+            "perspicacious",
+            "discerning",
+            "acute",
+            "keen",
+            "sharp",
+            "incisive",
+            "penetrating",
+            "insightful",
+            "perceptive",
+            "judicious",
+            "prudent",
+            "sensible"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Support, Strengthen & Reinforce",
+        "count": 20,
+        "description": "Words describing support, strengthening, or reinforcement",
+        "words": [
+            "bolster",
+            "buttress",
+            "reinforce",
+            "fortify",
+            "corroborate",
+            "substantiate",
+            "validate",
+            "confirm",
+            "endorse",
+            "sanction",
+            "advocate",
+            "champion",
+            "promote",
+            "foster",
+            "nurture",
+            "cultivate",
+            "enhance",
+            "augment",
+            "amplify",
+            "galvanize"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Excessive, Abundant & Overflowing",
+        "count": 19,
+        "description": "Words describing excess, abundance, or overflowing amounts",
+        "words": [
+            "abound",
+            "copious",
+            "profuse",
+            "abundant",
+            "plentiful",
+            "prolific",
+            "proliferate",
+            "burgeon",
+            "flourish",
+            "surfeit",
+            "superfluous",
+            "redundant",
+            "excessive",
+            "extravagant",
+            "lavish",
+            "prodigal",
+            "profligate",
+            "spendthrift",
+            "squander"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Angry, Irritable & Bad-tempered",
+        "count": 16,
+        "description": "Words describing anger, irritability, or bad temper",
+        "words": [
+            "irascible",
+            "choleric",
+            "cantankerous",
+            "curmudgeon",
+            "petulant",
+            "peevish",
+            "querulous",
+            "fractious",
+            "irritable",
+            "testy",
+            "churlish",
+            "surly",
+            "morose",
+            "sullen",
+            "glum",
+            "vexation"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Careful, Cautious & Prudent",
+        "count": 17,
+        "description": "Words describing carefulness, caution, or prudence",
+        "words": [
+            "circumspect",
+            "cautious",
+            "wary",
+            "chary",
+            "prudent",
+            "discreet",
+            "judicious",
+            "scrupulous",
+            "meticulous",
+            "painstaking",
+            "fastidious",
+            "punctilious",
+            "finicky",
+            "particular",
+            "discriminating",
+            "selective",
+            "vigilant"
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Reject, Refuse & Abandon",
+        "count": 21,
+        "description": "Words describing rejection, refusal, or abandonment",
+        "words": [
+            "abjure",
+            "repudiate",
+            "renounce",
+            "recant",
+            "retract",
+            "disavow",
+            "disclaim",
+            "eschew",
+            "abstain",
+            "forbear",
+            "refrain",
+            "desist",
+            "relinquish",
+            "abandon",
+            "forsake",
+            "jettison",
+            "discard",
+            "reject",
+            "spurn",
+            "rebuff",
+            "gainsay"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Flexible, Adaptable & Yielding",
+        "count": 15,
+        "description": "Words describing flexibility, adaptability, or willingness to yield",
+        "words": [
+            "malleable",
+            "pliable",
+            "pliant",
+            "tractable",
+            "amenable",
+            "compliant",
+            "docile",
+            "submissive",
+            "yielding",
+            "accommodating",
+            "adaptable",
+            "versatile",
+            "flexible",
+            "supple",
+            "elastic"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Old, Ancient & Outdated",
+        "count": 13,
+        "description": "Words describing age, antiquity, or being outdated",
+        "words": [
+            "archaic",
+            "anachronistic",
+            "antiquated",
+            "obsolete",
+            "outmoded",
+            "vestigial",
+            "ancient",
+            "antediluvian",
+            "bygone",
+            "erstwhile",
+            "former",
+            "onetime",
+            "temporal"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Secret, Hidden & Concealed",
+        "count": 17,
+        "description": "Words describing secrecy, concealment, or hidden nature",
+        "words": [
+            "clandestine",
+            "covert",
+            "surreptitious",
+            "furtive",
+            "stealthy",
+            "cloak",
+            "veil",
+            "shroud",
+            "mask",
+            "camouflage",
+            "disguise",
+            "occlude",
+            "eclipse",
+            "conceal",
+            "sequester",
+            "seclude",
+            "abscond"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Naive, Innocent & Simple",
+        "count": 16,
+        "description": "Words describing naivety, innocence, or simplicity",
+        "words": [
+            "naive",
+            "ingenuous",
+            "artless",
+            "guileless",
+            "innocent",
+            "unsophisticated",
+            "credulous",
+            "gullible",
+            "trusting",
+            "simple",
+            "candid",
+            "frank",
+            "straightforward",
+            "unadorned",
+            "plain",
+            "unpretentious"
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Greedy, Selfish & Acquisitive",
+        "count": 15,
+        "description": "Words describing greed, selfishness, or excessive desire for possessions",
+        "words": [
+            "avaricious",
+            "covet",
+            "acquisitive",
+            "rapacious",
+            "voracious",
+            "insatiable",
+            "mercenary",
+            "venal",
+            "opportunistic",
+            "exploitative",
+            "grasping",
+            "greedy",
+            "selfish",
+            "miserly",
+            "parsimonious"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Bold, Daring & Fearless",
+        "count": 18,
+        "description": "Words describing boldness, courage, or fearlessness",
+        "words": [
+            "audacious",
+            "brazen",
+            "intrepid",
+            "fearless",
+            "dauntless",
+            "undaunted",
+            "valiant",
+            "valorous",
+            "courageous",
+            "brave",
+            "heroic",
+            "gallant",
+            "daring",
+            "adventurous",
+            "venturesome",
+            "bold",
+            "plucky",
+            "temerity"
+        ]
+    },
+    {
+        "id": 26,
+        "name": "Hesitant, Uncertain & Doubtful",
+        "count": 19,
+        "description": "Words describing hesitation, uncertainty, or doubt",
+        "words": [
+            "vacillate",
+            "waver",
+            "hesitate",
+            "equivocate",
+            "prevaricate",
+            "ambivalent",
+            "irresolute",
+            "indecisive",
+            "tentative",
+            "dubious",
+            "skeptical",
+            "incredulous",
+            "suspicious",
+            "doubtful",
+            "uncertain",
+            "unsure",
+            "qualm",
+            "misgiving",
+            "apprehension"
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Happy, Joyful & Cheerful",
+        "count": 17,
+        "description": "Words describing happiness, joy, or cheerfulness",
+        "words": [
+            "elated",
+            "euphoric",
+            "exhilarating",
+            "jocund",
+            "jovial",
+            "buoyant",
+            "ebullient",
+            "exuberant",
+            "vivacious",
+            "spirited",
+            "animated",
+            "lively",
+            "blithe",
+            "cheerful",
+            "merry",
+            "gleeful",
+            "jubilant"
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Sad, Gloomy & Melancholy",
+        "count": 16,
+        "description": "Words describing sadness, gloom, or melancholy",
+        "words": [
+            "lugubrious",
+            "doleful",
+            "mournful",
+            "plaintive",
+            "melancholy",
+            "somber",
+            "morose",
+            "sullen",
+            "glum",
+            "dejected",
+            "despondent",
+            "crestfallen",
+            "forlorn",
+            "bereft",
+            "disconsolate",
+            "woeful"
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Rude, Crude & Ill-mannered",
+        "count": 18,
+        "description": "Words describing rudeness, crudeness, or bad manners",
+        "words": [
+            "boorish",
+            "churlish",
+            "uncouth",
+            "crass",
+            "crude",
+            "vulgar",
+            "coarse",
+            "base",
+            "ignoble",
+            "impertinent",
+            "impudent",
+            "insolent",
+            "brazen",
+            "presumptuous",
+            "unseemly",
+            "indecorous",
+            "improper",
+            "inappropriate"
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Harsh, Severe & Strict",
+        "count": 16,
+        "description": "Words describing harshness, severity, or strictness",
+        "words": [
+            "austere",
+            "stern",
+            "stringent",
+            "rigorous",
+            "draconian",
+            "harsh",
+            "severe",
+            "strict",
+            "exacting",
+            "demanding",
+            "unforgiving",
+            "ruthless",
+            "merciless",
+            "relentless",
+            "implacable",
+            "inexorable"
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Weak, Feeble & Frail",
+        "count": 17,
+        "description": "Words describing weakness, feebleness, or frailty",
+        "words": [
+            "feeble",
+            "frail",
+            "fragile",
+            "delicate",
+            "weak",
+            "enervate",
+            "debilitate",
+            "enfeeble",
+            "emaciate",
+            "attenuate",
+            "diminish",
+            "wane",
+            "decline",
+            "deteriorate",
+            "degenerate",
+            "languish",
+            "wither"
+        ]
+    },
+    {
+        "id": 32,
+        "name": "Mixed, Varied & Diverse",
+        "count": 15,
+        "description": "Words describing mixture, variety, or diversity",
+        "words": [
+            "heterogeneous",
+            "disparate",
+            "diverse",
+            "varied",
+            "multifaceted",
+            "eclectic",
+            "miscellaneous",
+            "assorted",
+            "mixed",
+            "composite",
+            "hodgepodge",
+            "medley",
+            "potpourri",
+            "amalgamation",
+            "conglomeration"
+        ]
+    },
+    {
+        "id": 33,
+        "name": "Uniform, Similar & Consistent",
+        "count": 14,
+        "description": "Words describing uniformity, similarity, or consistency",
+        "words": [
+            "homogeneous",
+            "uniform",
+            "consistent",
+            "analogous",
+            "similar",
+            "comparable",
+            "parallel",
+            "equivalent",
+            "commensurate",
+            "proportionate",
+            "tantamount",
+            "synonymous",
+            "interchangeable",
+            "identical"
+        ]
+    },
+    {
+        "id": 34,
+        "name": "Boring, Dull & Monotonous",
+        "count": 18,
+        "description": "Words describing boredom, dullness, or monotony",
+        "words": [
+            "banal",
+            "mundane",
+            "humdrum",
+            "prosaic",
+            "pedestrian",
+            "commonplace",
+            "hackneyed",
+            "trite",
+            "clich\u00e9d",
+            "stale",
+            "vapid",
+            "insipid",
+            "bland",
+            "tedious",
+            "monotonous",
+            "wearisome",
+            "tiresome",
+            "dreary"
+        ]
+    },
+    {
+        "id": 35,
+        "name": "Dangerous, Harmful & Destructive",
+        "count": 19,
+        "description": "Words describing danger, harm, or destructiveness",
+        "words": [
+            "deleterious",
+            "detrimental",
+            "pernicious",
+            "noxious",
+            "toxic",
+            "virulent",
+            "malignant",
+            "baneful",
+            "harmful",
+            "injurious",
+            "destructive",
+            "ruinous",
+            "calamitous",
+            "catastrophic",
+            "cataclysmic",
+            "perilous",
+            "hazardous",
+            "precarious",
+            "jeopardize"
+        ]
+    },
+    {
+        "id": 36,
+        "name": "Beneficial, Helpful & Advantageous",
+        "count": 16,
+        "description": "Words describing benefit, help, or advantage",
+        "words": [
+            "salutary",
+            "salubrious",
+            "beneficial",
+            "advantageous",
+            "profitable",
+            "lucrative",
+            "constructive",
+            "productive",
+            "fruitful",
+            "rewarding",
+            "useful",
+            "valuable",
+            "worthwhile",
+            "conducive",
+            "favorable",
+            "auspicious"
+        ]
+    },
+    {
+        "id": 37,
+        "name": "Modest, Humble & Unassuming",
+        "count": 15,
+        "description": "Words describing modesty, humility, or unassuming nature",
+        "words": [
+            "modest",
+            "humble",
+            "unassuming",
+            "unpretentious",
+            "self-effacing",
+            "demure",
+            "reticent",
+            "retiring",
+            "diffident",
+            "timorous",
+            "bashful",
+            "shy",
+            "reserved",
+            "understated",
+            "subdued"
+        ]
+    },
+    {
+        "id": 38,
+        "name": "Loud, Noisy & Clamorous",
+        "count": 14,
+        "description": "Words describing loudness, noise, or clamorous sounds",
+        "words": [
+            "clangor",
+            "clamorous",
+            "cacophonous",
+            "raucous",
+            "boisterous",
+            "obstreperous",
+            "vociferous",
+            "strident",
+            "shrill",
+            "piercing",
+            "deafening",
+            "thunderous",
+            "resounding",
+            "tumultuous"
+        ]
+    },
+    {
+        "id": 39,
+        "name": "Quiet, Silent & Reserved",
+        "count": 12,
+        "description": "Words describing quietness, silence, or reserved nature",
+        "words": [
+            "taciturn",
+            "reticent",
+            "laconic",
+            "terse",
+            "succinct",
+            "concise",
+            "brief",
+            "silent",
+            "mute",
+            "quiet",
+            "reserved",
+            "subdued"
+        ]
+    },
+    {
+        "id": 40,
+        "name": "Impulsive, Rash & Hasty",
+        "count": 15,
+        "description": "Words describing impulsiveness, rashness, or hastiness",
+        "words": [
+            "impetuous",
+            "impulsive",
+            "precipitate",
+            "precipitous",
+            "rash",
+            "hasty",
+            "reckless",
+            "foolhardy",
+            "headstrong",
+            "hotheaded",
+            "hot-tempered",
+            "volatile",
+            "explosive",
+            "unpredictable",
+            "erratic"
+        ]
+    },
+    {
+        "id": 41,
+        "name": "Clear, Obvious & Evident",
+        "count": 17,
+        "description": "Words describing clarity, obviousness, or evidence",
+        "words": [
+            "pellucid",
+            "lucid",
+            "limpid",
+            "transparent",
+            "clear",
+            "obvious",
+            "evident",
+            "manifest",
+            "palpable",
+            "tangible",
+            "conspicuous",
+            "patent",
+            "overt",
+            "explicit",
+            "unambiguous",
+            "unmistakable",
+            "indisputable"
+        ]
+    },
+    {
+        "id": 42,
+        "name": "Rural, Country & Simple",
+        "count": 11,
+        "description": "Words describing rural, country, or simple life",
+        "words": [
+            "bucolic",
+            "pastoral",
+            "rustic",
+            "rural",
+            "agrarian",
+            "provincial",
+            "parochial",
+            "insular",
+            "narrow-minded",
+            "unsophisticated",
+            "simple"
+        ]
+    },
+    {
+        "id": 43,
+        "name": "Sophisticated, Refined & Cultured",
+        "count": 13,
+        "description": "Words describing sophistication, refinement, or culture",
+        "words": [
+            "sophisticated",
+            "urbane",
+            "cosmopolitan",
+            "worldly",
+            "cultured",
+            "refined",
+            "polished",
+            "elegant",
+            "suave",
+            "debonair",
+            "connoisseur",
+            "aesthetic",
+            "tasteful"
+        ]
+    },
+    {
+        "id": 44,
+        "name": "Beginner, New & Inexperienced",
+        "count": 10,
+        "description": "Words describing beginners or inexperienced people",
+        "words": [
+            "neophyte",
+            "novice",
+            "tyro",
+            "fledgling",
+            "nascent",
+            "embryonic",
+            "incipient",
+            "inchoate",
+            "callow",
+            "inexperienced"
+        ]
+    },
+    {
+        "id": 45,
+        "name": "Wandering, Traveling & Roaming",
+        "count": 8,
+        "description": "Words describing wandering, traveling, or roaming",
+        "words": [
+            "itinerant",
+            "peripatetic",
+            "nomadic",
+            "vagrant",
+            "wandering",
+            "roving",
+            "rambling",
+            "meandering"
+        ]
+    },
+    {
+        "id": 46,
+        "name": "Sharp, Cutting & Penetrating",
+        "count": 14,
+        "description": "Words describing sharpness, cutting quality, or penetration",
+        "words": [
+            "trenchant",
+            "mordant",
+            "caustic",
+            "scathing",
+            "keen",
+            "penetrating",
+            "astute",
+            "shrewd",
+            "piquant",
+            "shrill",
+            "acrimonious",
+            "poignant",
+            "acerbic",
+            "incisive"
+        ]
+    }
+];
+
+const VIDEO_WORDS_SET = new Set(["egregious", "consummate", "impugn", "propriety", "fortuitous", "neophyte", "abeyance", "abstemious", "acme", "adulterate", "alacrity", "amortize", "analogous", "anodyne", "approbation", "appropriate", "arrogate", "asperity", "attenuate", "axiom", "bellicose", "bristle", "calumny", "canard", "canonical", "castigate", "celerity", "circumscribe", "contumacious", "curmudgeon", "desultory", "diaphanous", "diffidence", "diffident", "dilatory", "disinterested", "elegy", "encomium", "enervate", "ersatz", "estimable", "euphony", "evanescent", "exegesis", "expurgate", "extraneous", "fallacious", "fecund", "felicitous", "fractious", "garrulous", "hegemony", "heterogeneous", "impecunious", "imperturbable", "inchoate", "indolent", "inexorable", "ingenuous", "iniquity", "inure", "inveigle", "judicious", "juxtapose", "kindle", "levity", "libertine", "limpid", "lionize", "lugubrious", "mendacious", "mendicant", "mercurial", "moribund", "munificent", "nadir", "nascent", "obsequious", "occlude", "pejorative", "perfidious", "phlegmatic", "polemic", "prevaricate", "profuse", "propitiate", "puissance", "renege", "restive", "sanguine", "scrupulous", "solicitous", "stentorian", "stipulate", "stolid", "table", "tacit", "torpor", "tractable", "transitory", "turgid", "unequivocal", "verbose", "virulent", "vitiate", "vitriolic", "vituperate", "voracious"]);
