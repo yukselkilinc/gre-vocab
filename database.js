@@ -3046,10 +3046,10 @@ const coreDatabase = {
             },
             {
                 "word": "pedestrian",
-                "type": "noun",
-                "def": "A person walking rather than traveling in a vehicle",
-                "example": "A pedestrian was injured while crossing the street yesterday.",
-                "long_example": "As she stepped off the curb into the busy crosswalk, the distracted pedestrian narrowly avoided being struck by a delivery truck that had run a red light at the intersection."
+                "type": "adj.",
+                "def": "Dull, ordinary, and lacking imagination",
+		"example": "Despite all the hype surrounding the director's new film, critics dismissed the plot as surprisingly pedestrian.",
+		"long_example": "Although the architect was previously celebrated for her bold and revolutionary building designs, her latest municipal project turned out to be rather pedestrian, leaving both the city council and local art critics thoroughly unimpressed with the final result."
             },
             {
                 "word": "pejorative",
@@ -16371,10 +16371,10 @@ const coreDatabase = {
             },
             {
                 "word": "pedestrian",
-                "type": "noun",
-                "def": "A person walking rather than traveling in a vehicle",
-                "example": "A pedestrian was injured while crossing the street yesterday.",
-                "long_example": "As she stepped off the curb into the busy crosswalk, the distracted pedestrian narrowly avoided being struck by a delivery truck that had run a red light at the intersection."
+                "type": "adj.",
+                "def": "Dull, ordinary, and lacking imagination",
+		"example": "Despite all the hype surrounding the director's new film, critics dismissed the plot as surprisingly pedestrian.",
+		"long_example": "Although the architect was previously celebrated for her bold and revolutionary building designs, her latest municipal project turned out to be rather pedestrian, leaving both the city council and local art critics thoroughly unimpressed with the final result."
             },
             {
                 "word": "pomposity",
