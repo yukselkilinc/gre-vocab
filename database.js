@@ -41480,9 +41480,9 @@ const coreDatabase = {
             {
                 "word": "handsome",
                 "type": "adj.",
-                "def": "Good-looking, especially in a way that suggests strength or masculinity",
-                "example": "The gentleman looked very handsome in his clean blue suit.",
-                "long_example": "Dressed in a tailored charcoal suit for the formal ceremony, the handsome actor graciously thanked his fans and posed for photographs on the red carpet before entering the theater."
+                "def": "Substantial, sizable, or generous in amount or degree",
+                "example": "He received a handsome reward for returning the lost puppy.",
+		"long_example": "After thirty years of dedicated service to the company, she was honored at a retirement banquet and presented with a handsome bonus to help fund her dream travel plans."
             },
             {
                 "word": "import",
