@@ -809,9 +809,9 @@ const coreDatabase = {
             {
                 "word": "conflagration",
                 "type": "noun",
-                "def": "A large destructive fire",
+		"def": "A large destructive fire; or a violent conflict/war.",
                 "example": "The dry forest was threatened by a massive conflagration last summer.",
-                "long_example": "Fanned by strong dry winds, the massive conflagration rapidly destroyed three city blocks and forced hundreds of local residents to evacuate their homes before firefighters could control it."
+		"long_example": "As geopolitical tensions escalated rapidly along the border, military leaders feared that a single misstep could plunge the entire region into a disastrous, widespread conflagration."
             },
             {
                 "word": "confound",
@@ -1729,7 +1729,7 @@ const coreDatabase = {
             {
                 "word": "fractious",
                 "type": "adj.",
-                "def": "someone or something that is irritable, easily annoyed, and hard to control. It often refers to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
+            	"def": "Irritable, easily annoyed, and hard to control. Often referring to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
                 "example": "The fractious children began to argue over the wooden toys.",
                 "long_example": "The exhausted tour guide struggled to manage the fractious group of travelers, who had been complaining about the bus schedule, hotel accommodations, and food quality all day."
             },
@@ -3450,8 +3450,8 @@ const coreDatabase = {
             {
                 "word": "prolific",
                 "type": "adj.",
-                "def": "Producing a lot of something",
-                "example": "The composer was highly prolific, writing ten songs in a month.",
+		"def": "Producing a lot of something, such as fruit, offspring, or creative work",
+		"example": "Rabbits are famously prolific, often producing several litters of offspring each year.",
                 "long_example": "During his short but brilliant career, the prolific composer wrote over forty symphonies and hundreds of chamber pieces, leaving behind a vast musical legacy that still inspires artists."
             },
             {
@@ -9067,7 +9067,7 @@ const coreDatabase = {
             {
                 "word": "fractious",
                 "type": "adj.",
-                "def": "someone or something that is irritable, easily annoyed, and hard to control. It often refers to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
+		"def": "Irritable, easily annoyed, and hard to control. Often referring to people (especially children) who complain frequently, as well as unruly groups or animals that stubbornly resist authority",
                 "example": "The fractious children began to argue over the wooden toys.",
                 "long_example": "The exhausted tour guide struggled to manage the fractious group of travelers, who had been complaining about the bus schedule, hotel accommodations, and food quality all day."
             },
@@ -10972,9 +10972,9 @@ const coreDatabase = {
             {
                 "word": "conflagration",
                 "type": "noun",
-                "def": "A large destructive fire",
+		"def": "A large destructive fire; or a violent conflict/war.",
                 "example": "The dry forest was threatened by a massive conflagration last summer.",
-                "long_example": "Fanned by strong dry winds, the massive conflagration rapidly destroyed three city blocks and forced hundreds of local residents to evacuate their homes before firefighters could control it."
+		"long_example": "As geopolitical tensions escalated rapidly along the border, military leaders feared that a single misstep could plunge the entire region into a disastrous, widespread conflagration."
             },
             {
                 "word": "cunning",
@@ -19399,8 +19399,8 @@ const coreDatabase = {
             {
                 "word": "prolific",
                 "type": "adj.",
-                "def": "Producing a lot of something",
-                "example": "The composer was highly prolific, writing ten songs in a month.",
+		"def": "Producing a lot of something, such as fruit, offspring, or creative work",
+		"example": "Rabbits are famously prolific, often producing several litters of offspring each year.",
                 "long_example": "During his short but brilliant career, the prolific composer wrote over forty symphonies and hundreds of chamber pieces, leaving behind a vast musical legacy that still inspires artists."
             },
             {
