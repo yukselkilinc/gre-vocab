@@ -1347,7 +1347,7 @@ const coreDatabase = {
             {
                 "word": "embellish",
                 "type": "verb",
-                "def": "To make something more attractive by adding decorative details.",
+                "def": "to make something look more attractive by adding extra details, or to make a story more interesting by adding extra and sometimes false details.",
                 "example": "The writer decided to embellish the story with funny details.",
                 "long_example": "The master weaver decided to embellish the edges of the ceremonial tapestry with intricate silver threads and small pearls, enhancing its beauty before presenting it to the royal family."
             },
@@ -4628,7 +4628,7 @@ const coreDatabase = {
             {
                 "word": "embellish",
                 "type": "verb",
-                "def": "To make something more attractive by adding decorative details.",
+                "def": "to make something look more attractive by adding extra details, or to make a story more interesting by adding extra and sometimes false details.",
                 "example": "The writer decided to embellish the story with funny details.",
                 "long_example": "The master weaver decided to embellish the edges of the ceremonial tapestry with intricate silver threads and small pearls, enhancing its beauty before presenting it to the royal family."
             },
@@ -44291,9 +44291,9 @@ const coreDatabase = {
             {
                 "word": "embroider",
                 "type": "verb",
-                "def": "To decorate fabric with needlework",
+                "def": "To sew designs on cloth with thread; or to make a story more exciting by adding fake details, and to add fancy words to speech",
                 "example": "My mother taught me how to embroider flowers on fabric.",
-                "long_example": "The skilled seamstress spent many quiet evenings sitting by the window to embroider delicate floral patterns onto the silk collar of her granddaughter's white wedding gown."
+		"long_example": "Whenever Uncle John recounted his old fishing trips, he would subtly embroider the story with exaggerated details until a tiny catfish had transformed into a giant ocean monster."
             },
             {
                 "word": "fecundity",
