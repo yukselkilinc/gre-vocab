@@ -4564,6 +4564,13 @@ const coreDatabase = {
                 "def": "The highest point or peak",
                 "example": "The empire reached the zenith of its power during his reign.",
                 "long_example": "Achieving the position of Chief Executive Officer marked the absolute zenith of her professional career, culminating decades of hard work and strategic leadership in the corporate sector."
+            },
+            {
+                "word": "embroider",
+                "type": "verb",
+                "def": "To sew designs on cloth with thread; or to make a story more exciting by adding fake details, and to add fancy words to speech",
+                "example": "My mother taught me how to embroider flowers on fabric.",
+		"long_example": "Whenever Uncle John recounted his old fishing trips, he would subtly embroider the story with exaggerated details until a tiny catfish had transformed into a giant ocean monster."
             }
         ]
     },
