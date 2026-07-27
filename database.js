@@ -15389,10 +15389,10 @@ const coreDatabase = {
             },
             {
                 "word": "bridle",
-                "type": "noun",
-                "def": "A device used to control a horse, consisting of straps around its head and a bit in its mouth",
-                "example": "The rider adjusted the leather bridle of the horse.",
-                "long_example": "The experienced stable master carefully slipped the leather bridle over the stallion's head before leading him out of the farm for his morning exercise in the open field."
+                "type": "verb",
+                "def": "1: To restrain, check, or control. 2: To show resentment or offense, typically by pulling back the head and chin. 3: To put a bridle on an animal. ",
+                "example": "She had to bridle her temper during the tense meeting.",
+                "long_example": "Although the manager wanted to immediately shoot down the unfair criticism, she managed to bridle her impulse to react and instead offered a calm, measured response."
             },
             {
                 "word": "cleave",
