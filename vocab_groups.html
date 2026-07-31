@@ -14,24 +14,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>GRE Vocab Groups</title>
     <link rel="icon" href="vocab_groups_icon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        serif: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'Menlo', 'monospace'],
+                        sans: ['"Source Sans 3"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
                     colors: {
+                        paper: {
+                            50: '#fdfbf6',
+                            100: '#f7f2e7',
+                            200: '#efe6d3',
+                        },
+                        ink: {
+                            50: '#eef1f5',
+                            200: '#c7cfdb',
+                            400: '#7c889c',
+                            600: '#3f4b60',
+                            700: '#2e3849',
+                            800: '#212838',
+                            900: '#171c28',
+                            950: '#0f1219',
+                        },
                         primary: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
+                            50: '#f2f0f7',
+                            100: '#e3ddec',
+                            200: '#c7bbd9',
+                            300: '#a692bf',
+                            400: '#8a6fa8',
+                            500: '#6f5591',
+                            600: '#5a4276',
+                            700: '#4a3661',
+                            800: '#3a2a4c',
+                            900: '#2c2039',
+                        },
+                        brass: {
+                            400: '#d4a94c',
+                            500: '#b8903a',
+                            600: '#96742c',
+                        },
+                        turquoise: {
+                            50: '#e6fbfa',
+                            100: '#c7f4f1',
+                            200: '#8fe6e1',
+                            300: '#4fd0c9',
+                            400: '#26c6da',
+                            500: '#00acc1',
+                            600: '#0e8f88',
+                            700: '#0c7570',
+                            800: '#085753',
+                            900: '#053f3c',
+                            950: '#022422',
                         }
                     }
                 }
@@ -43,42 +84,52 @@
             overscroll-behavior-y: none;
         }
         body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
         .backdrop-blur {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+        .font-serif { font-family: 'Fraunces', ui-serif, Georgia, serif; }
+        .font-mono-word { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; letter-spacing: -0.01em; }
+        /* Index-tab accent colors, cycled per group via data-tab attribute on the card */
+        .tab-0 { --tab: #b5533c; } .tab-1 { --tab: #25a27a; } .tab-2 { --tab: #b08a3e; }
+        .tab-3 { --tab: #5b6f8c; } .tab-4 { --tab: #8a5a83; } .tab-5 { --tab: #6b8e4e; }
+        .tab-6 { --tab: #a85c8a; } .tab-7 { --tab: #4a6b8a; }
+        .vocab-card { border-left: 5px solid var(--tab, #6f5591); }
+        .vocab-card .group-eyebrow { color: var(--tab, #6f5591); }
+        .dark .vocab-card .group-eyebrow { filter: brightness(1.35) saturate(0.9); }
+        .word-chip-core.is-learned { background: #25a27a; border-color: #25a27a; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col pb-12" style="touch-action: manipulation; -webkit-text-size-adjust: 100%;">
+<body class="bg-paper-100 text-ink-900 dark:bg-ink-950 dark:text-paper-100 min-h-screen flex flex-col pb-12" style="touch-action: manipulation; -webkit-text-size-adjust: 100%;">
     
     <!-- Fixed safe-area cover strip for dynamic island -->
-    <div style="position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); z-index: 9999; pointer-events: none;" class="bg-white dark:bg-slate-900"></div>
+    <div style="position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); z-index: 9999; pointer-events: none;" class="bg-paper-50 dark:bg-ink-950"></div>
 
     <!-- Sticky Header -->
-    <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur" style="padding-top: env(safe-area-inset-top, 0px);">
+    <header class="sticky top-0 z-40 w-full border-b border-paper-200 dark:border-ink-800 bg-paper-50/90 dark:bg-ink-950/90 backdrop-blur" style="padding-top: env(safe-area-inset-top, 0px);">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
             
             <div class="flex items-center gap-1 sm:gap-3 shrink-0">
                 <!-- Back Button -->
-                <a href="index.html" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Back to main app">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="index.html" class="p-2 rounded-full hover:bg-paper-200/70 dark:hover:bg-ink-800 text-ink-600 dark:text-ink-200 transition-colors" title="Back to main app">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                 </a>
                 <!-- Brand Title -->
-                <div class="hidden sm:block">
-                    <h1 class="text-lg font-bold tracking-tight">Vocab Groups</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Thematic synonym families</p>
+                <div class="hidden sm:block leading-tight">
+                    <h1 class="font-serif text-xl font-semibold tracking-tight text-ink-900 dark:text-paper-50">Vocab Groups</h1>
+                    <p class="text-[11px] uppercase tracking-widest text-primary-500 dark:text-primary-300">Thematic word families</p>
                 </div>
             </div>
             
             <!-- Realtime Search -->
             <div class="flex-1 max-w-xl sm:max-w-md mx-1 sm:mx-4 relative">
-                <input type="text" id="search-input" placeholder="Words, group names & descriptions" class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm">
-                <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <input type="text" id="search-input" placeholder="Search words, groups, meanings…" class="w-full pl-10 pr-4 py-2 rounded-full border border-paper-200 dark:border-ink-700 bg-white/70 dark:bg-ink-900/70 focus:bg-white dark:focus:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all text-sm text-ink-800 dark:text-paper-100 placeholder:text-ink-400">
+                <svg class="w-4 h-4 text-ink-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </div>
@@ -86,7 +137,7 @@
             <!-- Theme and Status Controls -->
             <div class="flex items-center gap-2">
                 <!-- Dark Mode Toggle -->
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle theme">
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-paper-200/70 dark:hover:bg-ink-800 text-ink-600 dark:text-ink-200 transition-colors" title="Toggle theme">
                     <svg id="theme-btn-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
                 </button>
             </div>
@@ -96,67 +147,67 @@
     <!-- Main Content Area -->
     <main class="max-w-7xl w-full mx-auto px-4 mt-6 flex-1">
         <div id="no-results" class="hidden py-24 text-center">
-            <svg class="w-16 h-16 text-slate-300 dark:text-slate-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-14 h-14 text-paper-200 dark:text-ink-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-lg font-semibold text-slate-600 dark:text-slate-400">No matching groups or words found</h3>
-            <p class="text-sm text-slate-400 mt-1">Try searching for words, group names or descriptions.</p>
+            <h3 class="font-serif text-lg font-semibold text-ink-500 dark:text-ink-300">No matching groups or words found</h3>
+            <p class="text-sm text-ink-400 mt-1">Try searching for a word, group name, or theme.</p>
         </div>
         
-        <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <!-- Dynamically populated -->
         </div>
     </main>
 
     <!-- Side details drawer panel -->
-    <div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/40 dark:bg-slate-950/60 z-45 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none" onclick="closeDrawer()"></div>
+    <div id="drawer-backdrop" class="fixed inset-0 bg-ink-950/40 dark:bg-ink-950/70 z-45 transition-opacity duration-300 ease-in-out opacity-0 pointer-events-none" onclick="closeDrawer()"></div>
     
-    <div id="details-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-[80%] sm:w-96 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl transition-transform duration-300 ease-in-out translate-x-full flex flex-col">
+    <div id="details-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-[85%] sm:w-96 bg-paper-50 dark:bg-ink-900 border-l border-paper-200 dark:border-ink-800 shadow-2xl transition-transform duration-300 ease-in-out translate-x-full flex flex-col">
         <!-- Drawer Header -->
-        <div class="border-b border-slate-200 dark:border-slate-800 px-4 flex items-center gap-3 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur" style="padding-top: calc(0.75rem + env(safe-area-inset-top)); padding-bottom: 0.75rem;">
-            <button onclick="closeDrawer()" class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors" title="Close details">
+        <div class="border-b border-paper-200 dark:border-ink-800 px-4 flex items-center gap-3 bg-paper-100/60 dark:bg-ink-900/60 backdrop-blur" style="padding-top: calc(0.75rem + env(safe-area-inset-top)); padding-bottom: 0.75rem;">
+            <button onclick="closeDrawer()" class="p-1.5 rounded-full hover:bg-paper-200 dark:hover:bg-ink-800 text-ink-500 dark:text-ink-300 transition-colors" title="Close details">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
             </button>
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Word Details</span>
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-ink-400">Word Entry</span>
         </div>
         
         <!-- Drawer Content -->
         <div class="flex-1 overflow-y-auto p-6 space-y-6">
-            <div class="flex flex-col gap-3 border-b border-slate-100 dark:border-slate-800/60 pb-5">
+            <div class="flex flex-col gap-3 border-b border-paper-200 dark:border-ink-800 pb-5">
                 <div class="flex items-start justify-between gap-2">
-                    <h2 id="drawer-word" class="text-3xl font-extrabold tracking-tight text-primary-600 dark:text-primary-400 min-w-0" style="hyphens: auto; overflow-wrap: break-word; word-break: break-word;">Word</h2>
+                    <h2 id="drawer-word" class="font-serif text-4xl font-semibold tracking-tight text-turquoise-600 dark:text-turquoise-300 min-w-0" style="hyphens: auto; overflow-wrap: break-word; word-break: break-word;">Word</h2>
                     <!-- Learned toggle button -->
-                    <button id="drawer-learned-btn" onclick="toggleLearned()" class="px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-white hover:bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700">
+                    <button id="drawer-learned-btn" onclick="toggleLearned()" class="px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wide border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-transparent hover:bg-emerald-50 text-emerald-700 border-emerald-600/50 hover:border-emerald-600 dark:bg-transparent dark:hover:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-500/50 dark:hover:border-emerald-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <span>Mark as Learned</span>
+                        <span>Mark Learned</span>
                     </button>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <span id="drawer-type" class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 uppercase">part of speech</span>
+                    <span id="drawer-type" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-turquoise-50 dark:bg-turquoise-950/60 text-turquoise-600 dark:text-turquoise-300 border border-turquoise-200 dark:border-turquoise-800/60 italic lowercase">part of speech</span>
                 </div>
             </div>
             
             <div class="space-y-2">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Definition</h3>
-                <p id="drawer-def" class="text-base text-slate-700 dark:text-slate-200 leading-relaxed font-normal bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800">The definition will go here.</p>
+                <h3 class="text-[11px] font-semibold uppercase tracking-widest text-ink-400">Definition</h3>
+                <p id="drawer-def" class="text-base text-ink-700 dark:text-paper-100 leading-relaxed font-normal bg-white dark:bg-ink-800/40 p-4 rounded-lg border border-paper-200 dark:border-ink-800">The definition will go here.</p>
             </div>
             
             <div class="space-y-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Example Sentences</h3>
+                <h3 class="text-[11px] font-semibold uppercase tracking-widest text-ink-400">Example Sentences</h3>
                 
                 <div class="space-y-3">
-                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 relative">
-                        <div class="text-xs text-slate-400 mb-1">Standard Example</div>
-                        <p id="drawer-ex1" class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">Example 1</p>
+                    <div class="p-4 rounded-lg bg-white dark:bg-ink-800/40 border border-paper-200 dark:border-ink-800 relative">
+                        <div class="text-[10px] uppercase tracking-wider text-ink-400 mb-1">Standard example</div>
+                        <p id="drawer-ex1" class="text-sm text-ink-700 dark:text-paper-100 italic leading-relaxed font-mono-word">Example 1</p>
                     </div>
                     
-                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 relative">
-                        <div class="text-xs text-slate-400 mb-1">Detailed Context</div>
-                        <p id="drawer-ex2" class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">Example 2</p>
+                    <div class="p-4 rounded-lg bg-white dark:bg-ink-800/40 border border-paper-200 dark:border-ink-800 relative">
+                        <div class="text-[10px] uppercase tracking-wider text-ink-400 mb-1">Detailed context</div>
+                        <p id="drawer-ex2" class="text-sm text-ink-700 dark:text-paper-100 italic leading-relaxed font-mono-word">Example 2</p>
                     </div>
                 </div>
             </div>
@@ -1412,7 +1463,8 @@
                 
                 // Construct card element
                 const card = document.createElement('div');
-                card.className = 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm hover:shadow-md flex flex-col justify-between';
+                const tabIdx = (group.id - 1) % 8;
+                card.className = `vocab-card tab-${tabIdx} bg-white dark:bg-ink-900 border border-paper-200 dark:border-ink-800 rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between`;
                 
                 // Separate core words (clickable) and basic words (unclickable)
                 const coreWords = [];
@@ -1427,34 +1479,37 @@
                 });
 
                 // Head section
-                let titleHtml = `<h3 class="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-start justify-between gap-2">`;
-                titleHtml += `<span>Group ${group.id}: ${group.name}</span>`;
-                titleHtml += `<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs px-2.5 py-0.5 rounded-full shrink-0 font-medium">${group.words.length} words</span>`;
-                titleHtml += `</h3>`;
+                let titleHtml = `<div class="flex items-start justify-between gap-2">`;
+                titleHtml += `<div class="min-w-0">`;
+                titleHtml += `<div class="group-eyebrow text-[11px] font-mono font-semibold uppercase tracking-wider mb-0.5">Group ${group.id}</div>`;
+                titleHtml += `<h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-paper-50 leading-snug">${group.name}</h3>`;
+                titleHtml += `</div>`;
+                titleHtml += `<span class="bg-paper-100 dark:bg-ink-800 text-ink-500 dark:text-ink-300 text-[11px] px-2.5 py-1 rounded-full shrink-0 font-mono font-medium">${group.words.length}</span>`;
+                titleHtml += `</div>`;
                 
                 // Desc section
-                const descHtml = `<p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-normal leading-relaxed">${group.description}</p>`;
+                const descHtml = `<p class="text-[13px] text-ink-500 dark:text-ink-300 mt-1.5 font-normal leading-relaxed">${group.description}</p>`;
                 
                 // Words list section
-                let wordsHtml = `<div class="flex flex-wrap gap-2 mt-4 flex-1 items-start content-start">`;
+                let wordsHtml = `<div class="flex flex-wrap gap-1.5 mt-4 flex-1 items-start content-start">`;
                 
                 // 1. Render core words (clickable)
                 coreWords.forEach(w => {
                     const cleanW = w.toLowerCase().trim();
                     const isLearned = learnedWords.has(cleanW);
                     
-                    let chipClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer border select-none ';
+                    let chipClass = 'word-chip-core font-mono-word px-3 py-1.5 rounded-md text-[13px] font-medium cursor-pointer border select-none transition-colors ';
                     if (isLearned) {
-                        chipClass += 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/50';
+                        chipClass += 'is-learned text-white border-transparent shadow-sm';
                     } else {
-                        chipClass += 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200 hover:border-slate-300 dark:bg-slate-800/50 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-800 dark:hover:border-slate-700';
+                        chipClass += 'bg-paper-100/80 hover:bg-paper-200 text-ink-700 border-paper-200 hover:border-paper-300 dark:bg-ink-800/80 dark:hover:bg-ink-700 dark:text-ink-200 dark:border-ink-700 dark:hover:border-ink-600';
                     }
                     wordsHtml += `<span class="${chipClass}" onclick="showWordDetails('${w}')">${w}</span>`;
                 });
                 
                 // 2. Render basic words (unclickable, grayed out/subtle)
                 basicWords.forEach(w => {
-                    const badgeClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold border select-none bg-slate-100/50 border-slate-200/50 text-slate-400 dark:bg-slate-800/30 dark:border-slate-800/50 dark:text-slate-500 cursor-default';
+                    const badgeClass = 'font-mono-word px-3 py-1.5 rounded-md text-[13px] font-medium border select-none bg-transparent border-dashed border-paper-300 text-ink-400 dark:border-ink-700 dark:text-ink-500 cursor-default';
                     wordsHtml += `<span class="${badgeClass}" title="Basic word">${w}</span>`;
                 });
                 
@@ -1496,11 +1551,11 @@
             const isLearned = learnedWords.has(activeWord);
             
             if (isLearned) {
-                btn.className = "px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white border-transparent dark:bg-emerald-600 dark:hover:bg-emerald-500";
+                btn.className = "px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wide border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-[#25a27a] hover:bg-[#1f8967] text-white border-transparent shadow-sm";
                 btn.querySelector('span').textContent = "Learned";
             } else {
-                btn.className = "px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-white hover:bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700";
-                btn.querySelector('span').textContent = "Mark as Learned";
+                btn.className = "px-3.5 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wide border transition-colors flex items-center gap-1.5 select-none shrink-0 bg-transparent hover:bg-emerald-50 text-emerald-700 border-emerald-600/50 hover:border-emerald-600 dark:bg-transparent dark:hover:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-500/50 dark:hover:border-emerald-400";
+                btn.querySelector('span').textContent = "Mark Learned";
             }
         }
 
@@ -1564,8 +1619,8 @@
                 // Not found anywhere
                 drawerType.classList.add('hidden');
                 drawerDef.textContent = 'Definition and examples not found in the database.js or fallback dictionary.';
-                drawerEx1.innerHTML = '<span class="text-slate-400">No example available.</span>';
-                drawerEx2.innerHTML = '<span class="text-slate-400">No example available.</span>';
+                drawerEx1.innerHTML = '<span class="text-ink-400">No example available.</span>';
+                drawerEx2.innerHTML = '<span class="text-ink-400">No example available.</span>';
             }
             
             // No synonyms section needed in details drawer (fully handled on the card grid)
@@ -1593,7 +1648,7 @@
         }
         
         function highlightWord(sentence, word) {
-            if (!sentence) return '<span class="text-slate-400">No example sentence available.</span>';
+            if (!sentence) return '<span class="text-ink-400">No example sentence available.</span>';
             
             // Clean word from any brackets/suffixes
             let cleanW = word.toLowerCase().trim();
@@ -1615,7 +1670,7 @@
             try {
                 const regex = new RegExp(regexStr, 'gi');
                 return sentence.replace(regex, (match) => {
-                    return `<strong class="text-primary-600 dark:text-primary-400 font-bold">${match}</strong>`;
+                    return `<strong class="text-turquoise-600 dark:text-turquoise-400 font-bold">${match}</strong>`;
                 });
             } catch (err) {
                 // Fallback to literal search
@@ -1623,7 +1678,7 @@
                 if (idx !== -1) {
                     const originalMatch = sentence.substring(idx, idx + word.length);
                     return sentence.substring(0, idx) + 
-                           `<strong class="text-primary-600 dark:text-primary-400 font-bold">${originalMatch}</strong>` + 
+                           `<strong class="text-turquoise-600 dark:text-turquoise-400 font-bold">${originalMatch}</strong>` + 
                            sentence.substring(idx + word.length);
                 }
                 return sentence;
